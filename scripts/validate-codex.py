@@ -30,7 +30,11 @@ PLUGINS = [
 ]
 
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
-PLUGIN_SLASH_COMMAND = re.compile(r"/(" + "|".join(re.escape(p) for p in PLUGINS) + r"):")
+PLUGIN_SLASH_COMMAND = re.compile(r"(?<![A-Za-z0-9])/[A-Za-z0-9_-]+:")
+CODEX_SKILL_REFERENCE = re.compile(
+    r"(?<![/\w.-])(" + "|".join(re.escape(p) for p in sorted(PLUGINS, key=len, reverse=True)) + r"):([a-z0-9][a-z0-9-]*)"
+)
+CODEX_CONFIG_PATH = re.compile(r"~/.codex/plugins/config/claude-for-legal-zh/([^/\s`]+)/PRACTICE\.md")
 
 
 def rel(path: Path) -> str:
@@ -114,8 +118,11 @@ def validate_skill_frontmatter(plugin: str, errors: list[str]) -> None:
         fm = frontmatter(path, errors)
         if not fm:
             continue
-        if not re.search(r"^name:\s*\S+", fm, flags=re.M):
+        name_match = re.search(r"^name:\s*(\S+)", fm, flags=re.M)
+        if not name_match:
             errors.append(f"{rel(path)}: missing frontmatter name")
+        elif name_match.group(1) != path.parent.name:
+            errors.append(f"{rel(path)}: frontmatter name must match skill directory")
         if not re.search(r"^description:\s*", fm, flags=re.M):
             errors.append(f"{rel(path)}: missing frontmatter description")
         if re.search(r"^user-invocable:\s*false\s*$", fm, flags=re.M):
@@ -137,6 +144,31 @@ def validate_json_files(errors: list[str]) -> None:
         load_json(path, errors)
 
 
+def validate_semantic_references(errors: list[str]) -> None:
+    skills_by_plugin = {
+        plugin: {path.parent.name for path in (ROOT / plugin / "skills").glob("*/SKILL.md")}
+        for plugin in PLUGINS
+    }
+    checked_suffixes = {".md", ".yaml", ".yml", ".html"}
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or path.suffix not in checked_suffixes:
+            continue
+        if ".git" in path.parts or ".claude-plugin" in path.parts:
+            continue
+        if path.name == "CLAUDE.md":
+            continue
+        text = path.read_text(encoding="utf-8")
+        path_rel = rel(path)
+        for plugin, skill in CODEX_SKILL_REFERENCE.findall(text):
+            if skill not in skills_by_plugin[plugin]:
+                errors.append(f"{path_rel}: references missing skill {plugin}:{skill}")
+        for plugin in CODEX_CONFIG_PATH.findall(text):
+            if plugin.startswith("<") and plugin.endswith(">"):
+                continue
+            if plugin not in PLUGINS:
+                errors.append(f"{path_rel}: Codex PRACTICE.md path references unknown plugin {plugin}")
+
+
 def validate_residual_text(errors: list[str]) -> None:
     checked_suffixes = {".md", ".yaml", ".yml", ".html"}
     for path in ROOT.rglob("*"):
@@ -152,8 +184,10 @@ def validate_residual_text(errors: list[str]) -> None:
             errors.append(f"{path_rel}: contains legacy /plugin:skill command syntax")
         if "Codex marketplace add" in text or "Codex plugin install" in text:
             errors.append(f"{path_rel}: contains non-existent Codex CLI install wording")
-        if "Claude Code" in text:
+        if "Claude Code" in text or "claude-code" in text:
             errors.append(f"{path_rel}: contains Claude Code instead of Codex")
+        if "Cowork" in text:
+            errors.append(f"{path_rel}: contains Cowork platform wording in Codex default docs")
         if "~/.claude" in text:
             is_allowed_migration = path_rel.endswith("/skills/cold-start-interview/SKILL.md")
             is_legacy_template = path.name == "CLAUDE.md"
@@ -176,6 +210,7 @@ def main() -> int:
         validate_plugin_manifest(plugin, errors)
         validate_skill_frontmatter(plugin, errors)
     validate_json_files(errors)
+    validate_semantic_references(errors)
     validate_residual_text(errors)
     if errors:
         print("Codex validation failed:", file=sys.stderr)

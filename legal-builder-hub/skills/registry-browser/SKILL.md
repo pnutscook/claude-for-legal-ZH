@@ -64,7 +64,7 @@ argument-hint: "[搜索关键词]"
 
 如果用户有一个不在监视列表中的注册表 URL：
 
-1. 获取它，验证它是技能仓库（有 `skills/` 或 `.claude-plugin/`）
+1. 获取它，验证它是技能仓库（有 `skills/` 或 `.codex-plugin/`）
 2. 展示其中的内容
 3. 经确认后添加到 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` → 已监视注册表
 

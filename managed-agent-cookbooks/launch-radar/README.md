@@ -1,8 +1,8 @@
-# Launch Radar — managed-agent template
+# Launch Radar — Codex automation/recipe reference
 
 ## Overview
 
-Scheduled scan of the product team's launch tracker — Jira, Linear, or Asana — for launches that will likely need legal review in the next few weeks. Triages each launch against the product counsel's risk calibration and produces a weekly radar memo: what's coming, what needs legal attention, what triggered a flag. Same source as the [`launch-watcher`](../../product-legal/agents/launch-watcher.md) Codex plugin agent — this directory is the Managed Agent cookbook for `POST /v1/agents`.
+Scheduled scan of the product team's launch tracker — Jira, Linear, or Asana — for launches that will likely need legal review in the next few weeks. Triages each launch against the product counsel's risk calibration and produces a weekly radar memo: what's coming, what needs legal attention, what triggered a flag. Same source as the [`launch-watcher`](../../product-legal/agents/launch-watcher.md) Codex plugin agent — this directory is a Codex automation/recipe reference that must be wired into your own scheduler and runtime before use.
 
 This is a **cookbook, not a product.** It will not work out of the box. You need to point the MCP connectors at your tracker, load your risk calibration, set the cadence, and configure where the memo goes. Adaptation notes below.
 
@@ -13,15 +13,9 @@ This is a **cookbook, not a product.** It will not work out of the box. You need
 - **The trigger keyword list is opinionated.** If your product surface doesn't match the defaults (e.g., you're biometrics-heavy, FedRAMP-bound, or handling minors' data in ways the keywords don't cover), retune before the first run or the memo will miss the cases it was built to catch.
 - **Tracker tickets are untrusted input.** A PM can put anything in a title or description, and an attacker can file a ticket. The triage routes on content; it does not vouch for the ticket.
 
-## Deploy
+## Codex migration notes
 
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-export LINEAR_MCP_URL=... ATLASSIAN_MCP_URL=... ASANA_MCP_URL=... GDRIVE_MCP_URL=...
-../../scripts/deploy-managed-agent.sh launch-radar
-```
-
-Only set the MCP URLs for the trackers you actually use. The orchestrator and `tracker-reader` skip MCPs that aren't configured.
+This directory is not installed or scheduled automatically by Codex. To use it, wire the referenced skills, MCP connectors, cadence, permissions, and output paths into your Codex automation or your own controlled runtime, then use the steering examples below as test inputs. The legacy deployment script is retained only as a historical prototype.
 
 ## Steering events
 

@@ -125,7 +125,7 @@ legal-clinic:build-guide
 - **合同/交易型诊所：** `commercial-legal:review`（保密协议分流、供应商审查），包裹后学生运行审查，输出在发给当事人前标记需指导老师审查。
 - **劳动争议诊所：** `litigation-legal:chronology` 用于从当事人文件中构建时间线，在送入提交文件前标记需指导老师审查。
 - **消费者权益诊所：** `litigation-legal:subpoena-triage` 当当事人收到调查令时，包裹后学生起草应对方案但指导老师签字。
-- **任何诊所：** `privacy-legal:triage` 如果学生处理任何涉及个人数据在诊所外共享的事项。
+- **任何诊所：** `privacy-legal:use-case-triage` 如果学生处理任何涉及个人数据在诊所外共享的事项。
 
 如果指导老师提了想要的跨插件技能，记录：技能名称、学生何时使用、适用何种指导包裹（始终审查者、仅标记时、无指导老师不得使用）。
 

@@ -1,10 +1,10 @@
-# Docket Watcher — managed-agent template
+# Docket Watcher — Codex automation/recipe reference
 
 ## Overview
 
 Monitors court dockets for matters in the active litigation portfolio. 人民法院案例库 covers published judgments; 裁判文书网 covers trial-court filings; 元典/聚法案例 supplements for broader coverage. For each active matter the agent pulls new filings since the last check, maps filing types to candidate deadlines, cross-references against the matter's history and open deliverables, and produces a docket status report plus a structured deadline feed.
 
-Same source as the [`docket-watcher`](../../litigation-legal/agents/docket-watcher.md) agent in the litigation-legal Codex plugin — this directory is the Managed Agent cookbook for `POST /v1/agents`.
+Same source as the [`docket-watcher`](../../litigation-legal/agents/docket-watcher.md) agent in the litigation-legal Codex plugin — this directory is a Codex automation/recipe reference that must be wired into your own scheduler and runtime before use.
 
 ## ⚠️ Before you deploy
 
@@ -13,15 +13,9 @@ Same source as the [`docket-watcher`](../../litigation-legal/agents/docket-watch
 - **An unknown court is not a default.** If the jurisdiction-rule table does not cover a court, the mapper must produce `confidence: low` + `needs_verification: true`, never a silent default. If you see a confident deadline on an obscure court, treat the rule table as stale until proven otherwise.
 - **A quiet docket is not a clean docket.** Clerks docket late. Minute entries sometimes arrive days after the event. "No new filings" is a statement about the feed, not a statement about the case.
 
-## Deploy
+## Codex migration notes
 
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-export YUANDIAN_MCP_URL=...
-export CAIPANWENSHU_MCP_URL=...
-export FEISHU_MCP_URL=...
-../../scripts/deploy-managed-agent.sh docket-watcher
-```
+This directory is not installed or scheduled automatically by Codex. To use it, wire the referenced skills, MCP connectors, cadence, permissions, and output paths into your Codex automation or your own controlled runtime, then use the steering examples below as test inputs. The legacy deployment script is retained only as a historical prototype.
 
 ## Steering events
 

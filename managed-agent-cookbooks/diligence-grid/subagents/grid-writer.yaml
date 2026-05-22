@@ -47,8 +47,7 @@ system:
          once per summary, at the end, regardless of document count.
 
     You do NOT build the `.xlsx` workbook. The CSV pair is the deployable
-    artifact; the deploying team transforms it with openpyxl or Claude in
-    Excel on their surface. Shipping an xlsx from a headless agent
+    artifact; the deploying team transforms it with openpyxl or an Office automation agent on their surface. Shipping an xlsx from a headless agent
     requires the openpyxl runtime and a trusted macro surface that this
     cookbook deliberately does not assume.
 

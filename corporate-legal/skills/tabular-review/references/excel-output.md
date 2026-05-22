@@ -2,7 +2,7 @@
 
 The Excel file is the deliverable most deal teams will actually open. Get it right.
 
-## If Claude in Excel / Office agent is available
+## If Office 代理 / Office agent is available
 
 Build the workbook directly in Excel via the Office agent. This is the preferred path because it preserves formatting, lets the reviewer work in their native tool, and supports the cell-comment pattern natively.
 
@@ -48,7 +48,8 @@ Check with `python3 -c "import openpyxl"`. If not installed, offer to install (`
 
 ## Formula injection defense
 
-Before writing any cell in Excel, Sheets, or CSV output, neutralize formula injection. Counterparty-sourced text (contract quotes, party names, registered agent data, CLM exports) is attacker-controlled. A cell starting with `=`, `+`, `-`, `@`, `	`, ``, or `
+Before writing any cell in Excel, Sheets, or CSV output, neutralize formula injection. Counterparty-sourced text (contract quotes, party names, registered agent data, CLM exports) is attacker-controlled. A cell starting with `=`, `+`, `-`, `@`, `	`, `
+`, or `
 ` will be interpreted as a formula or break the row structure.
 
 - **Prefix with a single quote:** `'=SUM(A1:A10)` → `=SUM(A1:A10)` (displayed as text, not executed)

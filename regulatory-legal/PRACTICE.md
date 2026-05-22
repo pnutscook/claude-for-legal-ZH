@@ -212,7 +212,7 @@ Rules for every skill, command, and agent in this plugin:
 
 ## 脚手架，而非蒙眼布
 
-插件的职责是让 Claude 在法律工作中**更好**。
+插件的职责是让 Codex 在法律工作中**更好**。
 
 **不要将问题强行塞入错误的技能。**
 

@@ -6,7 +6,7 @@
   <a href="https://github.com/pnutscook/claude-for-legal-ZH/stargazers"><img src="https://img.shields.io/github/stars/pnutscook/claude-for-legal-ZH?style=social" alt="Stars"></a>
   <a href="https://github.com/pnutscook/claude-for-legal-ZH"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <br>
-  <b>为最常见的中国法律工作流提供的参考 Agent、技能和数据连接器</b>
+  <b>为最常见的中国法律工作流提供的 Codex automation/recipe 参考、技能和数据连接器</b>
   <br>
   涵盖商事合同 · 隐私数据 · 产品合规 · 公司并购 · 劳动用工 · 争议解决 · 监管合规 · AI 治理 · 知识产权 · 法学教育 · 法律诊所
 </p>
@@ -48,7 +48,7 @@ corporate-legal:cold-start-interview
 > [!IMPORTANT]
 > **这些插件的所有输出均为律师审查草稿——不是法律意见，不是法律结论，不替代律师。** 插件在设计层面内置了相应的安全机制：每条引用标注来源，涉主观法律判断默认保守处理，管辖权假设明示标注，任何提交、发送或依赖前设有明确门槛。律师审查、核实并对所有对外产出承担专业责任。插件让审查更快，但不能替代审查。
 >
-> **这些插件不代表 Anthropic 的法律立场。** 它们是帮助律师分析问题的工具。技能中包含的清单项目、建议框架、风险标记、案例法或监管指引的定性描述，均为辅助审查律师自身分析的参考，而非 Anthropic 对法律的表态。许多领域的法律处于未定和演进之中。使用插件的律师——而非插件本身，也非 Anthropic——对其工作成果中的法律立场负责。
+> **这些插件不代表 OpenAI、Anthropic 或作者所在机构的法律立场。** 它们是帮助律师分析问题的工具。技能中包含的清单项目、建议框架、风险标记、案例法或监管指引的定性描述，均为辅助审查律师自身分析的参考，而非任何平台或机构对法律的表态。许多领域的法律处于未定和演进之中。使用插件的律师——而非插件本身，也非模型或平台提供方——对其工作成果中的法律立场负责。
 
 ## 中国法本地化改造说明
 
@@ -77,7 +77,7 @@ corporate-legal:cold-start-interview
 |--------|------|
 | **风险评价六维度方法论** | 每个风险点完成：风险定性→风险敞口→发生概率→可规避性→商业权衡→紧迫性，六维评价 |
 | **双轴风险评价** | 法律风险与商业/操作摩擦独立评价，两个维度不互相替代 |
-| **三层来源溯源标签** | 所有法律依据强制标注来源（法条原文/yuandia检索/模型知识等），按可信度分层 |
+| **三层来源溯源标签** | 所有法律依据强制标注来源（法条原文/yuandian检索/模型知识等），按可信度分层 |
 | **三轮检索策略** | 改写检索表达→分层关键词→三轮递进检索，禁止直接拿用户原话开搜 |
 | **五组内容分离** | 诉讼文书编辑时强制区分：证据列举/质证意见/证据认定/查明事实/争议焦点分析 |
 | **时效验证流程** | 引用具体法条、司法解释、诉讼时效时强制独立检索验证 |
@@ -124,9 +124,9 @@ corporate-legal:cold-start-interview
 ## 盒子里有什么
 
 - **12 个业务领域插件**——覆盖律所、法务和学术法律工作，每个插件围绕冷启动面试构建，生成实践画像（`PRACTICE.md`），所有技能从中读取配置。
-- **托管 Agent 蓝图**——用于定时、持续监控型工作流（续签监控、案件进度监控、法规动态监控、尽调网格、产品上线雷达）。
+- **Codex automation/recipe 参考**——用于定时、持续监控型工作流的落地参考（续签监控、案件进度监控、法规动态监控、尽调网格、产品上线雷达）；不会被 Codex 自动当作后台任务运行。
 - **MCP 连接器**——覆盖通用生产力工具（飞书、Google Drive）和法律专属系统（元典 yuandian、北大法宝、威科先行、e签宝、聚法案例等）。
-- **命名 Agent**——端到端工作流 Agent（供应商合同审查、个人信息主体权利响应、劳动合同解除审查、要件分析表构建……），每个 Agent 有独立的职位式名称和单一启动命令。
+- **命名 workflow/recipe**——端到端工作流提示词（供应商合同审查、个人信息主体权利响应、劳动合同解除审查、要件分析表构建……），作为可迁移的 automation 参考，不在 Codex 中自动后台运行。
 
 <p align="center">
   <img src="docs/assets/capabilities.png" alt="能力展示 — Agent 卡片网格" width="800">
@@ -362,7 +362,7 @@ scripts/                  # validate-codex.py · validate.py · orchestrate.py �
 ## MCP 连接器
 
 > [!IMPORTANT]
-> **先连接检索工具。** 每个插件已预配置法律检索连接器——yuandian（元典）MCP 用于案例检索和法规检索。首次需要时系统会提示授权。连接后，Claude 从权威来源获取信息并对引用进行验证。通过检索连接器获取的引用标注来源标签。仅来自模型知识的引用标记为 `[需验证]`，如果完全没有连接检索工具，交付物上方的审查备注会记录来源未经验证，提醒你核实。连接器让引用可信——在任何其他设置之前先配置它。
+> **先连接检索工具。** 每个插件已预配置法律检索连接器——yuandian（元典）MCP 用于案例检索和法规检索。首次需要时系统会提示授权。连接后，Codex 从权威来源获取信息并对引用进行验证。通过检索连接器获取的引用标注来源标签。仅来自模型知识的引用标记为 `[需验证]`，如果完全没有连接检索工具，交付物上方的审查备注会记录来源未经验证，提醒你核实。连接器让引用可信——在任何其他设置之前先配置它。
 
 以下连接器随插件提供：
 
@@ -603,9 +603,9 @@ scripts/                  # validate-codex.py · validate.py · orchestrate.py �
 一切皆为 Markdown 和 JSON。Fork、编辑、提交 PR。
 
 - **新技能** → 添加到 `<插件名>/skills/<技能名>/SKILL.md`，使用现有技能的前置元数据（`name`、`description`、`argument-hint`）。描述保持在 1024 字符以内——这是触发信号。技能可通过 `<插件名>:<技能名>` 调用。纯参考技能标记 `user-invocable: false`。
-- **新 Agent** → 添加 `<插件名>/agents/<名称>.md`，含调度前置元数据和 system prompt。如需无头部署，添加匹配的 `managed-agent-cookbooks/<名称>/`。
+- **新 workflow/recipe** → 添加 `<插件名>/agents/<名称>.md` 作为可迁移提示词参考；如需无头部署，添加匹配的 `managed-agent-cookbooks/<名称>/`，并在自己的 Codex automation 或受控运行时中配置调度、权限和输出位置。
 - **社区技能** → 使用 `legal-builder-hub:skill-installer` 在你的环境中测试社区技能。Hub 在每次安装前运行 `legal-builder-hub:skills-qa`，对技能进行评分（九个设计参数、三种法律失败模式、信任面检查），拒绝任何不通过的技能。
-- **推送前验证蓝图** → `bash scripts/test-cookbooks.sh` 对所有托管 Agent 蓝图进行预检，并对编排器工具范围进行 lint。
+- **推送前验证 recipe** → `bash scripts/test-cookbooks.sh` 对所有 automation/recipe 参考进行预检，并对编排器工具范围进行 lint。
 
 ## 许可证
 

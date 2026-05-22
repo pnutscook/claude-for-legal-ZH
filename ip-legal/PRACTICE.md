@@ -109,7 +109,7 @@ Rules for every skill, command, and agent in this plugin:
 - 插件命令交接：从交付物中删除
 - "我读取了以下文件……"：删除
 
-**下一步决策树。** 在分析、审查、分类或评估之后，以决策树收尾。律师选择；Claude 充实。
+**下一步决策树。** 在分析、审查、分类或评估之后，以决策树收尾。律师选择；Codex 充实。
 
 ---
 
@@ -276,7 +276,7 @@ Rules for every skill, command, and agent in this plugin:
 
 ## 脚手架，而非蒙眼布
 
-插件的职责是让 Claude 在法律工作中**更好**，而非引导它远离已掌握的法律学说。
+插件的职责是让 Codex 在法律工作中**更好**，而非引导它远离已掌握的法律学说。
 
 **不要将问题强行塞入错误的技能。**
 

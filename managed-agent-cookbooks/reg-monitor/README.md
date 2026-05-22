@@ -1,8 +1,8 @@
-# Reg Monitor — managed-agent template
+# Reg Monitor — Codex automation/recipe reference
 
 ## Overview
 
-Checks regulatory feeds on a schedule, filters by the deploying team's materiality threshold, runs a quick gap check against the policy library for always-material items, and writes a digest. Same source as the [`reg-change-monitor`](../../regulatory-legal/agents/reg-change-monitor.md) Codex agent and the [`reg-feed-watcher`](../../regulatory-legal/skills/reg-feed-watcher) / [`policy-diff`](../../regulatory-legal/skills/policy-diff) skills — this directory is the Managed Agent cookbook for `POST /v1/agents`.
+Checks regulatory feeds on a schedule, filters by the deploying team's materiality threshold, runs a quick gap check against the policy library for always-material items, and writes a digest. Same source as the [`reg-change-monitor`](../../regulatory-legal/agents/reg-change-monitor.md) Codex agent and the [`reg-feed-watcher`](../../regulatory-legal/skills/reg-feed-watcher) / [`policy-diff`](../../regulatory-legal/skills/policy-diff) skills — this directory is a Codex automation/recipe reference that must be wired into your own scheduler and runtime before use.
 
 ## ⚠️ Before you deploy
 
@@ -11,13 +11,9 @@ Checks regulatory feeds on a schedule, filters by the deploying team's materiali
 - **The materiality threshold is your calibration, not law.** If your `## Materiality threshold` section is stale or was tuned for a different risk posture, the triage is stale. Recheck before enabling scheduled runs.
 - **The watchlist is a coverage assertion you made.** A regulator not on the watchlist may still publish something material. Missing a regulator is a configuration bug, not a feed bug.
 
-## Deploy
+## Codex migration notes
 
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-export GDRIVE_MCP_URL=...
-../../scripts/deploy-managed-agent.sh reg-monitor
-```
+This directory is not installed or scheduled automatically by Codex. To use it, wire the referenced skills, MCP connectors, cadence, permissions, and output paths into your Codex automation or your own controlled runtime, then use the steering examples below as test inputs. The legacy deployment script is retained only as a historical prototype.
 
 ## Steering events
 

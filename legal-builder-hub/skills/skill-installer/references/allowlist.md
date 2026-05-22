@@ -11,8 +11,8 @@ fetch, what publishers it will trust, and which MCP connectors community skills
 are allowed to wire up. It is the structural counterpart to the installer's
 trust-check step: the trust check is an AI reading the skill, which a
 well-crafted prompt injection can manipulate; the allowlist is an
-administrator-controlled file that Claude reads before any analysis runs and
-whose enforcement does not depend on Claude correctly analyzing the skill.
+administrator-controlled file that Codex reads before any analysis runs and
+whose enforcement does not depend on Codex correctly analyzing the skill.
 
 ## Schema
 

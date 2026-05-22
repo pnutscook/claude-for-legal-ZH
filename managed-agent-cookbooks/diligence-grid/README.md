@@ -1,4 +1,4 @@
-# Diligence Grid — managed-agent template
+# Diligence Grid — Codex automation/recipe reference
 
 ## Overview
 
@@ -7,7 +7,7 @@ Batch document review over a virtual data room. Two modes:
 - **watch** — monitors the VDR for new uploads since a cutoff, classifies each against the deploying team's diligence request-list categories, and flags uploads in high-priority categories (Material Contracts, Litigation, IP).
 - **grid** — runs a tabular review against a column schema over a folder of documents. One row per document, one column per data point, every cell cited back to a verbatim source quote. The M&A diligence workhorse.
 
-Same source as the [`corporate-legal`](../../corporate-legal) plugin — this directory is the Managed Agent cookbook for `POST /v1/agents`. Grid mode is the `tabular-review` skill, running headless across a fleet of extractor workers.
+Same source as the [`corporate-legal`](../../corporate-legal) plugin — this directory is a Codex automation/recipe reference that must be wired into your own scheduler and runtime before use. Grid mode is the `tabular-review` skill, running headless across a fleet of extractor workers.
 
 ## ⚠️ Before you deploy
 
@@ -16,16 +16,9 @@ Same source as the [`corporate-legal`](../../corporate-legal) plugin — this di
 - **Watch mode classifies metadata and previews, not full documents.** A new upload the classifier tags "low priority" can still be the side letter that changes the deal. Treat the watch report as a queue, not a filter.
 - **Counterparty-uploaded documents are untrusted input for the toolchain too.** The grid-writer's CSV formula-injection defense is mandatory, not optional — see the security section below.
 
-## Deploy
+## Codex migration notes
 
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-export FEISHU_MCP_URL=...
-export GDRIVE_MCP_URL=...
-export CLM_MCP_URL=...                # optional; set the toolset default to enabled if used
-export AI_CONTRACT_MCP_URL=...        # optional; for clause-structure QA of the normalizer pass
-../../scripts/deploy-managed-agent.sh diligence-grid
-```
+This directory is not installed or scheduled automatically by Codex. To use it, wire the referenced skills, MCP connectors, cadence, permissions, and output paths into your Codex automation or your own controlled runtime, then use the steering examples below as test inputs. The legacy deployment script is retained only as a historical prototype.
 
 ## Steering events
 
@@ -46,7 +39,7 @@ VDR documents — contracts, board minutes, side letters, counterparty uploads �
 
 **CSV formula injection.** Every cell written by `grid-writer` — values, verbatim quotes, locations, document names, column labels — is first-character-checked against `=`, `+`, `-`, `@`, tab, and carriage return. Cells that match are prefixed with a single apostrophe before they land in the CSV. Counterparty-uploaded contracts routinely contain strings that Excel and Sheets will otherwise execute as formulas (`=HYPERLINK(...)` exfil, `=cmd|...` DDE on older Excel) the moment the deal team opens the file. The sources CSV is the larger exposure — verbatim quotes are the attacker-controlled surface.
 
-**Xlsx is a deployment concern.** The cookbook ships CSVs only. The deploying team transforms them to `.xlsx` with the workbook structure in [`corporate-legal/skills/tabular-review/references/excel-output.md`](../../corporate-legal/skills/tabular-review/references/excel-output.md) — hidden `_source` columns, cell comments carrying the quote on hover, state-based fills, `Verified` dropdown per column, `_schema` and `_summary` sheets. That transform happens on the deploying team's Excel surface (Claude in Excel, openpyxl, or Google Sheets via the Sheets API). Shipping the xlsx from the headless agent requires a trusted runtime and a macro surface this cookbook deliberately does not assume.
+**Xlsx is a deployment concern.** The cookbook ships CSVs only. The deploying team transforms them to `.xlsx` with the workbook structure in [`corporate-legal/skills/tabular-review/references/excel-output.md`](../../corporate-legal/skills/tabular-review/references/excel-output.md) — hidden `_source` columns, cell comments carrying the quote on hover, state-based fills, `Verified` dropdown per column, `_schema` and `_summary` sheets. That transform happens on the deploying team's Excel surface (Office 代理, openpyxl, or Google Sheets via the Sheets API). Shipping the xlsx from the headless agent requires a trusted runtime and a macro surface this cookbook deliberately does not assume.
 
 **Not guaranteed:** every cell this agent produces is a **lead that needs verification**, not a finding. The reviewer reads the source, checks the quote, marks the `Verified` column. A lawyer decides what goes into a rep, a schedule, or a memo.
 

@@ -1,8 +1,8 @@
-# Renewal Watcher — managed-agent template
+# Renewal Watcher — Codex automation/recipe reference
 
 ## Overview
 
-Scans the contract repository for upcoming renewal and cancel-by deadlines, cross-references against the team's playbook, flags contracts with upcoming deadlines, playbook deviations, and escalation triggers, and writes an alert report. Same source as the [`renewal-watcher`](../../commercial-legal/agents/renewal-watcher.md) Codex agent and the [`renewal-tracker`](../../commercial-legal/skills/renewal-tracker) skill — this directory is the Managed Agent cookbook for `POST /v1/agents`.
+Scans the contract repository for upcoming renewal and cancel-by deadlines, cross-references against the team's playbook, flags contracts with upcoming deadlines, playbook deviations, and escalation triggers, and writes an alert report. Same source as the [`renewal-watcher`](../../commercial-legal/agents/renewal-watcher.md) Codex agent and the [`renewal-tracker`](../../commercial-legal/skills/renewal-tracker) skill — this directory is a Codex automation/recipe reference that must be wired into your own scheduler and runtime before use.
 
 This is a **cookbook, not a product.** It is CLM-agnostic — defaults to a contract repository MCP (e签宝/法大大/飞书文档 for PRC practitioners); teams on other CLMs or a shared drive of signed PDFs should swap the MCP endpoint accordingly.
 
@@ -12,16 +12,9 @@ This is a **cookbook, not a product.** It is CLM-agnostic — defaults to a cont
 - **Escalation routing follows the configured matrix; it does not make the escalation judgment.** A flagged playbook deviation may still be acceptable in context; an unflagged term may still need attention. The matrix is a router, not a reviewer.
 - **Quiet weeks are not clean weeks.** A contract that isn't surfaced may be missing from the CLM, mis-tagged, or past its notice window without the metadata reflecting that. The all-clear footer means the agent ran, not that nothing needs doing.
 
-## Deploy
+## Codex migration notes
 
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-export CLM_MCP_URL=...                # e签宝/法大大/飞书文档 CLM endpoint
-export FEISHU_MCP_URL=...
-# Optional — enable in the manifest if your signed agreements live here
-export GDRIVE_MCP_URL=...
-../../scripts/deploy-managed-agent.sh renewal-watcher
-```
+This directory is not installed or scheduled automatically by Codex. To use it, wire the referenced skills, MCP connectors, cadence, permissions, and output paths into your Codex automation or your own controlled runtime, then use the steering examples below as test inputs. The legacy deployment script is retained only as a historical prototype.
 
 ## Steering events
 

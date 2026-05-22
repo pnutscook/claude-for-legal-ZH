@@ -1,12 +1,12 @@
-# 法律领域托管 Agent 模板
+# 法律领域 Codex automation/recipe 参考
 
 本目录保留原托管 Agent 设计，作为迁移到 Codex automation 或自有工作流引擎的 recipe 参考。每个目录引用对应 Codex 插件中的权威 system prompt 和技能文件，确保单一事实来源；这些文件不会被 Codex 自动当作后台任务运行，落地时需要按当前环境单独配置调度、权限和输出位置。
 
 这些是**蓝图，而非成品。** 它们是起点。请根据你的文档管理系统、合同台账、飞书工作空间、通知路由和审查节奏进行调整。未经适配无法开箱即用，它们也不应如此。
 
-运行 `../scripts/deploy-managed-agent.sh <slug>` 上传技能、创建 leaf worker，并以解析后的配置执行 `POST /v1/agents`。每个模板附带 [`steering-examples.json`](./reg-monitor/steering-examples.json) 和每个 Agent 的 README（涵盖安全层和交接说明）。
+不要把本目录理解为 Codex 会自动加载的后台任务。`agent.yaml`、subagents 和 `steering-examples.json` 是部署说明素材；落地时需要你把它们迁移到当前使用的 Codex automation、自有调度器或其他受控运行时。旧的部署脚本仅作为历史原型保留，不是本仓库的默认安装路径。
 
-| Agent | 对应插件 | 监控内容 | CMA steering 事件 | Leaf worker |
+| Recipe | 对应插件 | 监控内容 | steering 示例 | worker 拆分 |
 |-------|----------|----------|-------------------|-------------|
 | [`reg-monitor`](./reg-monitor/) | regulatory-legal | 法规信息源（司法部数据库、部委 RSS、元典） | `检查 <日期> 之前的法规动态，重要性阈值：<阈值>` | feed-reader · materiality-filter · **digest-writer** |
 | [`renewal-watcher`](./renewal-watcher/) | commercial-legal | 合同台账（法大大、e签宝）中的续签和解约截止日期 | `扫描 <X>–<Y> 天内的续签，标记审查指引偏离` | repo-reader · deadline-calculator · **alert-writer** |
@@ -16,23 +16,23 @@
 
 **粗体** leaf = 唯一拥有 `Write` 权限的 worker。
 
-## 清单与 API
+## 清单结构
 
-`agent.yaml` 文件使用真实 `POST /v1/agents` 字段名，同时包含部署脚本自动解析的若干约定：
+`agent.yaml` 文件沿用原托管 Agent 字段名，作为迁移到你自己运行时的结构化说明，同时包含若干可机械解析的约定：
 
-| 清单约定 | 解析为 |
+| 清单约定 | 迁移时含义 |
 |----------|--------|
 | `system: {file: ../../<插件名>/agents/<agent>.md, append: "..."}` | `system: "<内联内容 + append>"` |
 | `system: {text: "..."}` | `system: "<text>"` |
 | `skills: [{from_plugin: ../../<插件名>}]` | 上传该目录下所有 `skills/*` → `[{type: custom, skill_id: ...}, ...]` |
 | `skills: [{path: ../../...}]` | `skills: [{type: custom, skill_id: <上传后id>}]` |
-| `callable_agents: [{manifest: ./subagents/x.yaml}]` | `callable_agents: [{type: agent, id: <创建后id>, version: latest}]` |
+| `callable_agents: [{manifest: ./subagents/x.yaml}]` | 该 recipe 需要一个受控 worker；由你的运行时决定如何创建和调用 |
 
-> **研究预览：** `callable_agents`（多 Agent 委托）支持**一级委托**。编排器可调用 worker；worker 不能进一步调用子 Agent。
+> **迁移约束：** 多 worker 委托只应支持一级委托。编排器可调用 worker；worker 不能进一步调用子 worker。
 
 ## 跨 Agent 交接
 
-命名 Agent 之间从不直接相互调用。当一个 Agent 需要另一个 Agent 时（如 `launch-radar` 发现一个需要完整审查备忘录的上线项目），它在输出中发出一个 `handoff_request`；[`../scripts/orchestrate.py`](../scripts/orchestrate.py)（或你自己的事件总线）将其作为新的 steering 事件路由至目标会话。参考脚本对目标进行硬白名单限制并对荷载进行 schema 验证。
+命名 recipe 之间从不直接相互调用。当一个 recipe 需要另一个 recipe 时（如 `launch-radar` 发现一个需要完整审查备忘录的上线项目），它在输出中发出一个 `handoff_request`；[`../scripts/orchestrate.py`](../scripts/orchestrate.py)（或你自己的事件总线）将其作为新的 steering 事件路由至目标会话。参考脚本对目标进行硬白名单限制并对荷载进行 schema 验证。
 
 ## 安全模型
 
@@ -46,7 +46,7 @@
 
 ## 工作成果与保密
 
-正常部署下，这些 Agent 产出的所有内容均为**律师工作成果**。每个清单中的无头附加指令要求 Agent 在开头附加用户插件配置中的工作成果保密声明。部署前请与你的法务团队确认声明内容。如果部署中处理不应保留的材料，请先审查 Anthropic 的数据留存设置和你自己的存储留存策略。
+正常部署下，这些 recipe 产出的所有内容均为**律师工作成果**。每个清单中的无头附加指令要求运行时在开头附加用户插件配置中的工作成果保密声明。部署前请与你的法务团队确认声明内容。如果部署中处理不应保留的材料，请先审查模型提供商的数据留存设置和你自己的存储留存策略。
 
 ## 你得到什么、不会得到什么
 
