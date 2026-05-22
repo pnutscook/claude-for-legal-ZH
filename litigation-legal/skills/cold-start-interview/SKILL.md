@@ -3,20 +3,25 @@ name: cold-start-interview
 description: >
   诉讼插件首次配置——按角色分流（法务、律所律师、独立执业）、
   按立场分流（原告、被告、两者皆有），捕获风险校准、执业背景和文书风格，
-  写入实践画像 CLAUDE.md。在全新安装时、用户想设置或重做实践画像时、
+  写入实践画像 PRACTICE.md。在全新安装时、用户想设置或重做实践画像时、
   或重新检查可用集成时使用。
 argument-hint: "[--redo | --check-integrations]"
 ---
 
-# /cold-start-interview
+# cold-start-interview
 
-1. 检查 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`。如已填充且无 `--redo`，覆盖前询问。
+## Codex 画像路径与旧 Claude 迁移
+
+本技能在 Codex 中使用 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 作为唯一运行期画像。若该文件不存在，先检查旧 Claude 配置：`~/.claude/plugins/config/claude-for-legal-zh/litigation-legal/CLAUDE.md` 和 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`。
+
+如旧文件存在且不含 `[PLACEHOLDER]`，创建 Codex 目录并复制为 `PRACTICE.md`，然后继续本次任务；如旧文件仍为模板或不存在，则按本访谈生成新的 `PRACTICE.md`。旧 `.claude-plugin/` 文件仅用于兼容，不再作为 Codex 的默认读取位置。
+1. 检查 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md`。如已填充且无 `--redo`，覆盖前询问。
 2. 按以下工作流操作。
 3. 运行 Part 0（角色、立场、集成检查）。访谈按角色和立场分流。
    - **角色**路由实践画像结构：**法务**（案件组合管理、外聘律师监督、重要性评估方法）、**律所律师**（案件工作——案件理论、关键事实、文书风格），或**独立执业**（案件量 + 风险代理或固定律师费模式 + 客户期望 + 时效追踪，再加案件理论和文书风格部分）。
    - **立场**路由校准词汇：**原告**（主动主张、案件价值、风险代理、时效悬崖）、**被告**（被动应对、敞口评估、保险通知），或**两者/因案而异**（捕获默认值，由各案技能重新询问）。
 4. 浮现缺口。如用户没有成文的风险框架或报告门槛，注明并提供现在思考或留 `[PLACEHOLDER]` 供后续填写。
-5. 写入 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`。注明编写日期。
+5. 写入 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md`。注明编写日期。
 6. 定稿前与用户确认："这是我捕获的内容——有什么问题吗？"
 
 ---
@@ -205,11 +210,11 @@ argument-hint: "[--redo | --check-integrations]"
 
 向用户展示插件可以做什么的定制列表，并说明实践画像可以随时修改。
 
-> "您的实践画像位于 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` —— 一个可以直接阅读和编辑的纯文本文件。您回答的任何内容都可以修改。当输出感觉不对时，修复通常在此处。"
+> "您的实践画像位于 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` —— 一个可以直接阅读和编辑的纯文本文件。您回答的任何内容都可以修改。当输出感觉不对时，修复通常在此处。"
 
 ## 本技能不做什么
 
 - 替用户决定框架。默认值是起点；用户判断是实际内容。
 - 假装缺口不存在。诚实留 `[PLACEHOLDER]` 比发明一个门槛更好。
 - 与用户争执。如用户说"我还没有那个"，注明并继续。
-- 未经询问读取个人 `~/CLAUDE.md` 或其他环境上下文。
+- 未经询问读取个人 `~/PRACTICE.md` 或其他环境上下文。

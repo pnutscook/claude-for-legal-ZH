@@ -1,0 +1,40 @@
+{
+  "name": "corporate-legal",
+  "version": "1.0.2",
+  "description": "规模化开展并购尽调（附引用来源的表格化审查），制作披露函与交割检查表，按公司格式起草董事会决议与股东会决议，跨法域追踪主体合规期限。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "corporate-legal"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Corporate Legal CN",
+    "shortDescription": "规模化开展并购尽调（附引用来源的表格化审查），制作披露函与交割检查表，按公司格式起草董事会决议与股东会决议，跨法域追踪主体合规期限。",
+    "longDescription": "规模化开展并购尽调（附引用来源的表格化审查），制作披露函与交割检查表，按公司格式起草董事会决议与股东会决议，跨法域追踪主体合规期限。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "从这些尽调材料中提取重大问题"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

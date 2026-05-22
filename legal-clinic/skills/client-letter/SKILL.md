@@ -7,21 +7,20 @@ description: >
 argument-hint: "[预约 | 文件索取 | 状态更新]"
 ---
 
-# /client-letter
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 通俗语言标准、指导风格、诊所联系信息。
+# client-letter
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 通俗语言标准、指导风格、诊所联系信息。
 2. 使用以下模板和工作流。
 3. 匹配类型到模板。通俗语言检查。
 4. 输出附 AI 辅助标签、指导路由。
 
-范围：仅常规信函。实质性建议 → `/status client` 或与指导老师的对话。
+范围：仅常规信函。实质性建议 → `legal-clinic:status client` 或与指导老师的对话。
 
 ```
-/legal-clinic:client-letter 预约
+legal-clinic:client-letter 预约
 ```
 
 ```
-/legal-clinic:client-letter 文件索取
+legal-clinic:client-letter 文件索取
 ```
 
 ---
@@ -32,15 +31,15 @@ argument-hint: "[预约 | 文件索取 | 状态更新]"
 
 诊所需发送大量常规信函："您的预约是周二下午2点""请携带您的租赁合同""我们已为您提交了答辩状"。本技能从模板处理这些，让学生不必每周重复输入相同内容。
 
-**范围：仅常规信函。** 实质性建议、坏消息、案件策略——这些是 `/status client` 或一次对话，而非模板信函。
+**范围：仅常规信函。** 实质性建议、坏消息、案件策略——这些是 `legal-clinic:status client` 或一次对话，而非模板信函。
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 通俗语言标准、指导风格、诊所联系信息。
+`~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 通俗语言标准、指导风格、诊所联系信息。
 
 ## 教学检查
 
-读取该实践领域的指导老师指南，路径为 `~/.claude/plugins/config/claude-for-legal/legal-clinic/guides/<实践领域>.md`。检查 `pedagogy_posture` 设置：
+读取该实践领域的指导老师指南，路径为 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/guides/<实践领域>.md`。检查 `pedagogy_posture` 设置：
 
 - **`guide`（默认）：** 产出结构和核查清单（必要元素、通俗语言目标、依学生实践规则签字）。要求学生自行起草每节。对其草稿给予反馈（语域、阅读水平、必要元素、遗漏之处）。仅当学生已尝试一次后，才为某节提供填充。
 - **`assist`：** 产出信函。标注事项供学生审查。学生通过审查编辑来学习。
@@ -111,7 +110,7 @@ argument-hint: "[预约 | 文件索取 | 状态更新]"
 
 ### 简要状态更新
 
-用于常规"已提交""正在等待"更新。（更全面的状态更新 → `/status client`。）
+用于常规"已提交""正在等待"更新。（更全面的状态更新 → `legal-clinic:status client`。）
 
 *供学生的审查标签（非给当事人——发送前剥离）：*
 `[AI辅助草稿 —— 需按插件配置指导步骤审查]`
@@ -133,11 +132,11 @@ argument-hint: "[预约 | 文件索取 | 状态更新]"
 
 ## 发送前
 
-向当事人发送信函是一项具有法律后果的行为。本插件的门控是 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` 中 `## 指导风格` 描述的指导工作流程，由确认持证指导律师拥有诊所设置的 Part 0 身份检查强化。该门控仍有效：每封信函在离开诊所前均需通过审查。
+向当事人发送信函是一项具有法律后果的行为。本插件的门控是 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` 中 `## 指导风格` 描述的指导工作流程，由确认持证指导律师拥有诊所设置的 Part 0 身份检查强化。该门控仍有效：每封信函在离开诊所前均需通过审查。
 
 在发送上述任何信函前，确认：
 
-1. 草稿已按 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` 中的指导协议审查（队列 / 标记 / 较轻触）。
+1. 草稿已按 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` 中的指导协议审查（队列 / 标记 / 较轻触）。
 2. 所有内部审查标签（`[AI辅助草稿]`、任何 `[待核实]` 或 `[需补充事实]` 标签）已从当事人可见版本中移除。
 3. 签字符合你所在法域关于法学学生签署信函的学生实践规则。
 
@@ -145,14 +144,14 @@ argument-hint: "[预约 | 文件索取 | 状态更新]"
 
 ## 通俗语言检查
 
-按 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` 标准。短句。无法律术语。强制阅读水平目标。如果上述模板中包含当事人可能不理解的法律术语，首次出现时解释："我们已提交了'答辩状'——这是向法院说明您对案件看法的文件。"
+按 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` 标准。短句。无法律术语。强制阅读水平目标。如果上述模板中包含当事人可能不理解的法律术语，首次出现时解释："我们已提交了'答辩状'——这是向法院说明您对案件看法的文件。"
 
 ## 指导路由
 
-按 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md`。常规信函是否触发标记取决于指导老师选择的指导风格。如为较轻触：信函经学生审查后直接发送，无需队列步骤。如为正式队列：即使是常规信函也需排队。
+按 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md`。常规信函是否触发标记取决于指导老师选择的指导风格。如为较轻触：信函经学生审查后直接发送，无需队列步骤。如为正式队列：即使是常规信函也需排队。
 
 ## 本技能不做什么
 
-- **实质性建议。** 如果信函会说"这是我对您案件的分析"或"这是您应该做的"，那不是常规信函——那是 `/status client` 或先与指导老师对话。
+- **实质性建议。** 如果信函会说"这是我对您案件的分析"或"这是您应该做的"，那不是常规信函——那是 `legal-clinic:status client` 或先与指导老师对话。
 - **坏消息。** 结案、不利裁决、无法帮助——这些需要思考，不是模板。标记给指导老师。
-- **任何给对立方律师或法院的内容。** 不同受众，不同技能（`/draft` 或 `/status court`）。
+- **任何给对立方律师或法院的内容。** 不同受众，不同技能（`legal-clinic:draft` 或 `legal-clinic:status court`）。

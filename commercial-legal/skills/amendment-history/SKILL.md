@@ -7,8 +7,7 @@ description: >
 argument-hint: "[文件 | 合同管理系统ID(即将上线) | 存储库链接(即将上线)] [--provision <条款名称>]"
 ---
 
-# /amendment-history
-
+# amendment-history
 加载基础协议及所有修订，然后总结历次变更内容或追踪特定条款的当前有效语言。
 
 ## 指令
@@ -27,15 +26,15 @@ argument-hint: "[文件 | 合同管理系统ID(即将上线) | 存储库链接(�
 ## 示例
 
 ```
-/commercial-legal:amendment-history acme-msa.pdf amendment-1.pdf amendment-2.pdf
+commercial-legal:amendment-history acme-msa.pdf amendment-1.pdf amendment-2.pdf
 ```
 
 ```
-/commercial-legal:amendment-history --provision 赔偿
+commercial-legal:amendment-history --provision 赔偿
 ```
 
 ```
-/commercial-legal:amendment-history
+commercial-legal:amendment-history
 [粘贴协议和修订文本]
 ```
 
@@ -43,7 +42,7 @@ argument-hint: "[文件 | 合同管理系统ID(即将上线) | 存储库链接(�
 
 ## 事项上下文
 
-**事项上下文。** 检查业务领域级 CLAUDE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（法务用户的默认值），跳过本段其余内容。如果已启用且没有活动事项，询问。加载活动事项的 `matter.md`。
+**事项上下文。** 检查业务领域级 PRACTICE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（法务用户的默认值），跳过本段其余内容。如果已启用且没有活动事项，询问。加载活动事项的 `matter.md`。
 
 ---
 
@@ -182,7 +181,7 @@ argument-hint: "[文件 | 合同管理系统ID(即将上线) | 存储库链接(�
 
 ## 以下一步行动决策树收尾
 
-以 CLAUDE.md `## 输出` 中的下一步行动决策树收尾。决策树是输出；律师选择。
+以 PRACTICE.md `## 输出` 中的下一步行动决策树收尾。决策树是输出；律师选择。
 
 ## 本技能不做的事
 

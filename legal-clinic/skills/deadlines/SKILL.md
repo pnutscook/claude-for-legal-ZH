@@ -8,12 +8,11 @@ description: >
 argument-hint: "[--add | --report (默认) | --update [id] | --complete [id] | --close [id] | --horizon=N]"
 ---
 
-# /deadlines
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 管辖地、实践领域、预警天数节奏。
+# deadlines
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 管辖地、实践领域、预警天数节奏。
 2. 使用以下工作流。
 3. 按标志路由：
-   - `--add`：捕获案件、类型、描述、截止日期、来源、负责人。写入 `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml`。先检查重复。
+   - `--add`：捕获案件、类型、描述、截止日期、来源、负责人。写入 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/deadlines.yaml`。先检查重复。
    - `--report`（默认）：跨案汇总——逾期、未来3天、未来7天、未来14天；按负责人；按实践领域；未分配标记。
    - `--update [id]`：修改字段；记录带日期的备注。
    - `--complete [id]`：标记完成；与学生确认工作已实际提交/送达。
@@ -28,14 +27,14 @@ argument-hint: "[--add | --report (默认) | --update [id] | --complete [id] | -
 
 诊所最大的运营风险是错过截止日期。学生同时处理多个案件、兼职工作、每学期更替。仅存于个别学生脑海中的截止日期在交接时被遗漏，在期末考试周被遗忘，在学生意外退出诊所时被错过。本技能是集中的运营记录。
 
-一旦错过截止日期，指导律师承担责任。技能按此风险级别校准——预警提前触发，逾期项目在明确解决前保持可见，交接（通过 `/semester-handoff`）将截止日期列表向前传递给下一位学生。
+一旦错过截止日期，指导律师承担责任。技能按此风险级别校准——预警提前触发，逾期项目在明确解决前保持可见，交接（通过 `legal-clinic:semester-handoff`）将截止日期列表向前传递给下一位学生。
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 管辖地、实践领域、截止日期预警天数（默认14/7/3/1）、指导律师
-- `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml` ——分类台账
+- `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 管辖地、实践领域、截止日期预警天数（默认14/7/3/1）、指导律师
+- `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/deadlines.yaml` ——分类台账
 
-**管辖地假设。** 截止日期计算和预警阈值假设 CLAUDE.md 中设定的管辖地。截止日期、中断/延长规则、期间计算规则和本地法院惯例在不同省份和具体法院之间存在实质差异。如果事项涉及不同省份、特定法院的本地规则或法院层级问题，在依赖之前与你的指导老师对照管辖规则确认截止日期。
+**管辖地假设。** 截止日期计算和预警阈值假设 PRACTICE.md 中设定的管辖地。截止日期、中断/延长规则、期间计算规则和本地法院惯例在不同省份和具体法院之间存在实质差异。如果事项涉及不同省份、特定法院的本地规则或法院层级问题，在依赖之前与你的指导老师对照管辖规则确认截止日期。
 
 ## 模式
 
@@ -54,7 +53,7 @@ argument-hint: "[--add | --report (默认) | --update [id] | --complete [id] | -
 
 技能自动生成 `id` 标识：`[案件]-[简短描述]-[YYYY-MM]`。
 
-**从其他技能中提取：** 当 `/client-intake`、`/draft` 或 `/status` 在其输出中浮现截止日期时，应预填充字段移交至本技能。学生确认并添加。
+**从其他技能中提取：** 当 `legal-clinic:client-intake`、`legal-clinic:draft` 或 `legal-clinic:status` 在其输出中浮现截止日期时，应预填充字段移交至本技能。学生确认并添加。
 
 **添加前检查：** 如果存在相同 case_id + type + due_date 的截止日期，标记为可能重复并在添加前询问。
 
@@ -73,7 +72,7 @@ argument-hint: "[--add | --report (默认) | --update [id] | --complete [id] | -
 
 ### `--report`（默认）——跨案汇总
 
-读取 `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml`。产出：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/deadlines.yaml`。产出：
 
 ```markdown
 # 截止日期报告 — [今天日期]
@@ -105,7 +104,7 @@ argument-hint: "[--add | --report (默认) | --update [id] | --complete [id] | -
 
 ## 14天之后
 
-[仅计数——扩展至30天详情用 `/deadlines --report --horizon=30`]
+[仅计数——扩展至30天详情用 `legal-clinic:deadlines --report --horizon=30`]
 
 ---
 
@@ -141,19 +140,19 @@ argument-hint: "[--add | --report (默认) | --update [id] | --complete [id] | -
 
 ## 预警节奏
 
-按 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` 截止日期预警天数。默认 14, 7, 3, 1。
+按 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` 截止日期预警天数。默认 14, 7, 3, 1。
 
-预警不自动推送——本插件没有计划任务/agent 行为。但每次调用 `/deadlines`（或 `/status`，该技能路由到本技能进行截止日期检查），报告会将任何触及预警阈值的事项拉出。
+预警不自动推送——本插件没有计划任务/agent 行为。但每次调用 `legal-clinic:deadlines`（或 `legal-clinic:status`，该技能路由到本技能进行截止日期检查），报告会将任何触及预警阈值的事项拉出。
 
 如果截止日期超过到期日且未被标记完成，则移至 `status: overdue` 并在每次报告中保持直至明确解决。逾期截止日期不会自动关闭。
 
 ## 技能联动
 
-- **`/client-intake`：** 接待浮现时效紧迫性时，提议以预填充字段执行 `/deadlines --add`。
-- **`/draft`：** 当文书草稿引用截止日期（答辩到期、异议窗口），提议添加。
-- **`/status`：** status 技能读取相关案件的 `~/.claude/plugins/config/claude-for-legal/legal-clinic/deadlines.yaml` 并将其活跃截止日期纳入输出。
-- **`/semester-handoff`：** 读取 deadlines.yaml 识别离届学生案件中所有活跃截止日期；每份交接备忘录携带截止日期向前。
-- **`/supervisor-review-queue`（如正式审查启用）：** 临近截止日期的案件在审查队列中获得优先级。
+- **`legal-clinic:client-intake`：** 接待浮现时效紧迫性时，提议以预填充字段执行 `legal-clinic:deadlines --add`。
+- **`legal-clinic:draft`：** 当文书草稿引用截止日期（答辩到期、异议窗口），提议添加。
+- **`legal-clinic:status`：** status 技能读取相关案件的 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/deadlines.yaml` 并将其活跃截止日期纳入输出。
+- **`legal-clinic:semester-handoff`：** 读取 deadlines.yaml 识别离届学生案件中所有活跃截止日期；每份交接备忘录携带截止日期向前。
+- **`legal-clinic:supervisor-review-queue`（如正式审查启用）：** 临近截止日期的案件在审查队列中获得优先级。
 
 ## 本技能不做什么
 

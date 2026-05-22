@@ -6,9 +6,8 @@ description: >
   "还有什么可用的"或询问技能推荐时使用；也作为其他插件工作流的被动环节运行。
 ---
 
-# /related-skills-surfacer
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md` → 实践画像。
+# related-skills-surfacer
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` → 实践画像。
 2. 使用以下工作流。
 3. 检查其他插件最近在做什么。与注册表进行匹配。
 4. 建议："你一直在做 X — 社区有一个关于 Y 的技能与之相关。"
@@ -28,7 +27,7 @@ description: >
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md` → 实践画像、已安装技能（不推荐已安装的内容）。
+`~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` → 实践画像、已安装技能（不推荐已安装的内容）。
 来自 registry-browser 的注册表缓存。
 
 ## 匹配
@@ -44,7 +43,7 @@ description: >
 ## 输出
 
 如果强匹配：
-> 💡 社区有一个针对此的技能：**[名称]** 来自 [注册表] — "[描述]"。`/legal-builder-hub:skill-installer [名称]` 来试用。
+> 💡 社区有一个针对此的技能：**[名称]** 来自 [注册表] — "[描述]"。`legal-builder-hub:skill-installer [名称]` 来试用。
 
 如果无强匹配：静默。无输出。不要宣告"我什么都没找到。"
 
@@ -54,14 +53,14 @@ description: >
 
 ## 用户控制
 
-根据 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md` → 新技能通知设置：
+根据 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` → 新技能通知设置：
 - **全部：** 浮现任何匹配
 - **匹配实践画像：** 按画像过滤（默认）
 - **无：** 本技能关闭
 
 ## 以下一步决策树收尾
 
-以 CLAUDE.md `## Outputs` 中规定的下一步决策树结尾。根据本技能刚刚产出的内容自定义选项——五个默认分支（起草 X、升级、获取更多事实、观察等待、其他）是起点，不是锁死。树是输出；律师选择。
+以 PRACTICE.md `## Outputs` 中规定的下一步决策树结尾。根据本技能刚刚产出的内容自定义选项——五个默认分支（起草 X、升级、获取更多事实、观察等待、其他）是起点，不是锁死。树是输出；律师选择。
 
 ## 本技能不做什么
 

@@ -8,16 +8,15 @@ description: >
 argument-hint: "[法律问题]"
 ---
 
-# /research-start
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 管辖地、实践领域。
+# research-start
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 管辖地、实践领域。
 2. 使用以下工作流。
 3. 具体界定问题。构建路线图：法条起手点（未核实）、案例法领域（非具体案例）、二次文献来源、检索关键词。
 4. 如学生已上传已有检索成果：综合并识别缺口。
 5. 输出前置显著的"线索非权威"标题。一切都是学生核实的起手点。
 
 ```
-/legal-clinic:research-start "[省份]房屋租赁中以丧失居住条件为由的抗辩"
+legal-clinic:research-start "[省份]房屋租赁中以丧失居住条件为由的抗辩"
 ```
 
 ---
@@ -34,7 +33,7 @@ argument-hint: "[法律问题]"
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 管辖地（省份）、实践领域。
+`~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 管辖地（省份）、实践领域。
 
 ## 工作流
 
@@ -42,7 +41,7 @@ argument-hint: "[法律问题]"
 
 **在构建路线图之前，阅读诊所自己的种子文件。** 指导老师在冷启动时上传（手册、提交指南、本地法院规则、接待表格、示例案件文件、既往备忘录）——它们是预先经过审查的、管辖地特定的，在学生检索的前20分钟比任何数据库查询都更有价值。
 
-1. 读取 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → `## 种子文件`。识别任何目的或文件名与检索领域匹配的项目。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → `## 种子文件`。识别任何目的或文件名与检索领域匹配的项目。
 2. 对每个匹配项，将其呈现为路线图输出顶部的**优先阅读的种子文件**块。命名文件，说明它为什么与这个具体问题相关，并说明它可能涵盖什么 vs. 仍需外部检索的地方。
 3. 如果没有种子文件匹配该问题，直说（"无诊所种子文件匹配本问题——直接进入一手来源"）。不要编造匹配。
 4. 如果诊所有 `LIMITED DATA` 标记，添加一行说明。
@@ -172,7 +171,7 @@ argument-hint: "[法律问题]"
 2. 找到并阅读一手法条——确认上述引注是现行有效的
 3. 运行检索，找到典型案例
 4. 依赖前通过北大法宝/法信核实所有内容
-5. 一旦你掌握了规则，回来运行 `/memo` 来搭建你的分析框架
+5. 一旦你掌握了规则，回来运行 `legal-clinic:memo` 来搭建你的分析框架
 
 ## 本路线图不做什么
 

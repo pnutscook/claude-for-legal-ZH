@@ -8,14 +8,19 @@ description: >
 argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations 仅重新探测集成]"
 ---
 
-# /cold-start-interview
+# cold-start-interview
 
-运行冷启动面谈。首次运行写入 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`；
+## Codex 画像路径与旧 Claude 迁移
+
+本技能在 Codex 中使用 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` 作为唯一运行期画像。若该文件不存在，先检查旧 Claude 配置：`~/.claude/plugins/config/claude-for-legal-zh/ip-legal/CLAUDE.md` 和 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。
+
+如旧文件存在且不含 `[PLACEHOLDER]`，创建 Codex 目录并复制为 `PRACTICE.md`，然后继续本次任务；如旧文件仍为模板或不存在，则按本访谈生成新的 `PRACTICE.md`。旧 `.claude-plugin/` 文件仅用于兼容，不再作为 Codex 的默认读取位置。
+运行冷启动面谈。首次运行写入 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`；
 后续运行使用 `--redo` 重新面谈并在覆盖前显示差异。
 
 ## 使用说明
 
-1. **检查当前状态：** 读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。如含 `[PLACEHOLDER]` 或 `[你的公司名称]`，继续全新面谈。如已填充且未传 `--redo`，询问："看起来你已经设置好了。要重新运行面谈吗？这将覆盖 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`（我先给你看差异）。"
+1. **检查当前状态：** 读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。如含 `[PLACEHOLDER]` 或 `[你的公司名称]`，继续全新面谈。如已填充且未传 `--redo`，询问："看起来你已经设置好了。要重新运行面谈吗？这将覆盖 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`（我先给你看差异）。"
 
 2. **按以下面谈脚本执行。**
 
@@ -23,35 +28,35 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 4. **阅读已分享的文件** 并提取实际立场——维权门槛、审批链、品牌监视设置、开源规则。标注陈述的立场与模板/手册实际要求之间的差异。
 
-5. **迁移：** 如有已填充的 CLAUDE.md（无 `[PLACEHOLDER]` 标记）在 `~/.claude/plugins/cache/claude-for-legal/ip-legal/*/CLAUDE.md` 但不在配置路径，将其复制至配置路径并展示迁移内容。
+5. **迁移：** 如有已填充的 PRACTICE.md（无 `[PLACEHOLDER]` 标记）在 `~/.codex/plugins/cache/claude-for-legal-zh/ip-legal/*/PRACTICE.md` 但不在配置路径，将其复制至配置路径并展示迁移内容。
 
-6. **写入 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`**（按需创建父目录），按下文结构撰写。尽可能使用律师自己的措辞。
+6. **写入 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`**（按需创建父目录），按下文结构撰写。尽可能使用律师自己的措辞。
 
-7. **种子组合登记簿** 如用户分享了组合导出或知识产权管理系统访问：写入 `~/.claude/plugins/config/claude-for-legal/ip-legal/portfolio.yaml`。如未分享任何内容，留下占位指针供组合追踪器稍后填充。
+7. **种子组合登记簿** 如用户分享了组合导出或知识产权管理系统访问：写入 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/portfolio.yaml`。如未分享任何内容，留下占位指针供组合追踪器稍后填充。
 
 8. **展示摘要 + 建议下一步：**
-   - "以下是我听到的 — `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` 已写就。我说错了什么？"
+   - "以下是我听到的 — `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` 已写就。我说错了什么？"
    - 提供测试："想投一个商标名称到确权筛查看看效果，或查看组合登记簿上即将到期的内容吗？"
    - 如已连接知识产权管理系统：建议批量导入组合登记簿并展示即将到期的续展。
 
 ## `--check-integrations`
 
-重新运行集成可用性检查（知识产权管理系统、专利研究、法律研究、文件存储、Slack）并更新 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` 中的 `## 可用集成`。不重新面谈。用于你连接或断开 MCP 后想让插件注意到而无需重新运行完整设置。
+重新运行集成可用性检查（知识产权管理系统、专利研究、法律研究、文件存储、Slack）并更新 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` 中的 `## 可用集成`。不重新面谈。用于你连接或断开 MCP 后想让插件注意到而无需重新运行完整设置。
 
 探测时：仅当 MCP 工具调用实际成功时报告 ✓。已配置但未测试的连接器应标记 ⚪ 附确认方法说明。绝不基于 `.mcp.json` 声明报告 ✓——那误导用户以为某物已接通实则不然。
 
 ## 示例
 
 ```
-/ip-legal:cold-start-interview
+ip-legal:cold-start-interview
 ```
 
 ```
-/ip-legal:cold-start-interview --redo
+ip-legal:cold-start-interview --redo
 ```
 
 ```
-/ip-legal:cold-start-interview --check-integrations
+ip-legal:cold-start-interview --check-integrations
 ```
 
 ---
@@ -64,21 +69,21 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 ## "冷启动"含义
 
-读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`：
 - **不存在** → 开始面谈。
 - **含 `<!-- 设置暂停于：-->`** → 向用户问候并询问是否从该节继续。
 - **含 `[PLACEHOLDER]` 或 `[你的公司名称]` 标记但无暂停注释** → 模板从未完成；询问是否全新开始或从占位符出现处继续。
 - **已填充（无占位符、无暂停注释）** → 已配置；跳过，除非 `--redo`。
 
-模板结构位于 `${CLAUDE_PLUGIN_ROOT}/CLAUDE.md` — 以它作为分区骨架。将完成的实务画像写入配置路径，按需创建父目录。
+模板结构位于 `${CLAUDE_PLUGIN_ROOT}/PRACTICE.md` — 以它作为分区骨架。将完成的实务画像写入配置路径，按需创建父目录。
 
-如有 CLAUDE.md 存在于旧缓存路径 `~/.claude/plugins/cache/claude-for-legal/ip-legal/*/CLAUDE.md` 但不在配置路径，先复制至配置路径。
+如有 PRACTICE.md 存在于旧缓存路径 `~/.codex/plugins/cache/claude-for-legal-zh/ip-legal/*/PRACTICE.md` 但不在配置路径，先复制至配置路径。
 
 如用户明确要求重新运行设置（"我们重新做面谈"、"我的维权立场变了"），再次运行并在覆盖前展示差异。
 
 ## 检查共享的公司画像
 
-查找 `~/.claude/plugins/config/claude-for-legal/company-profile.md`。
+查找 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`。
 
 - **如存在：** 读取。显示一行确认："你是[姓名]，[执业类型]，在[公司]，[行业]，运营在[管辖]。对吗？（或回复'更新'以更改共享画像。）"如确认，跳过公司问题——直接进入插件特定问题。
 - **如不存在：** 你将是用户设置的第一个插件。在定位和分叉后，提出公司问题并写入共享画像（按模板），然后继续插件特定问题。告知用户："我已保存你的公司画像——其他法律插件将读取它并跳过这些问题。"
@@ -97,13 +102,13 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 以先分叉的开场白开启。保持3-4短行。在一切之前先问快速还是完整。
 
-> **`ip-legal` 专为管理商标、著作权、专利、商业秘密和开源义务的人设计——确权、维权、组合追踪和协议中的知识产权条款。** 不是你的领域？`/legal-builder-hub:related-skills-surfacer`。
+> **`ip-legal` 专为管理商标、著作权、专利、商业秘密和开源义务的人设计——确权、维权、组合追踪和协议中的知识产权条款。** 不是你的领域？`legal-builder-hub:related-skills-surfacer`。
 >
 > **2分钟** 可完成你的角色、执业类型、管辖和你实际工作的知识产权领域（商标、专利、著作权、商业秘密、开源），加上维权立场、审批门槛和品牌监视的工作默认值。**15分钟** 增加你真实的维权立场（激进 / 稳健 / 保守及实际触发条件）、每种函件类型的审批矩阵、品牌监视清单和监视服务、开源可接受使用政策、外部律师名册和组合登记簿。
 >
-> 快速还是完整？（随时通过 `/cold-start-interview --full` 升级。）
+> 快速还是完整？（随时通过 `ip-legal:cold-start-interview --full` 升级。）
 
-**快速启动路径：** 仅提问第0部分（角色、执业类型、集成）和第1部分（实务领域组合）。在其余内容上写入 `[DEFAULT]` 标记，并以："完成。你现在可以开始使用命令。我对维权立场、审批门槛和品牌监视使用了合理默认值。当某个技能的输出感觉不对时，通常是一个应调优的默认值——它会告诉你哪个。随时运行 `/ip-legal:cold-start-interview --redo` 做完整面谈。"收尾。
+**快速启动路径：** 仅提问第0部分（角色、执业类型、集成）和第1部分（实务领域组合）。在其余内容上写入 `[DEFAULT]` 标记，并以："完成。你现在可以开始使用命令。我对维权立场、审批门槛和品牌监视使用了合理默认值。当某个技能的输出感觉不对时，通常是一个应调优的默认值——它会告诉你哪个。随时运行 `ip-legal:cold-start-interview --redo` 做完整面谈。"收尾。
 
 **完整设置路径：** 以下现有面谈流程。用户选择后，给出下文更充分定位，然后进入第0部分。
 
@@ -117,7 +122,7 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 **为什么这很重要**（如用户对时间成本有异议时提供）。本插件中的每项命令都从本面谈写入的配置中读取。通用配置给出通用输出——通用的维权立场、通用的审批链、通用的确权门槛。告诉插件你的实务如何实际运作——你真实的审批链、你真实的"何时发送侵权警告函"触发条件、你真实的品牌监视清单——是"一个法律AI工具"和"以你的方式工作的工具"之间的区别。
 
-**全新职业画像。** 设置从用户的回答和他们明确分享的文件构建全新职业画像。不读取用户的个人 Claude 历史、无关对话或其家目录 CLAUDE.md。如当前对话上下文中出现相关内容（如他们之前提到公司），使用前先询问——除非用户输入或批准，不将任何个人信息纳入实务画像。
+**全新职业画像。** 设置从用户的回答和他们明确分享的文件构建全新职业画像。不读取用户的个人 Claude 历史、无关对话或其家目录 PRACTICE.md。如当前对话上下文中出现相关内容（如他们之前提到公司），使用前先询问——除非用户输入或批准，不将任何个人信息纳入实务画像。
 
 推论：面谈的输入是用户输入的回答和他们明确分享的文件。不从环境上下文、先前会话或用户记忆中拉取内容以填补空白。
 
@@ -132,9 +137,9 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 - **对于上传和种子文件：** "粘贴内容、分享文件路径或说'暂时跳过'。如跳过，我会在实务画像中标注该空缺让你之后填写。"然后真正等。
 - **写实务画像前：** 回顾面谈并列出跳过或用占位符回答的问题——特别是维权立场、审批矩阵和组合清单。说："在写入你的实务画像前，以下仍为未填：[清单]。要现在填写其中任何一个，还是留为占位符？"然后等。
 - **绝不**撰写含静默空白的实务画像。每个占位符应是被用户故意选择跳过的，非滚动过去的问题。
-- **暂停并恢复。** 提前告诉用户："如需停下，说'暂停'（或'stop'、或'let me come back to this'）我会保存进度。稍后运行 `/ip-legal:cold-start-interview` 我将在你停下的地方继续。"当用户暂停时，写入部分配置至 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`，顶部附 `<!-- 设置暂停于：[分区名称] — 运行 /ip-legal:cold-start-interview 继续 -->` 注释，未回答字段上使用 `[PENDING]` 标记（区别于 `[PLACEHOLDER]`）。当设置重新运行并发现暂停的配置时，问候用户："欢迎回来。你暂停在[分区]。你先前的回答已保存。从之前的地方继续，还是重新开始？"不重新提问已回答的问题。
+- **暂停并恢复。** 提前告诉用户："如需停下，说'暂停'（或'stop'、或'let me come back to this'）我会保存进度。稍后运行 `ip-legal:cold-start-interview` 我将在你停下的地方继续。"当用户暂停时，写入部分配置至 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`，顶部附 `<!-- 设置暂停于：[分区名称] — 运行 ip-legal:cold-start-interview 继续 -->` 注释，未回答字段上使用 `[PENDING]` 标记（区别于 `[PLACEHOLDER]`）。当设置重新运行并发现暂停的配置时，问候用户："欢迎回来。你暂停在[分区]。你先前的回答已保存。从之前的地方继续，还是重新开始？"不重新提问已回答的问题。
 
-**在设置过程中核实用户陈述的法律事实。** 当用户用具体的规则引用、法条编号、案例名称、截止日期、门槛、管辖或注册号回答面谈问题时——且是你可以检查的——在写入配置前执行检查。如他们说的与你理解或与他们粘贴的某个内容冲突，指出来："你说门槛是X；我的理解是Y——能确认哪个写入画像吗？`[前提标注 — 请核实]`"写入 CLAUDE.md 的错误事实会传播进每个将来的输出；在此处捕获它是产品中杠杆最高的时刻之一。
+**在设置过程中核实用户陈述的法律事实。** 当用户用具体的规则引用、法条编号、案例名称、截止日期、门槛、管辖或注册号回答面谈问题时——且是你可以检查的——在写入配置前执行检查。如他们说的与你理解或与他们粘贴的某个内容冲突，指出来："你说门槛是X；我的理解是Y——能确认哪个写入画像吗？`[前提标注 — 请核实]`"写入 PRACTICE.md 的错误事实会传播进每个将来的输出；在此处捕获它是产品中杠杆最高的时刻之一。
 
 ## 面谈
 
@@ -223,7 +228,7 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 > - ⚪ [集成] — 已配置但未核实。打开 MCP 设置确认。
 > - ✗ [集成] — 未找到。[功能]将降级至[手动替代]。[如何连接。]
 
-你不需要以上全部。核心功能仅凭文件访问即能工作。如之后设置某物，重新运行 `/ip-legal:cold-start-interview --check-integrations`。
+你不需要以上全部。核心功能仅凭文件访问即能工作。如之后设置某物，重新运行 `ip-legal:cold-start-interview --check-integrations`。
 
 #### 执业类型
 
@@ -256,7 +261,7 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 > [你的公司]做什么？这是最重要的上下文——SaaS供应商的手册、硬件分销商的手册和服务企业的手册完全不同。你不需要输入：粘贴你公司官网、"关于我们"页面或最新年报的链接，我来提取所需内容。或者给我一句话版：你销售什么、销售对象、以及如何销售（直销 / 渠道 / 市场 / 订阅）。如果你是私人执业律所，同样对你的大多数知识产权客户适用。
 
-> 哪些知识产权领域是你实际工作的？我会在你不做的领域跳过问题。（这决定哪些技能亮起——商标用 /clearance 和 /cd、专利用 /fto 和 /infringe、著作权用 /takedown、开源用 /oss。仅选商标的彻底跳过专利、著作权和开源面谈。）
+> 哪些知识产权领域是你实际工作的？我会在你不做的领域跳过问题。（这决定哪些技能亮起——商标用 ip-legal:clearance 和 /cd、专利用 /fto 和 /infringe、著作权用 ip-legal:takedown、开源用 /oss。仅选商标的彻底跳过专利、著作权和开源面谈。）
 >
 > - **商标** — 确权、审查、维权、品牌监视
 > - **专利** — FTO、侵权筛查、组合维护。*（非权利要求起草——本插件不涉及。）*
@@ -275,7 +280,7 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 ### 第2部分：管辖范围（1-2分钟）
 
-> 你在哪里持有注册和在哪里维权？（这影响 /clearance、/fto、/portfolio ——确权检查和 FTO 筛查需要知道哪些管辖重要，组合登记簿追踪每个管辖的续展。）
+> 你在哪里持有注册和在哪里维权？（这影响 ip-legal:clearance、/fto、ip-legal:portfolio ——确权检查和 FTO 筛查需要知道哪些管辖重要，组合登记簿追踪每个管辖的续展。）
 >
 > - **商标注册地：** 中国（国家知识产权局商标局）？WIPO马德里成员国家——哪些？其他国家直接申请？仅有使用产生的商标权？
 > - **专利授权地：** 中国？EPO？PCT国家阶段进入国？任何重要的特定管辖（德国、日本、美国）？
@@ -289,7 +294,7 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 在询问维权或审批问题前，检查他们已有的。
 
-> 在询问你如何看待维权和审批之前，让我从你已有的文件中提取。粘贴内容、分享文件路径或网盘链接给我以下任何内容——我来阅读而不是让你重新输入：（这些影响 /cd、/takedown、/oss、/portfolio、/clause——技能直接复用你的模板、维权触发条件和组合数据，而非默认为通用表格。）
+> 在询问你如何看待维权和审批之前，让我从你已有的文件中提取。粘贴内容、分享文件路径或网盘链接给我以下任何内容——我来阅读而不是让你重新输入：（这些影响 /cd、ip-legal:takedown、/oss、ip-legal:portfolio、/clause——技能直接复用你的模板、维权触发条件和组合数据，而非默认为通用表格。）
 >
 > - **组合清单**（来自你的知识产权管理系统或电子表格）— 商标 / 专利 / 著作权注册（含管辖、状态、续展日期）
 > - **品牌指南** — 商标使用指南、品牌手册或相对方的内部规则
@@ -325,7 +330,7 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 **谁批准发送？** 一次性询问：
 
-> 每种以下函件发出前谁签署？（这影响 /cd 和 /takedown——当你告诉技能起草函件，它带着草稿经过具名审批人并在函件发出前等待签署。）
+> 每种以下函件发出前谁签署？（这影响 /cd 和 ip-legal:takedown——当你告诉技能起草函件，它带着草稿经过具名审批人并在函件发出前等待签署。）
 >
 > - **信息网络传播权删除通知（常规）：** 常委托律师或品牌保护；你团队谁负责？
 > - **温和信函：** 同样问题。
@@ -367,11 +372,11 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 ## 撰写实务画像
 
-按 `${CLAUDE_PLUGIN_ROOT}/CLAUDE.md`（模板）的结构撰写插件配置。能用他们的原话时就用。这是关于*他们实务*的文件，他们将阅读和编辑——不是配置文件。
+按 `${CLAUDE_PLUGIN_ROOT}/PRACTICE.md`（模板）的结构撰写插件配置。能用他们的原话时就用。这是关于*他们实务*的文件，他们将阅读和编辑——不是配置文件。
 
 撰写前，重新阅读第3部分期间分享的任何文件——组合、模板、手册、开源政策。不依赖面谈前段的记忆。
 
-写入 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`（按需创建父目录）。如用户分享了组合导出，同时种子 `~/.claude/plugins/config/claude-for-legal/ip-legal/portfolio.yaml` 写入提取的注册信息。
+写入 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`（按需创建父目录）。如用户分享了组合导出，同时种子 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/portfolio.yaml` 写入提取的注册信息。
 
 **角色条件工作成果页眉。** 在撰写的 `## 输出` 分区中，基于 `## 使用者` 选择正确的页眉。不同时写入两种变体。律师 → 特权/工作成果；非律师 → 研究笔记。
 
@@ -387,14 +392,14 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 > **以下是我在知识产权实务中擅长的：**
 >
-> - **确权拟议商标** — 如"针对你的组合和注册簿的初步检索，含自信度判断。"尝试：`/ip-legal:clearance`
-> - **筛查潜在侵权** — 如"发现一个山寨品——按你的维权立场判断是删除通知 vs 侵权警告函 vs 监控。"尝试：`/ip-legal:infringement-triage`
-> - **自由实施分析** — 如"按你的实务高度检查拟议产品与现有技术。"尝试：`/ip-legal:fto-triage`
-> - **起草删除通知或侵权警告函** — 如"从案件采集到以所做风格起草的函件，附升级路由。"尝试：`/ip-legal:cease-desist`
-> - **开源合规检查** — 如"一个产品使用开源组件——对照你的所做立场评估许可证义务。"尝试：`/ip-legal:oss-review`
-> - **组合续展状态** — 如"查看商标和专利续展中什么即将到期，使用你的警告频率。"尝试：`/ip-legal:portfolio`
+> - **确权拟议商标** — 如"针对你的组合和注册簿的初步检索，含自信度判断。"尝试：`ip-legal:clearance`
+> - **筛查潜在侵权** — 如"发现一个山寨品——按你的维权立场判断是删除通知 vs 侵权警告函 vs 监控。"尝试：`ip-legal:infringement-triage`
+> - **自由实施分析** — 如"按你的实务高度检查拟议产品与现有技术。"尝试：`ip-legal:fto-triage`
+> - **起草删除通知或侵权警告函** — 如"从案件采集到以所做风格起草的函件，附升级路由。"尝试：`ip-legal:cease-desist`
+> - **开源合规检查** — 如"一个产品使用开源组件——对照你的所做立场评估许可证义务。"尝试：`ip-legal:oss-review`
+> - **组合续展状态** — 如"查看商标和专利续展中什么即将到期，使用你的警告频率。"尝试：`ip-legal:portfolio`
 >
-> **我对你第一个的建议：** 运行 `/portfolio`——这是插件组合登记簿是否与真实记录匹配的最快方式。或告诉我你手头有什么，我来选择。
+> **我对你第一个的建议：** 运行 `ip-legal:portfolio`——这是插件组合登记簿是否与真实记录匹配的最快方式。或告诉我你手头有什么，我来选择。
 
 这在一个询问中既解决了冷启动问题（主管不知道该先做什么）又解决了价值主张问题（不知道插件能做什么）。让清单具体。如在面谈中主管已说出具体首个任务，跳过此步。
 
@@ -409,11 +414,11 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 
 4. **以可变更性说明收尾。** 类似以下内容收尾：
 
-   > "完成。你的实务画像在 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`——是一个可直接阅读和编辑的纯文本文件。你回答的任何内容均可更改：
+   > "完成。你的实务画像在 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`——是一个可直接阅读和编辑的纯文本文件。你回答的任何内容均可更改：
    >
    > - 直接编辑文件做快速修改（新审批人、修订监视清单、管辖变更）
-   > - 运行 `/ip-legal:cold-start-interview --redo` 做完整重新面谈
-   > - 运行 `/ip-legal:cold-start-interview --check-integrations` 重新检查连接状态
+   > - 运行 `ip-legal:cold-start-interview --redo` 做完整重新面谈
+   > - 运行 `ip-legal:cold-start-interview --check-integrations` 重新检查连接状态
    >
    > 首次设置后最常调整的分区是**维权立场**（团队常发现真实触发条件不同于预设）、**管辖范围**（新申请、删除的注册）和**被监视商标**（品牌组合变动时的增加和移除）。当某个技能输出感觉不对时，修复通常在这里。"
 
@@ -426,7 +431,7 @@ argument-hint: "[--redo 对已配置插件重新运行] [--check-integrations �
 > - 当某个技能输出感觉不对时，通常是一个应调整的立场。输出会告诉你哪个。
 > - 组合续展监视器观察组合登记簿并按你的预警频率标注即将到期的续展；将漏标的视为需闭合的登记簿空缺。
 > - 你随时可以说"将我的手册更新为偏好X"或"将我的审批门槛改为Y"，对应技能会写入变更。
-> - 运行 `/cold-start-interview --redo <分区>` 重新面谈某一部分，或直接编辑配置文件。
+> - 运行 `ip-legal:cold-start-interview --redo <分区>` 重新面谈某一部分，或直接编辑配置文件。
 >
 > 十分钟设置获得一个可用的画像。一个月使用获得一个读起来像你自己写的画像。
 

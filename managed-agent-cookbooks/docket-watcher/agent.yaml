@@ -1,6 +1,6 @@
 # Docket Watcher — managed-agent cookbook
 #
-# Same agent as the `docket-watcher` agent in the litigation-legal Claude Code
+# Same agent as the `docket-watcher` agent in the litigation-legal Codex
 # plugin. This manifest resolves the canonical system prompt and skills against
 # the plugin on disk so there is one source of truth.
 
@@ -12,7 +12,7 @@ system:
   append: |
     You are running headless behind the platform team's workflow engine.
     Produce files in ./out/; do not assume an interactive session. Prepend the
-    work-product header from the deploying team's litigation-legal CLAUDE.md.
+    work-product header from the deploying team's litigation-legal PRACTICE.md.
 
     Your output is a lead, not a legal conclusion. Computed deadlines are
     leads, not calendar entries. Court deadline rules vary by jurisdiction,

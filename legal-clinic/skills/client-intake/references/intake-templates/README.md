@@ -1,7 +1,7 @@
 # Practice-Area Intake Templates
 
 Populated at cold-start from the professor's intake form(s). If none provided,
-`/client-intake` uses the default question sets in `client-intake/SKILL.md` Step 2.
+`legal-clinic:client-intake` uses the default question sets in `client-intake/SKILL.md` Step 2.
 
 One file per practice area the clinic handles:
 

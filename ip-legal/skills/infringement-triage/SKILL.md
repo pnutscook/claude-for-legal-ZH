@@ -7,8 +7,7 @@ description: >
 argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，由我询问涉及的权利]"
 ---
 
-# /infringement-triage
-
+# infringement-triage
 **这是初步筛查，而非侵权认定或非侵权认定。**
 侵权分析依赖大量事实且法律上非常复杂。依据筛查结果采取行动——
 发送侵权警告函、拒绝停止、提起诉讼或决定不起诉——而未经过律师审查，
@@ -16,8 +15,8 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 ## 使用说明
 
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。如含
-   `[PLACEHOLDER]`，停止并指引至 `/ip-legal:cold-start-interview`。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。如含
+   `[PLACEHOLDER]`，停止并指引至 `ip-legal:cold-start-interview`。
 2. 按以下工作流执行。
 3. 询问涉及哪项权利——商标 / 著作权 / 专利 / 商业秘密
    / 混合。如为混合，各权利分别筛查，不混合分析。
@@ -37,23 +36,23 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 7. 将筛查备忘录写入事项文件夹或实务输出文件夹。根据角色应用
    工作成果页眉。
 8. 以建议的后续步骤收尾，如角色为非律师则触发非律师门槛，以及——
-   若实务立场支持维权主张——提议通过 `/ip-legal:cease-desist` 起草侵权警告函或
-   通过 `/ip-legal:takedown` 提交删除通知。不得自动起草。
+   若实务立场支持维权主张——提议通过 `ip-legal:cease-desist` 起草侵权警告函或
+   通过 `ip-legal:takedown` 提交删除通知。不得自动起草。
 
 本技能从不作结论。如有不确定，标注——由律师决定。
 
 ## 示例
 
 ```
-/ip-legal:infringement-triage "竞争对手在第9类推出了一款名为APEXSEED的工具——我们在第9类已有APEXLEAF注册商标；是否存在混淆可能性？"
+ip-legal:infringement-triage "竞争对手在第9类推出了一款名为APEXSEED的工具——我们在第9类已有APEXLEAF注册商标；是否存在混淆可能性？"
 ```
 
 ```
-/ip-legal:infringement-triage "前工程师将我们模型架构的笔记带到竞争对手处——可能构成商业秘密侵权？"
+ip-legal:infringement-triage "前工程师将我们模型架构的笔记带到竞争对手处——可能构成商业秘密侵权？"
 ```
 
 ```
-/ip-legal:infringement-triage
+ip-legal:infringement-triage
 ```
 
 （技能将询问涉及的权利及事实。）
@@ -80,7 +79,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 ## 事项上下文
 
-**事项上下文。** 检查实务级 CLAUDE.md 中的 `## 事项工作区`。如 `Enabled` 为 `✗`（法务用户的默认状态），跳过本段其余内容——各技能使用实务级上下文，事项机制不可见。如已启用且无活跃事项，询问："此事项属于哪个案件？运行 `/ip-legal:matter-workspace switch <slug>` 或回复 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖设置。将输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/ip-legal/matters/<事项slug>/`。除非 `跨事项上下文` 开启，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实务级 PRACTICE.md 中的 `## 事项工作区`。如 `Enabled` 为 `✗`（法务用户的默认状态），跳过本段其余内容——各技能使用实务级上下文，事项机制不可见。如已启用且无活跃事项，询问："此事项属于哪个案件？运行 `ip-legal:matter-workspace switch <slug>` 或回复 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖设置。将输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/matters/<事项slug>/`。除非 `跨事项上下文` 开启，否则绝不读取其他事项的文件。
 
 侵权筛查通常导向侵权警告函起草或删除通知路由。如无活跃事项且实务为私人执业，
 创建一个——筛查、警告函及任何后续回复属于同一工作区。
@@ -89,7 +88,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 ## 首先加载实务画像
 
-读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。提取：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。提取：
 
 - **角色** 来自 `## 使用者`.
 - **维权立场** 来自 `## 维权立场` — 筛查输出应以与声明的立场一致的路由建议收尾
@@ -105,14 +104,14 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 > 我注意到你尚未配置实务画像——这是我根据你的实务定制立场、管辖和审批链的依据。
 >
 > **两个选择：**
-> - 运行 `/ip-legal:cold-start-interview`（约2分钟）完成配置，然后我将根据你的实务定制输出。
+> - 运行 `ip-legal:cold-start-interview`（约2分钟）完成配置，然后我将根据你的实务定制输出。
 > - 回复 **"provisional"（临时）** 我将使用通用默认值——中国管辖、中等风险偏好、律师角色、无实务手册——并对每个输出标注 `[临时 — 配置你的实务画像以获得定制输出]`，让你在承诺前看到我能做什么。
 
 ### 临时模式
 
 如用户回复"provisional"（临时），正常执行侵权筛查，使用以下通用默认值：中等风险偏好、律师角色、中国管辖、无实务手册（执行完整分析而非按立场清单匹配）。在审查备注和每个分析模块中标注 `[临时]`。输出末尾追加：
 
-> "以上是基于默认假设的通用运行。运行 `/ip-legal:cold-start-interview` 以获得针对你实务定制的输出——你的实务手册、你的管辖、你的风险偏好。约2分钟。"
+> "以上是基于默认假设的通用运行。运行 `ip-legal:cold-start-interview` 以获得针对你实务定制的输出——你的实务手册、你的管辖、你的风险偏好。约2分钟。"
 
 ---
 
@@ -229,7 +228,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 ## 专利模式
 
-**详细框架转用 `/ip-legal:fto-triage`。** 本模式是 FTO 技能的镜像——相同的权利要求对照表、
+**详细框架转用 `ip-legal:fto-triage`。** 本模式是 FTO 技能的镜像——相同的权利要求对照表、
 相同的等同原则标注、相同的全面覆盖原则——应用于被控产品而非己方产品。
 
 ### 外观设计专利 — 在流程开始前分流
@@ -344,7 +343,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 ## 输出格式（所有模式适用）
 
-在输出前附加 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` `## 输出` 中的工作成果页眉。
+在输出前附加 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` `## 输出` 中的工作成果页眉。
 
 ```markdown
 [工作成果页眉]
@@ -394,7 +393,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 - [证据保全和保存 — 如诉讼时效在走]
 - [决定前需补充的事实 — 如访问日志、审查历史、
   市场调查、问卷证据]
-- [按 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`
+- [按 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`
   `## 维权立场` 的路由建议，如立场为积极维权]
 
 ## 引文核实
@@ -431,9 +430,9 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 ## 输出位置
 
 如事项工作区已启用且有活跃事项，写入
-`~/.claude/plugins/config/claude-for-legal/ip-legal/matters/<事项slug>/outputs/infringe-<模式>-<主题slug>-YYYY-MM-DD.md`。
+`~/.codex/plugins/config/claude-for-legal-zh/ip-legal/matters/<事项slug>/outputs/infringe-<模式>-<主题slug>-YYYY-MM-DD.md`。
 否则写入
-`~/.claude/plugins/config/claude-for-legal/ip-legal/outputs/infringe-<模式>-<主题slug>-YYYY-MM-DD.md`
+`~/.codex/plugins/config/claude-for-legal-zh/ip-legal/outputs/infringe-<模式>-<主题slug>-YYYY-MM-DD.md`
 并显示路径。
 
 如存在活跃事项，在事项的 `history.md` 中追加一行记录。
@@ -444,13 +443,13 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 如筛查输出指向维权主张且实务画像的立场支持，询问：
 
-> 需要我起草侵权警告函吗？运行 `/ip-legal:cease-desist`。
+> 需要我起草侵权警告函吗？运行 `ip-legal:cease-desist`。
 > 我将使用本筛查的因素清单作为事实基础，并适用
 > 你实务画像中的审批链——在审批人签署前，函件不会发出。
 
 或如模式为著作权且被控内容为托管内容：
 
-> 需要我准备删除通知吗？运行 `/ip-legal:takedown`。
+> 需要我准备删除通知吗？运行 `ip-legal:takedown`。
 
 不得从筛查自动起草函件。维权的决定属于审批人，不属于筛查。
 
@@ -458,7 +457,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 ## 以行动选项决策树收尾
 
-以 CLAUDE.md `## 输出` 规定的行动选项决策树收尾。将选项定制为本技能刚生成的内容——五个默认分支（起草X、升级、收集更多事实、观察等待、其他事项）仅为起点，非固定模板。由律师从决策树中选择。
+以 PRACTICE.md `## 输出` 规定的行动选项决策树收尾。将选项定制为本技能刚生成的内容——五个默认分支（起草X、升级、收集更多事实、观察等待、其他事项）仅为起点，非固定模板。由律师从决策树中选择。
 
 ## 本技能不做什么
 
@@ -467,7 +466,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 - **不评估筛查管辖范围之外的管辖特定抗辩。** 如事实涉及跨境，标注需要外国法分析。
 - **不将合理使用作为法律问题作出决定。** 合理使用依赖大量事实，留待律师和最终法院判断。
 - **不起草侵权警告函、删除通知或起诉状。** 这些是独立技能
-  （`/ip-legal:cease-desist`、`/ip-legal:takedown`），受限于实务画像中的审批链。
+  （`ip-legal:cease-desist`、`ip-legal:takedown`），受限于实务画像中的审批链。
 - **不将输出引用至相对方。** 如适用页眉，属于受特权保护的文件。
 
 ---

@@ -7,9 +7,8 @@ description: >
 argument-hint: "[章节——如'事实与理由'、'代理意见'、'上诉请求']"
 ---
 
-# /brief-section-drafter
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 案件理论、内部风格。
+# brief-section-drafter
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 案件理论、内部风格。
 2. 遵循以下工作流。
 3. 按内部格式/语气/引用风格起草。与理论一致。
 4. 输出：草案章节。标记每个需要核实的事实或引用。
@@ -43,7 +42,7 @@ argument-hint: "[章节——如'事实与理由'、'代理意见'、'上诉请�
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 案件理论、内部风格（引用格式、结构、语气）。
+`~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 案件理论、内部风格（引用格式、结构、语气）。
 
 ## 工作流
 
@@ -65,7 +64,7 @@ argument-hint: "[章节——如'事实与理由'、'代理意见'、'上诉请�
 
 ### 步骤3：按内部风格起草
 
-按 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`：
+按 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md`：
 
 - **引用格式：** 法条引用规范化（全名+条文编号）。案例引用规范。
 - **结构：** 如何组织论点？结论在先还是逐步展开？

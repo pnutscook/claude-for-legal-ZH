@@ -8,15 +8,14 @@ description: >
 argument-hint: "[粘贴AI供应商合同条款]"
 ---
 
-# /vendor-ai-review
-
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → 合同审查立场、可接受风险阈值、红线条款。
+# vendor-ai-review
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` → 合同审查立场、可接受风险阈值、红线条款。
 2. 运行以下工作流。
 3. 逐项核查AI特定风险——训练数据→责任→模型变更→合规传导。
 4. 输出：风险总结 + 红线标记 + 谈判立场（经核准/附条件/阻止）。
 
 ```
-/ai-governance-legal:vendor-ai-review
+ai-governance-legal:vendor-ai-review
 [paste the vendor AI terms]
 ```
 
@@ -26,7 +25,7 @@ argument-hint: "[粘贴AI供应商合同条款]"
 
 ## 事务上下文
 
-**事务上下文。** 检查实践级 CLAUDE.md 中的 `## 事务工作区`。如果 `已启用` 为 `✗`，跳过本段其余部分。如果已启用且无活跃事务，询问事务归属。加载活跃事务的 `matter.md`。除非 `跨事务上下文` 为 `开`，否则绝不读取其他事务的文件。
+**事务上下文。** 检查实践级 PRACTICE.md 中的 `## 事务工作区`。如果 `已启用` 为 `✗`，跳过本段其余部分。如果已启用且无活跃事务，询问事务归属。加载活跃事务的 `matter.md`。除非 `跨事务上下文` 为 `开`，否则绝不读取其他事务的文件。
 
 ---
 
@@ -36,7 +35,7 @@ AI供应商合同引入了传统技术合同没有的风险维度——供应商
 
 ## 加载当前状态
 
-读取 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md`：
 - `## 合同审查配置` — 公司立场、风险偏好、红线
 - `## 监管注册表` — 适用的法规框架
 - `## 已批准的供应商` — 既有关系和已通过审查的条款
@@ -197,7 +196,7 @@ AI产出的特殊性使得传统的责任条款可能无法直接适用。需要
 
 ## 收尾
 
-以 CLAUDE.md `## 输出` 规定的下一步决策树收尾。定制选项：按审查意见与供应商谈判、升级红线条款至法律顾问决策、接受当前条款（如无红线）、获取更多供应商信息。
+以 PRACTICE.md `## 输出` 规定的下一步决策树收尾。定制选项：按审查意见与供应商谈判、升级红线条款至法律顾问决策、接受当前条款（如无红线）、获取更多供应商信息。
 
 ---
 

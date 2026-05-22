@@ -17,14 +17,14 @@
 询问你在哪些省/直辖市有员工，读取你的劳动规章制度和三份近期解除备忘录，建立省/直辖市口径差异的上报表。
 
 ```
-/employment-legal:cold-start-interview
+employment-legal:cold-start-interview
 ```
 
-你的配置存储于 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md`，不受插件更新影响。
+你的配置存储于 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md`，不受插件更新影响。
 
 ## 前置条件
 
-- **持久化数据路径。** 假期登记册、调查日志、跨省用工跟踪表写入 `~/.claude/plugins/config/claude-for-legal/employment-legal/`——版本无关路径，不受插件更新影响。这些文件含有人事敏感信息——请确保该目录已备份且权限受控。
+- **持久化数据路径。** 假期登记册、调查日志、跨省用工跟踪表写入 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/`——版本无关路径，不受插件更新影响。这些文件含有人事敏感信息——请确保该目录已备份且权限受控。
 - **法律检索工具。** 本插件中的技能故意不存储实体法律规则（最低工资标准、竞业限制经济补偿、经济补偿金计算基数、各地特殊规定等）。每一省/直辖市的口径差异在审查时实时检索并引用。请确保会话已接入你依赖的检索工具（yuan dian MCP、联网搜索、内部参考资料）。
 - **外部律师。** 涉及地方司法口径争议或新型用工问题的法律意见，应征询当地执业律师意见。
 
@@ -32,22 +32,22 @@
 
 | 技能 | 功能 |
 |---|---|
-| `/employment-legal:cold-start-interview` | Cold-start 访谈——从劳动规章制度+解除备忘录中学习管辖范围与上报规则 |
-| `/employment-legal:hiring-review` | 录用通知书+竞业限制审查、管辖地检查 |
-| `/employment-legal:termination-review` | 解除审查，含高风险标记检测 |
-| `/employment-legal:policy-drafting [topic]` | 起草劳动规章制度，含各省/直辖市补充规定 |
-| `/employment-legal:wage-hour-qa [question]` | 工资工时或一般劳动法问答，管辖地差异适配 |
-| `/employment-legal:worker-classification` | 劳动关系的认定——劳社部发〔2005〕12号三要素分析 |
-| `/employment-legal:expansion-kickoff [省/直辖市]` | 启动跨省/直辖市用工规划 |
-| `/employment-legal:expansion-update [省/直辖市]` | 更新进行中的跨省用工跟踪表 |
-| `/employment-legal:investigation-open` | 启动新的内部调查事项 |
-| `/employment-legal:investigation-add` | 向进行中的调查添加文件、访谈纪要或观察 |
-| `/employment-legal:investigation-query` | 对进行中的调查日志提问 |
-| `/employment-legal:investigation-memo` | 起草或更新保密调查备忘录 |
-| `/employment-legal:investigation-summary` | 从调查备忘录起草针对不同受众的摘要 |
-| `/employment-legal:leave-tracker` | 检查未结假期事项，法定期限预警和必要决策提醒 |
-| `/employment-legal:log-leave` | 将新的假期记录添加到假期登记册 |
-| `/employment-legal:matter-workspace` | 管理事项工作区（仅多客户场景适用） |
+| `employment-legal:cold-start-interview` | Cold-start 访谈——从劳动规章制度+解除备忘录中学习管辖范围与上报规则 |
+| `employment-legal:hiring-review` | 录用通知书+竞业限制审查、管辖地检查 |
+| `employment-legal:termination-review` | 解除审查，含高风险标记检测 |
+| `employment-legal:policy-drafting [topic]` | 起草劳动规章制度，含各省/直辖市补充规定 |
+| `employment-legal:wage-hour-qa [question]` | 工资工时或一般劳动法问答，管辖地差异适配 |
+| `employment-legal:worker-classification` | 劳动关系的认定——劳社部发〔2005〕12号三要素分析 |
+| `employment-legal:expansion-kickoff [省/直辖市]` | 启动跨省/直辖市用工规划 |
+| `employment-legal:expansion-update [省/直辖市]` | 更新进行中的跨省用工跟踪表 |
+| `employment-legal:investigation-open` | 启动新的内部调查事项 |
+| `employment-legal:investigation-add` | 向进行中的调查添加文件、访谈纪要或观察 |
+| `employment-legal:investigation-query` | 对进行中的调查日志提问 |
+| `employment-legal:investigation-memo` | 起草或更新保密调查备忘录 |
+| `employment-legal:investigation-summary` | 从调查备忘录起草针对不同受众的摘要 |
+| `employment-legal:leave-tracker` | 检查未结假期事项，法定期限预警和必要决策提醒 |
+| `employment-legal:log-leave` | 将新的假期记录添加到假期登记册 |
+| `employment-legal:matter-workspace` | 管理事项工作区（仅多客户场景适用） |
 | **handbook-updates** | 对比劳动规章制度修改前后差异，标注省/直辖市补充条款影响 |
 
 ## 交互式技能与定时代理人
@@ -60,7 +60,7 @@
 
 ## 如何学习与进化
 
-你的实践画像存储在 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md`——它不是静态的，随你使用插件而优化。技能会提示你某个输出使用了应调优的默认值。你可以重新运行设置、直接编辑文件，或告诉技能记录新的立场。
+你的实践画像存储在 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md`——它不是静态的，随你使用插件而优化。技能会提示你某个输出使用了应调优的默认值。你可以重新运行设置、直接编辑文件，或告诉技能记录新的立场。
 
 ## 注意事项
 

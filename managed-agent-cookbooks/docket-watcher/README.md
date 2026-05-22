@@ -4,7 +4,7 @@
 
 Monitors court dockets for matters in the active litigation portfolio. 人民法院案例库 covers published judgments; 裁判文书网 covers trial-court filings; 元典/聚法案例 supplements for broader coverage. For each active matter the agent pulls new filings since the last check, maps filing types to candidate deadlines, cross-references against the matter's history and open deliverables, and produces a docket status report plus a structured deadline feed.
 
-Same source as the [`docket-watcher`](../../litigation-legal/agents/docket-watcher.md) agent in the litigation-legal Claude Code plugin — this directory is the Managed Agent cookbook for `POST /v1/agents`.
+Same source as the [`docket-watcher`](../../litigation-legal/agents/docket-watcher.md) agent in the litigation-legal Codex plugin — this directory is the Managed Agent cookbook for `POST /v1/agents`.
 
 ## ⚠️ Before you deploy
 

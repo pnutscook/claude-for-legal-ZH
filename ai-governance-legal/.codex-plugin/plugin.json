@@ -1,0 +1,40 @@
+{
+  "name": "ai-governance-legal",
+  "version": "1.0.2",
+  "description": "AI 治理实务：对拟议的 AI 应用场景进行分类登记、依据适用监管体系开展算法安全评估与科技伦理审查、审查 AI 供应商条款中的训练数据使用和责任条款、保持 AI 使用政策与实践同步。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "ai-governance-legal"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "AI Governance Legal CN",
+    "shortDescription": "AI 治理实务：对拟议的 AI 应用场景进行分类登记、依据适用监管体系开展算法安全评估与科技伦理审查、审查 AI 供应商条款中的训练数据使用和责任条款、保持 AI 使用政策与实践同步。",
+    "longDescription": "AI 治理实务：对拟议的 AI 应用场景进行分类登记、依据适用监管体系开展算法安全评估与科技伦理审查、审查 AI 供应商条款中的训练数据使用和责任条款、保持 AI 使用政策与实践同步。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "评估这个 AI 应用场景的合规要求"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

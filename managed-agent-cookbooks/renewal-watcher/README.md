@@ -2,7 +2,7 @@
 
 ## Overview
 
-Scans the contract repository for upcoming renewal and cancel-by deadlines, cross-references against the team's playbook, flags contracts with upcoming deadlines, playbook deviations, and escalation triggers, and writes an alert report. Same source as the [`renewal-watcher`](../../commercial-legal/agents/renewal-watcher.md) Claude Code agent and the [`renewal-tracker`](../../commercial-legal/skills/renewal-tracker) skill — this directory is the Managed Agent cookbook for `POST /v1/agents`.
+Scans the contract repository for upcoming renewal and cancel-by deadlines, cross-references against the team's playbook, flags contracts with upcoming deadlines, playbook deviations, and escalation triggers, and writes an alert report. Same source as the [`renewal-watcher`](../../commercial-legal/agents/renewal-watcher.md) Codex agent and the [`renewal-tracker`](../../commercial-legal/skills/renewal-tracker) skill — this directory is the Managed Agent cookbook for `POST /v1/agents`.
 
 This is a **cookbook, not a product.** It is CLM-agnostic — defaults to a contract repository MCP (e签宝/法大大/飞书文档 for PRC practitioners); teams on other CLMs or a shared drive of signed PDFs should swap the MCP endpoint accordingly.
 

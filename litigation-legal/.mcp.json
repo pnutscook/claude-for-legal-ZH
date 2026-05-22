@@ -11,11 +11,5 @@
       "title": "本地文件系统",
       "description": "读取案件文件、证据材料、裁判文书等本地文档。"
     }
-  },
-  "recommendedCategories": [
-    "legal-research",
-    "case-law",
-    "court-analytics",
-    "documents"
-  ]
+  }
 }

@@ -7,9 +7,8 @@ description: >
 argument-hint: "[可选：项目ID + 状态更新]"
 ---
 
-# /closing-checklist
-
-1. 读取 `~/.claude/plugins/config/claude-for-legal/corporate-legal/deals/[代码]/closing-checklist.yaml` 并使用以下模式。
+# closing-checklist
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/deals/[代码]corporate-legal:closing-checklist.yaml` 并使用以下模式。
 2. 如有状态更新：模式3（更新项目）。
 3. 否则模式4：阻碍项、关键路径、距交割天数。
 
@@ -17,7 +16,7 @@ argument-hint: "[可选：项目ID + 状态更新]"
 
 ## 事项上下文
 
-**事项上下文。** 检查实务级 CLAUDE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `/corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实务级 PRACTICE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
 
 ---
 
@@ -27,7 +26,7 @@ argument-hint: "[可选：项目ID + 状态更新]"
 
 ## 检查表
 
-存放于 `~/.claude/plugins/config/claude-for-legal/corporate-legal/deals/[代码]/closing-checklist.yaml`。结构：
+存放于 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/deals/[代码]corporate-legal:closing-checklist.yaml`。结构：
 
 ```yaml
 deal_code: "Project Falcon"
@@ -102,7 +101,7 @@ handoff:
   category: "[第三方同意 | 股东/董事会行动 | 监管申报 | 解除/终止 | 托管/扣留 | 交割交付物]"
   source: "[合同名称 / 法条章节 / 数据室路径 + 页码]"
   blocking: true  # 除非协议含重大性限定
-  severity: "[🔴 / 🟠 / 🟡 / 🟢 — 承自上游，见 CLAUDE.md 中的严重程度下限规则]"
+  severity: "[🔴 / 🟠 / 🟡 / 🟢 — 承自上游，见 PRACTICE.md 中的严重程度下限规则]"
 
   # 同意/第三方行动字段
   counterparty: "[例如：某某有限公司]"
@@ -120,7 +119,7 @@ handoff:
   must_occur_before: "[例如：交割 | 签署 | 中断期结束]"
 ```
 
-保留上游技能填充的每个字段。"某某同意需要，附带替代担保条件和30天通知"应在检查表上显示全部三个要素（同意、担保人、通知），而非压缩为"某某控制权变更同意"。当上游技能提供了严重程度时，承继——见 CLAUDE.md 中的跨技能严重程度下限规则。
+保留上游技能填充的每个字段。"某某同意需要，附带替代担保条件和30天通知"应在检查表上显示全部三个要素（同意、担保人、通知），而非压缩为"某某控制权变更同意"。当上游技能提供了严重程度时，承继——见 PRACTICE.md 中的跨技能严重程度下限规则。
 
 追加至检查表。按（对方当事人 + 行动类型）去重，而非按自由文本项目名——某某一项同意和某某一项解除是不同的项目，尽管都提及某某。去重时合并且不覆盖：如果一次交接填充了 `guarantor`，另一次交接填充了 `notice_deadline`，检查表行应包含两者。
 
@@ -129,7 +128,7 @@ handoff:
 用户（或数据室监控代理）提供状态更新。找到项目，更新状态和最近更新日期。
 
 ```
-/corporate-legal:closing-checklist
+corporate-legal:closing-checklist
 CP-002: Acme 已回应，同意表格已附，需要副签
 ```
 
@@ -174,7 +173,7 @@ CP-002: Acme 已回应，同意表格已附，需要副签
 
 对每项阻碍项，估计完成时间。其中 `(截止日 - 今天) < 估计时间` 的有风险。这些排在每份状态报告的顶部。
 
-如果检查表有超过约10个项，或用户任何时候提问：提供仪表盘（见 CLAUDE.md `## 输出规范 → 数据密集产出的仪表盘选项`）。为本次产出定制：按状态计数（已完成/进行中/未开始/有风险）、按工作流分组的关键路径视图，以及带项目、负责人、截止日和距截止天数的可排序网格。
+如果检查表有超过约10个项，或用户任何时候提问：提供仪表盘（见 PRACTICE.md `## 输出规范 → 数据密集产出的仪表盘选项`）。为本次产出定制：按状态计数（已完成/进行中/未开始/有风险）、按工作流分组的关键路径视图，以及带项目、负责人、截止日和距截止天数的可排序网格。
 
 ## 集成：数据室监控代理
 
@@ -182,7 +181,7 @@ CP-002: Acme 已回应，同意表格已附，需要副签
 
 ## 后果性行动准入（证明交割）
 
-**在产出"已可交割/全部交割先决条件已满足"认证或交割备忘录前：** 读取 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 中的 `## 使用者`。如果角色为**非法务人员**：
+**在产出"已可交割/全部交割先决条件已满足"认证或交割备忘录前：** 读取 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 中的 `## 使用者`。如果角色为**非法务人员**：
 
 > 证明交割先决条件已满足（或出具如此主张的交割备忘录）具有法律后果——这是推动资金流转和交割后义务的信号。你是否已与律师审查？如已审查，继续。如未审查，以下是带给律师的简要说明：
 >

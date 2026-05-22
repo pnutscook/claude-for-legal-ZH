@@ -2,7 +2,7 @@
 name: ai-tool-handoff
 description: >
   检测 AI 辅助审查工具（如 Luminance、Kira 等）是否在使用中，将大批量条款提取
-  交接给工具，并按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 中的
+  交接给工具，并按 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 中的
   信任层级对其输出进行 QA。当用户说"交给AI工具""批量审查""AI提取"或
   diligence-issue-extraction 遇到大批量类别时使用。
 ---
@@ -11,7 +11,7 @@ description: >
 
 ## 事项上下文
 
-**事项上下文。** 检查实务级 CLAUDE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `/corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实务级 PRACTICE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
 
 ---
 
@@ -21,17 +21,17 @@ AI 辅助审查工具擅长一件事：读取500份合同并找到每一条控�
 
 本技能将批量提取交接给合适的工具，然后对返回的结果运行 QA 层。
 
-**交接之前：** 先尝试 `tabular-review`（`/corporate-legal:tabular-review`）。对于用户环境可以处理的任何内容——几百份文档、已定义的列模式——原生表格审查设置更快、无按文档计费成本，且将工作成果保留在本地。当语料确实过于庞大、团队已有许可证和工作流，或事项要求具有已验证溯源链的工具时，再交接给 AI 工具。
+**交接之前：** 先尝试 `tabular-review`（`corporate-legal:tabular-review`）。对于用户环境可以处理的任何内容——几百份文档、已定义的列模式——原生表格审查设置更快、无按文档计费成本，且将工作成果保留在本地。当语料确实过于庞大、团队已有许可证和工作流，或事项要求具有已验证溯源链的工具时，再交接给 AI 工具。
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` → AI辅助审查：
+`~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → AI辅助审查：
 - 使用的工具（Luminance / Kira / 无）
 - 用于什么（哪些条款类型）
 - 信任层级（直接使用 / 抽查 / 全面复核）
 - 交接流程（谁加载，谁QA）
 
-如果 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 显示无AI工具 → 本技能为无操作。所有内容直接通过 diligence-issue-extraction 处理。
+如果 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 显示无AI工具 → 本技能为无操作。所有内容直接通过 diligence-issue-extraction 处理。
 
 ## 何时交接
 
@@ -50,12 +50,12 @@ AI 辅助审查工具擅长一件事：读取500份合同并找到每一条控�
 ### 第1步：准备批次
 
 - 从数据室目录中识别批次文档
-- 按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 指定提取目标（哪些条款类型）
+- 按 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 指定提取目标（哪些条款类型）
 - 注明重要性阈值以便过滤工具输出
 
 ### 第2步：加载（或指示加载者）
 
-按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` ——由谁加载。如果是你，生成加载指令。如果是别人，生成请求：
+按 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` ——由谁加载。如果是你，生成加载指令。如果是别人，生成请求：
 
 ```markdown
 ## [工具] 加载请求 — [交易代码] — [类别]
@@ -65,7 +65,7 @@ AI 辅助审查工具擅长一件事：读取500份合同并找到每一条控�
 **提取目标：**
 - 控制权变更 / 合同转让
 - 独家性
-- [等——按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`]
+- [等——按 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md`]
 
 **过滤输出：** 仅标记提取目标存在的情况——无需为每份文档报告"未发现控制权变更条款"。
 
@@ -76,7 +76,7 @@ AI 辅助审查工具擅长一件事：读取500份合同并找到每一条控�
 
 当工具返回结果时，按信任层级应用：
 
-**"直接使用"：** 直接录入尽调发现。（仅在 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 如此设置时使用——这种情况很少见。）
+**"直接使用"：** 直接录入尽调发现。（仅在 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 如此设置时使用——这种情况很少见。）
 
 **"抽查 X%"：** 随机抽取 X% 的已标记文档。对每份，阅读实际条款并与工具的提取对比。如错误率低，接受该批次。如发现错误，扩大样本。
 
@@ -106,7 +106,7 @@ AI 辅助审查工具擅长一件事：读取500份合同并找到每一条控�
 
 ### QA
 
-**信任层级：** [按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`]
+**信任层级：** [按 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md`]
 **样本量：** [N]份文档抽查
 **错误率：** [X]% — [接受 / 扩大样本 / 触发全面复核]
 
@@ -123,10 +123,10 @@ AI 辅助审查工具擅长一件事：读取500份合同并找到每一条控�
 
 ## 以下一步行动决策树收尾
 
-以 CLAUDE.md `## 输出规范` 中的下一步行动决策树收尾。根据本技能刚产出的内容定制选项——五个默认分支（起草X、上报、补充事实、监控等待、其他）是起点，不是锁定。决策树本身就是产出；律师选择。
+以 PRACTICE.md `## 输出规范` 中的下一步行动决策树收尾。根据本技能刚产出的内容定制选项——五个默认分支（起草X、上报、补充事实、监控等待、其他）是起点，不是锁定。决策树本身就是产出；律师选择。
 
 ## 本技能不做什么
 
 - 不运行 Luminance 或 Kira——它管理交接和 QA。由人工（或工具自身的界面）运行提取。
-- 不完全用自身判断替代工具的输出——如果 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 说抽查10%，就检查10%，不是100%。
-- 不决定信任层级——这在 CLAUDE.md 中设定，在冷启动时基于团队对工具的经验确定。
+- 不完全用自身判断替代工具的输出——如果 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 说抽查10%，就检查10%，不是100%。
+- 不决定信任层级——这在 PRACTICE.md 中设定，在冷启动时基于团队对工具的经验确定。

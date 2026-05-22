@@ -7,13 +7,12 @@ description: >
 argument-hint: "<--send | --respond | --counter> [上下文或收件路径]"
 ---
 
-# /takedown
-
+# takedown
 三种模式。选一：
 
-- `/ip-legal:takedown --send` — 起草通知-删除通知（信息网络传播权保护条例第14条 `[法条原文]`）。合理使用关口+响亮的权利声明关口。
-- `/ip-legal:takedown --respond` — 对收到的通知做分诊。选项：合规 / 反通知 / 协商 / 忽略。
-- `/ip-legal:takedown --counter` — 起草反通知（信息网络传播权保护条例第16条 `[法条原文]`）。对司法管辖同意和真实声明的响亮关口。
+- `ip-legal:takedown --send` — 起草通知-删除通知（信息网络传播权保护条例第14条 `[法条原文]`）。合理使用关口+响亮的权利声明关口。
+- `ip-legal:takedown --respond` — 对收到的通知做分诊。选项：合规 / 反通知 / 协商 / 忽略。
+- `ip-legal:takedown --counter` — 起草反通知（信息网络传播权保护条例第16条 `[法条原文]`）。对司法管辖同意和真实声明的响亮关口。
 
 ## 指令
 
@@ -27,9 +26,9 @@ argument-hint: "<--send | --respond | --counter> [上下文或收件路径]"
 ## 示例
 
 ```
-/ip-legal:takedown --send
-/ip-legal:takedown --respond ~/Downloads/平台通知.pdf
-/ip-legal:takedown --counter
+ip-legal:takedown --send
+ip-legal:takedown --respond ~/Downloads/平台通知.pdf
+ip-legal:takedown --counter
 ```
 
 ---

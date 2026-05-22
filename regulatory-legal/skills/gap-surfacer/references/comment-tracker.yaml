@@ -1,6 +1,6 @@
 # Comment Period Tracker
 # Populated automatically by reg-feed-watcher when NPRMs are detected.
-# Managed via /regulatory-legal:comments
+# Managed via regulatory-legal:comments
 
 comments:
   - id: CMT-001
@@ -11,7 +11,7 @@ comments:
     comment_deadline: "2026-05-15"
     detected: "2026-03-20"
     decision: "undecided"  # undecided | filing | not-filing | filed | waived
-    owner: "[default comment decision owner from CLAUDE.md]"
+    owner: "[default comment decision owner from PRACTICE.md]"
     owner_slack: "[Slack user ID or handle]"
     notified: false
     rationale: ""  # filled when decision is made

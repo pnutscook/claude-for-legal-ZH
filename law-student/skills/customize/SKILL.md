@@ -7,19 +7,18 @@ description: >
 argument-hint: "[配置章节名称, 或描述你想修改的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户输入了 `/law-student:customize`。他们想修改学习画像中的某项内容——课程、学习风格偏好、法考备考科目——无需重新运行整个新手导入访谈，也无需手动编辑 YAML。
+用户输入了 `law-student:customize`。他们想修改学习画像中的某项内容——课程、学习风格偏好、法考备考科目——无需重新运行整个新手导入访谈，也无需手动编辑 YAML。
 
 ## 做什么
 
 1. **读取配置。** 读取
-   `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`。
+   `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md`。
    如果插件配置不存在或仍包含 `[PLACEHOLDER]` 值，说：
 
-   > 你还没运行设置。先运行 `/law-student:cold-start-interview`
+   > 你还没运行设置。先运行 `law-student:cold-start-interview`
    > ——自定义是用于调整你已有的画像。
 
 2. **显示可自定义的配置地图。** 列出画像中的内容，分组，附当前值的一句话摘要：
@@ -40,13 +39,13 @@ argument-hint: "[配置章节名称, 或描述你想修改的内容]"
 4. **执行修改。** 显示当前值，询问新值，解释对下游的影响，确认，写入配置。
 
    示例：
-   - *添加新课程：* "`/outline` 将为这门课搭建新的知识大纲。`/flashcards` 将添加新的科目记忆卡片桶。`/cold-call-prep` 在为这门课调用时会问你座位和主题。"
+   - *添加新课程：* "`/outline` 将为这门课搭建新的知识大纲。`law-student:flashcards` 将添加新的科目记忆卡片桶。`law-student:cold-call-prep` 在为这门课调用时会问你座位和主题。"
    - *学习风格从讲解引导型改为追问训练型：* "`/drill` 不再先给你讲解——它会直接提问，让你先回答，然后再追问。"
    - *添加法考备考科目：* "`/bar-prep` 将在轮换中纳入该科目，如果标记为薄弱则加大权重。"
 
 5. **收尾。**
 
-   > 完成。你的下一次输出将反映这次修改。还要改别的吗？随时可以运行 `/law-student:customize`。
+   > 完成。你的下一次输出将反映这次修改。还要改别的吗？随时可以运行 `law-student:customize`。
 
 ## 护栏
 

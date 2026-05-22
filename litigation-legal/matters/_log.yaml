@@ -1,9 +1,9 @@
 # Portfolio Ledger — litigation-legal
 #
-# One entry per matter under `matters:`. Source of truth for /portfolio-status rollups.
+# One entry per matter under `matters:`. Source of truth for litigation-legal:portfolio-status rollups.
 # Closed matters stay in this file (searchable history) but are filtered out
-# of active rollups by default. Edit via /litigation-legal:matter-intake,
-# /matter-update, and /matter-close — direct edits are fine but show your work in
+# of active rollups by default. Edit via litigation-legal:matter-intake,
+# litigation-legal:matter-update, and litigation-legal:matter-close — direct edits are fine but show your work in
 # the matter's history.md.
 #
 # ──────────────────────────────────────────────────────────────────────────
@@ -17,13 +17,13 @@
 #   jurisdiction:      string — court or regulatory body
 #   status:            threatened | active | discovery | trial | appeal | closed
 #                      (resolution type is captured separately via `outcome` at close time;
-#                       `/matter-close` writes `outcome: settled` for resolved-via-settlement)
+#                       `litigation-legal:matter-close` writes `outcome: settled` for resolved-via-settlement)
 #   stage:             string — free-text substage (e.g., "pleadings", "fact discovery")
 #   source:            demand-letter | complaint-served | subpoena | regulator-inquiry | internal-report | pre-suit-threat
 #   outside_counsel:
 #     firm:            string | null
 #     lead:            string | null
-#     email:           string | null     # NEW v2 — used by /oc-status email drafter
+#     email:           string | null     # NEW v2 — used by litigation-legal:oc-status email drafter
 #     engagement:      signed | pending | none
 #   conflicts:
 #     status:          cleared | pending | not-run | waived
@@ -34,7 +34,7 @@
 #       by:              string | null        # who authorized the bypass
 #       date:            YYYY-MM-DD | null
 #       rationale:       string | null        # permanent record; does not auto-expire
-#   risk:              critical | high | medium | low   (per CLAUDE.md risk matrix)
+#   risk:              critical | high | medium | low   (per PRACTICE.md risk matrix)
 #   materiality:       reserved | disclosed | monitored | none
 #   exposure_range:    string — e.g., "$2M–$5M" or "<$250K"
 #   internal_owners:

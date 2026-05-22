@@ -8,20 +8,19 @@ description: >
 argument-hint: "[部分名称，或描述你想修改的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户输入 `/litigation-legal:customize`。他们想修改诉讼画像中的某项内容——风险校准、文书风格规则、上报表联系人、执业背景备注——而不重新运行整个首次配置访谈，也不手动编辑 YAML。
+用户输入 `litigation-legal:customize`。他们想修改诉讼画像中的某项内容——风险校准、文书风格规则、上报表联系人、执业背景备注——而不重新运行整个首次配置访谈，也不手动编辑 YAML。
 
 ## 操作
 
 1. **读取配置。** 读取
-   `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`
-   （及上一级目录的 `~/.claude/plugins/config/claude-for-legal/company-profile.md`）。
+   `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md`
+   （及上一级目录的 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`）。
    如插件配置不存在或仍含 `[PLACEHOLDER]` 值，说：
 
-   > 你尚未运行设置。请先运行 `/litigation-legal:cold-start-interview`
+   > 你尚未运行设置。请先运行 `litigation-legal:cold-start-interview`
    > ——自定义是用于调整已有画像的。
 
 2. **展示可自定义的图谱。** 分组列出画像中的内容，附当前值的一句话摘要：
@@ -44,18 +43,18 @@ argument-hint: "[部分名称，或描述你想修改的内容]"
 4. **执行修改。** 展示当前值、询问新值、说明下游变化、确认、写入配置。
 
    示例：
-   - *立场从混合改为仅被告：* "`/matter-intake` 将停止询问原告方问题。`/demand-draft` 仍可用于被告方的诉前律师函，但起始框架将不同。"
-   - *收紧高风险门槛：* "更多来函和调查令将通过 `/matter-briefing` 和 `/oc-status` 路由。"
-   - *为知识产权案件新增外聘律师：* "`/oc-status` 将在知识产权标记案件的每周扫查中包含此律所。"
+   - *立场从混合改为仅被告：* "`litigation-legal:matter-intake` 将停止询问原告方问题。`litigation-legal:demand-draft` 仍可用于被告方的诉前律师函，但起始框架将不同。"
+   - *收紧高风险门槛：* "更多来函和调查令将通过 `litigation-legal:matter-briefing` 和 `litigation-legal:oc-status` 路由。"
+   - *为知识产权案件新增外聘律师：* "`litigation-legal:oc-status` 将在知识产权标记案件的每周扫查中包含此律所。"
 
 5. **对于共享画像的变更**（公司名称、行业、管辖地、执业场景）：写入
-   `~/.claude/plugins/config/claude-for-legal/company-profile.md` 并注明：
+   `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` 并注明：
 
    > 此变更影响全部插件——任何读取你管辖地范围的插件现在看到的是[新值]。
 
 6. **收尾。**
 
-   > 完成。你下一次输出将反映此变更。还有别的吗？你可以随时运行 `/litigation-legal:customize`。
+   > 完成。你下一次输出将反映此变更。还有别的吗？你可以随时运行 `litigation-legal:customize`。
 
 ## 护栏
 

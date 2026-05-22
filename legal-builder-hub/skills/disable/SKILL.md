@@ -7,19 +7,18 @@ description: >
 argument-hint: "[技能名称]"
 ---
 
-# /disable
-
+# disable
 针对命名技能运行 `skill-manager` 参考技能中的 `disable` 工作流。
 
 禁用做什么：
 
 - 将技能的 `SKILL.md` 重命名为 `SKILL.md.disabled`，使 Claude 不再将其发现为活跃技能。文件、参考、模板和配置保留在原位。
 - 如果技能附有 `hooks/hooks.json` 中的 hooks，也将该文件重命名为 `hooks.json.disabled`，使技能禁用期间无自动触发器触发。
-- 将操作记录到 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/install-log.yaml`。
+- 将操作记录到 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/install-log.yaml`。
 
 安全规则：
 
-1. **仅禁用通过本中心安装的社区技能。** 与卸载相同的检查——查阅安装日志和 CLAUDE.md 已安装表。
+1. **仅禁用通过本中心安装的社区技能。** 与卸载相同的检查——查阅安装日志和 PRACTICE.md 已安装表。
 2. **绝不禁用第一方插件的技能。** 不可触碰。
 3. **在重命名前确认。** 展示路径，获取明确同意。
 

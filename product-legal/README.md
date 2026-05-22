@@ -17,27 +17,27 @@
 
 对接您的产品上线追踪器（飞书多维表格/钉钉/Teambition），读取您过往十份产品上线审查，学习您实际阻断什么、放行什么。构建每项技能均会读取的风险校准表。
 
-您的配置存储于 `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` 并在插件更新后继续生效。
+您的配置存储于 `~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md` 并在插件更新后继续生效。
 
 ```
-/product-legal:cold-start-interview
+product-legal:cold-start-interview
 ```
 
 ## 指令
 
 | 指令 | 功能 |
 |---|---|
-| `/product-legal:cold-start-interview` | 冷启动访谈 |
-| `/product-legal:launch-review [PRD或需求编号]` | 对照您的审查框架进行完整产品上线审查 |
-| `/product-legal:marketing-claims-review [文案]` | 营销宣传审查 |
-| `/product-legal:is-this-a-problem [问题]` | 快速"这有问题吗？"解答 |
-| `/product-legal:matter-workspace` | 管理事项工作空间（仅多客户私人执业）——新建、列表、切换、关闭、无事项 |
+| `product-legal:cold-start-interview` | 冷启动访谈 |
+| `product-legal:launch-review [PRD或需求编号]` | 对照您的审查框架进行完整产品上线审查 |
+| `product-legal:marketing-claims-review [文案]` | 营销宣传审查 |
+| `product-legal:is-this-a-problem [问题]` | 快速"这有问题吗？"解答 |
+| `product-legal:matter-workspace` | 管理事项工作空间（仅多客户私人执业）——新建、列表、切换、关闭、无事项 |
 
 ## 技能
 
 | 技能 | 用途 |
 |---|---|
-| **cold-start-interview** | 通过访谈+过往产品上线审查，写入 ~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md |
+| **cold-start-interview** | 通过访谈+过往产品上线审查，写入 ~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md |
 | **launch-review** | 按类别逐项审查，依据贵公司风险标准校准 |
 | **marketing-claims-review** | 宣传主张分类：夸大宣传/事实陈述/比较性/暗示性/绝对化用语 |
 | **feature-risk-assessment** | 当产品上线审查不够时，针对单一问题进行深度分析 |
@@ -69,26 +69,26 @@
 ## 快速入门
 
 ```
-/product-legal:cold-start-interview
+product-legal:cold-start-interview
 ```
 
 然后：
 
 ```
-/product-legal:is-this-a-problem "我们能否对定价页做A/B测试？"
+product-legal:is-this-a-problem "我们能否对定价页做A/B测试？"
 ```
 
 → 即时回答，依据您的风险校准表。
 
 ```
-/product-legal:launch-review PROJ-1234
+product-legal:launch-review PROJ-1234
 ```
 
 → 完整的逐项审查，附行动事项。
 
 ## 如何学习
 
-您在 `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` 中的实务画像并非一成不变——它会随着您使用插件而持续改进。技能会告知您何时某次输出使用了应予调整的默认值。您可以重新运行设置、直接编辑文件或告知某项技能记录新的立场。
+您在 `~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md` 中的实务画像并非一成不变——它会随着您使用插件而持续改进。技能会告知您何时某次输出使用了应予调整的默认值。您可以重新运行设置、直接编辑文件或告知某项技能记录新的立场。
 
 ## 说明
 
@@ -99,8 +99,8 @@
 
 ## 前提条件
 
-部分功能引用外部集成（文档管理、产品上线追踪器、电子签章、监管资讯）。这些不随插件打包——如果您的环境中存在对应MCP服务器，相关功能将使用这些服务器。没有时，插件降级为文件上传和手动工作流。运行 `/product-legal:cold-start-interview --check-integrations` 查看您环境中的可用内容。
+部分功能引用外部集成（文档管理、产品上线追踪器、电子签章、监管资讯）。这些不随插件打包——如果您的环境中存在对应MCP服务器，相关功能将使用这些服务器。没有时，插件降级为文件上传和手动工作流。运行 `product-legal:cold-start-interview --check-integrations` 查看您环境中的可用内容。
 
 ## 配置
 
-您的配置存储于 `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` 并在插件更新后继续生效——设置只需运行一次。
+您的配置存储于 `~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md` 并在插件更新后继续生效——设置只需运行一次。

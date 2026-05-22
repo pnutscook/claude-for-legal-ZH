@@ -8,16 +8,15 @@ description: >
 argument-hint: "[调查令/协查通知文件路径] [--slug=自定义代号]"
 ---
 
-# /subpoena-triage
-
+# subpoena-triage
 1. 读取提供的调查令/协查通知文件。
 2. 分类（法院调查令 / 律师调查令 / 行政机关协查通知 / 证人出庭通知 / 监察委/刑事侦查）。
-3. 如为监察委/刑事侦查 → 停止，按 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` 上报。否则继续。
-4. 加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml` 用于交叉检索。加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 执业背景、保密惯例、上报规则。
+3. 如为监察委/刑事侦查 → 停止，按 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 上报。否则继续。
+4. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/_log.yaml` 用于交叉检索。加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 执业背景、保密惯例、上报规则。
 5. 按以下工作流操作。
 6. 提取关键字段，分析范围/负担/保密，生成异议框架 + 合规方案 + 期限日历。
-7. 写入 `~/.claude/plugins/config/claude-for-legal/litigation-legal/inbound/[slug]/triage.md`。将调查令复制或链接至 `~/.claude/plugins/config/claude-for-legal/litigation-legal/inbound/[slug]/incoming.[ext]`。
-8. 转交：如保全通知未到位 → `/legal-hold --issue`；如重要性足够 → `/matter-intake`；如系既有案件中的当事人调查令 → `/matter-briefing [slug]`。
+7. 写入 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/inbound/[slug]/triage.md`。将调查令复制或链接至 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/inbound/[slug]/incoming.[ext]`。
+8. 转交：如保全通知未到位 → `litigation-legal:legal-hold --issue`；如重要性足够 → `litigation-legal:matter-intake`；如系既有案件中的当事人调查令 → `litigation-legal:matter-briefing [slug]`。
 
 ---
 
@@ -40,8 +39,8 @@ argument-hint: "[调查令/协查通知文件路径] [--slug=自定义代号]"
 ## 加载上下文
 
 - 调查令/协查通知文件（用户提供路径或在会话中发送）
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml` —— 用于关联案件检索和证据保全状态
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 执业背景（常打交道的监管机构）、事务所保密惯例、上报规则
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/_log.yaml` —— 用于关联案件检索和证据保全状态
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 执业背景（常打交道的监管机构）、事务所保密惯例、上报规则
 
 ## 工作流
 
@@ -137,7 +136,7 @@ argument-hint: "[调查令/协查通知文件路径] [--slug=自定义代号]"
 
 ### 步骤8：撰写分流意见
 
-输出：`~/.claude/plugins/config/claude-for-legal/litigation-legal/inbound/[slug]/triage.md`。
+输出：`~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/inbound/[slug]/triage.md`。
 
 ```markdown
 [工作成果标头——根据插件配置 ## 输出——因角色不同；见 `## 使用者`]
@@ -234,7 +233,7 @@ argument-hint: "[调查令/协查通知文件路径] [--slug=自定义代号]"
 
 ## 即时行动
 
-- [ ] 证据保全通知是否已发出——[是/否]——如否，运行 `/legal-hold [slug] --issue`，范围按调查令确定
+- [ ] 证据保全通知是否已发出——[是/否]——如否，运行 `litigation-legal:legal-hold [slug] --issue`，范围按调查令确定
 - [ ] 外聘律师是否已委托——[是/谁是/待定]
 - [ ] 协商延期是否已安排——[日期]
 - [ ] 案件是否已在日志中创建——[是/否/待定——通常在法院调查令或重大协查通知时创建]
@@ -243,7 +242,7 @@ argument-hint: "[调查令/协查通知文件路径] [--slug=自定义代号]"
 
 ### 步骤9：转交
 
-**在答复调查令/协查通知（提出异议、提供文件、出庭作证或申请撤销——向签发机关或法院的任何实质性回应）之前：** 读取 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` 中的 `## 使用者`。如果角色是**非律师**：
+**在答复调查令/协查通知（提出异议、提供文件、出庭作证或申请撤销——向签发机关或法院的任何实质性回应）之前：** 读取 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 中的 `## 使用者`。如果角色是**非律师**：
 
 > 答复调查令/协查通知具有法律后果——错过期限面临拒不配合风险，过度提供放弃保密保护，提供不足面临处罚风险。您是否已与律师审查过此事？如已审查，继续。如未审查，以下是带去给律师的简要材料：
 >
@@ -253,13 +252,13 @@ argument-hint: "[调查令/协查通知文件路径] [--slug=自定义代号]"
 
 未收到明确确认之前，不越此门槛。分流、范围判断和内部日程安排不需要此门槛——向签发机关的答复需要。
 
-- 如分类为**监察委/刑事侦查** → 停止，按 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` 标注上报，不进行标准分流。
+- 如分类为**监察委/刑事侦查** → 停止，按 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 标注上报，不进行标准分流。
 - 如分类为**行政机关协查通知**：标注适用特定监管机构惯例；建议委托熟悉该监管领域的外部律师。
 - 其他情况：提供创建案件（通常建议创建——调查令往往重要到值得追踪）。
 
 ## 以下一步决策树收尾
 
-以 CLAUDE.md `## 输出` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
+以 PRACTICE.md `## 输出` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
 
 ## 本技能不做什么
 

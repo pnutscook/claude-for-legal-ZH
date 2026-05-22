@@ -3,21 +3,20 @@ name: client-comms-log
 description: >
   记录当事人沟通——电话、邮件、短信、信函、面谈、语音留言。
   按案件仅追加记录，含日期条目、方向、媒介、摘要、行动事项。
-  与 /client-letter 和 /status client 协同使用。
+  与 legal-clinic:client-letter 和 legal-clinic:status client 协同使用。
   当需要记录通话或当事人邮件、查阅沟通日志或询问"我们上次告诉[当事人]什么"时使用。
 argument-hint: "[案件编号] [--add（默认）| --read | --summary | --patterns]"
 ---
 
-# /client-comms-log
-
+# client-comms-log
 1. 使用以下工作流。
 2. 要求案件编号（未提供则提示）。
 3. 按标志路由：
-   - `--add`（默认）：记录方向、媒介、学生、摘要、行动事项、后续截止日期。与用户确认。追加（最新在最前）到 `~/.claude/plugins/config/claude-for-legal/legal-clinic/client-comms/[案件编号]/log.md`。
+   - `--add`（默认）：记录方向、媒介、学生、摘要、行动事项、后续截止日期。与用户确认。追加（最新在最前）到 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/client-comms/[案件编号]/log.md`。
    - `--read`：显示最近 N 条记录。
    - `--summary`：一段话简要阅读。
    - `--patterns`：扫描未回复的沟通、遗漏的后续跟进、语言缺口、语气变化、联系缺口。面向指导的。
-4. 联动：如果记录创建了截止日期，提议 `/legal-clinic:deadlines --add`；通过 `--summary` 路由到 `/legal-clinic:semester-handoff`。
+4. 联动：如果记录创建了截止日期，提议 `legal-clinic:deadlines --add`；通过 `--summary` 路由到 `legal-clinic:semester-handoff`。
 
 ---
 
@@ -36,8 +35,8 @@ argument-hint: "[案件编号] [--add（默认）| --read | --summary | --patter
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/legal-clinic/client-comms/[案件编号]/log.md`（如存在）——追加目标
-- `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 不重度读取；本技能是案件范围的
+- `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/client-comms/[案件编号]/log.md`（如存在）——追加目标
+- `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 不重度读取；本技能是案件范围的
 
 ## 模式
 
@@ -62,7 +61,7 @@ argument-hint: "[案件编号] [--add（默认）| --read | --summary | --patter
 
 **写入前：** 向用户展示格式化的条目并征求确认。诊所记录应在写入前审查，而非写入后。
 
-**追加**到 `~/.claude/plugins/config/claude-for-legal/legal-clinic/client-comms/[案件编号]/log.md`。如果日志不存在，创建它并附页眉：
+**追加**到 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/client-comms/[案件编号]/log.md`。如果日志不存在，创建它并附页眉：
 
 ```markdown
 # 沟通日志 — [案件名称]
@@ -84,7 +83,7 @@ argument-hint: "[案件编号] [--add（默认）| --read | --summary | --patter
 
 ### `--summary`——简要阅读
 
-生成一段话的日志摘要——最近联系、总条数、常用媒介、学生方任何待处理行动事项、任何未回复的沟通。输入给 `/semester-handoff` 和 `/status`。
+生成一段话的日志摘要——最近联系、总条数、常用媒介、学生方任何待处理行动事项、任何未回复的沟通。输入给 `legal-clinic:semester-handoff` 和 `legal-clinic:status`。
 
 ### `--patterns`——标记全日志的关注事项
 
@@ -100,11 +99,11 @@ argument-hint: "[案件编号] [--add（默认）| --read | --summary | --patter
 
 ## 联动
 
-- **`/client-letter`：** 生成并发送信函后，提议记录为一条发出的沟通。
-- **`/status client`：** 生成面向当事人的状态摘要时，提议记录（这些摘要通常发给当事人）。
-- **`/client-intake`：** 每个新案件日志的第一条是接待联系。
-- **`/semester-handoff`：** 交接备忘录读取每个案件的 `--summary` 以填充沟通历史部分。
-- **`/deadlines`：** 如果某次沟通建立了截止日期（"当事人说他们需要在周五前回复"），提议 `/deadlines --add`。
+- **`legal-clinic:client-letter`：** 生成并发送信函后，提议记录为一条发出的沟通。
+- **`legal-clinic:status client`：** 生成面向当事人的状态摘要时，提议记录（这些摘要通常发给当事人）。
+- **`legal-clinic:client-intake`：** 每个新案件日志的第一条是接待联系。
+- **`legal-clinic:semester-handoff`：** 交接备忘录读取每个案件的 `--summary` 以填充沟通历史部分。
+- **`legal-clinic:deadlines`：** 如果某次沟通建立了截止日期（"当事人说他们需要在周五前回复"），提议 `legal-clinic:deadlines --add`。
 
 ## 本技能不做什么
 

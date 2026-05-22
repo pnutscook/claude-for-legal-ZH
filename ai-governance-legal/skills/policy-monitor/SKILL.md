@@ -9,24 +9,23 @@ description: >
 argument-hint: "[描述提议的新AI实践 — 或省略/使用 --sweep 进入扫描模式]"
 ---
 
-# /policy-monitor
-
+# policy-monitor
 **扫描模式**（无参数或 `--sweep`）：
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → 输出文件夹路径、AI使用政策文档、上次扫描日期。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` → 输出文件夹路径、AI使用政策文档、上次扫描日期。
 2. 运行以下工作流。扫描输出文件夹中自上次扫描以来的文件。
 3. 对每个输出：提取已批准的实践 → 与当前政策承诺对比。
 4. 分类差距：必须（政策与实际操作不符）vs 建议（政策未提及）。
 5. 对每个差距：引用当前政策、描述差距、起草建议语言。
-6. 更新 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` 中的上次政策扫描日期。
+6. 更新 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` 中的上次政策扫描日期。
 
 **直接查询模式**（有描述参数）：
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → 当前政策承诺 + 实际政策文档。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` → 当前政策承诺 + 实际政策文档。
 2. 解析提议的实践。与政策对比：AI系统类型、数据使用、透明度、安全措施、用户权利、供应商管理。
 3. 输出：已覆盖 / 缺失 / 冲突 + 每个差距的建议语言 + 时机建议。
 
 ```
-/ai-governance-legal:policy-monitor
-/ai-governance-legal:policy-monitor "我们想在内部使用AI生成客户邮件的草稿"
+ai-governance-legal:policy-monitor
+ai-governance-legal:policy-monitor "我们想在内部使用AI生成客户邮件的草稿"
 ```
 
 ---
@@ -45,16 +44,16 @@ AI使用政策与实际实践之间的漂移是单向的：实践向前发展，
 
 ## 加载当前状态
 
-读取 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md`：
 - `## 监管注册表` — 适用法规范围
 - `## AI使用政策` — 已对外公开的AI使用承诺或内部AI治理政策摘要
 - `## AI系统清单` — 所有已部署、在评估和已退役的系统
 - `## 输出` — 输出文件夹路径、AI使用政策文档位置、上次政策扫描日期
 
 如果 `## 输出` 包含 `[PLACEHOLDER]`：
-> "输出尚未配置。我仍然可以运行直接查询检查——描述你计划做的事情，我会将其与你当前政策进行对比。要启用爬取扫描，请运行 `/ai-governance-legal:cold-start-interview` 并提供输出文件夹路径。"
+> "输出尚未配置。我仍然可以运行直接查询检查——描述你计划做的事情，我会将其与你当前政策进行对比。要启用爬取扫描，请运行 `ai-governance-legal:cold-start-interview` 并提供输出文件夹路径。"
 
-读取 `## 输出` → **AI使用政策文档** 路径下的实际政策文档。配置CLAUDE.md中的承诺是摘要；实际文档是建议编辑的权威来源。
+读取 `## 输出` → **AI使用政策文档** 路径下的实际政策文档。配置PRACTICE.md中的承诺是摘要；实际文档是建议编辑的权威来源。
 
 ### AI承诺存在于多个界面——全部扫描
 
@@ -253,7 +252,7 @@ AI使用政策与实际实践之间的漂移是单向的：实践向前发展，
 ## 建议语言的质量标准
 
 政策语言应：
-- 与现有AI使用政策的语气和风格一致（在起草前阅读实际文档，而非仅凭CLAUDE.md摘要）
+- 与现有AI使用政策的语气和风格一致（在起草前阅读实际文档，而非仅凭PRACTICE.md摘要）
 - 足够具体以有意义，但不过于具体以致常规变更破坏它（"我们使用AI技术来提升服务质量" 比列出每个模型名称更经得起时间考验）
 - 不做团队无法遵守的承诺（例如，如果架构是每次API调用都流经第三方，不要起草"我们不会将数据发送给第三方AI供应商"）
 - 标记可能需要更广泛政策立场变更的地方，而不仅仅是增加一句话
@@ -264,9 +263,9 @@ AI使用政策与实际实践之间的漂移是单向的：实践向前发展，
 
 ## 收尾
 
-以 CLAUDE.md `## 输出` 规定的下一步决策树收尾。
+以 PRACTICE.md `## 输出` 规定的下一步决策树收尾。
 
-如果扫描产生的漂移发现超过约10项，或用户任何时候提出要求：提供仪表板（见 CLAUDE.md `## 输出 → 数据密集型输出的仪表板提议`）。针对此输出定制提议——按界面（政策条款/AI评估/用例分类/供应商审查）统计、按严重程度统计、以及可排序的发现网格，附来源工件和建议的整改措施。
+如果扫描产生的漂移发现超过约10项，或用户任何时候提出要求：提供仪表板（见 PRACTICE.md `## 输出 → 数据密集型输出的仪表板提议`）。针对此输出定制提议——按界面（政策条款/AI评估/用例分类/供应商审查）统计、按严重程度统计、以及可排序的发现网格，附来源工件和建议的整改措施。
 
 ---
 

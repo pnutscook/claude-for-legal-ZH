@@ -7,9 +7,14 @@ description: >
 argument-hint: "[--redo 在已配置插件上重新运行] [--check-integrations 仅重新检测集成] [--side sales|purchasing 仅重新运行某一方的审查指引部分]"
 ---
 
-# /cold-start-interview
+# cold-start-interview
 
-运行冷启动访谈。首次运行写入 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`；后续使用 `--redo` 运行则重新访谈并在覆盖前展示差异。
+## Codex 画像路径与旧 Claude 迁移
+
+本技能在 Codex 中使用 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md` 作为唯一运行期画像。若该文件不存在，先检查旧 Claude 配置：`~/.claude/plugins/config/claude-for-legal-zh/commercial-legal/CLAUDE.md` 和 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`。
+
+如旧文件存在且不含 `[PLACEHOLDER]`，创建 Codex 目录并复制为 `PRACTICE.md`，然后继续本次任务；如旧文件仍为模板或不存在，则按本访谈生成新的 `PRACTICE.md`。旧 `.claude-plugin/` 文件仅用于兼容，不再作为 Codex 的默认读取位置。
+运行冷启动访谈。首次运行写入 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md`；后续使用 `--redo` 运行则重新访谈并在覆盖前展示差异。
 
 ## 指令
 
@@ -30,10 +35,10 @@ argument-hint: "[--redo 在已配置插件上重新运行] [--check-integrations
 ## 示例
 
 ```
-/commercial-legal:cold-start-interview
-/commercial-legal:cold-start-interview --redo
-/commercial-legal:cold-start-interview --check-integrations
-/commercial-legal:cold-start-interview --side purchasing
+commercial-legal:cold-start-interview
+commercial-legal:cold-start-interview --redo
+commercial-legal:cold-start-interview --check-integrations
+commercial-legal:cold-start-interview --side purchasing
 ```
 
 ---
@@ -54,7 +59,7 @@ argument-hint: "[--redo 在已配置插件上重新运行] [--check-integrations
 
 ## 检查共享公司配置
 
-查找 `~/.claude/plugins/config/claude-for-legal/company-profile.md`。如果存在：读取并确认。如果不存在：先询问公司问题并写入共享配置。
+查找 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`。如果存在：读取并确认。如果不存在：先询问公司问题并写入共享配置。
 
 ## 安装范围检查
 
@@ -64,11 +69,11 @@ argument-hint: "[--redo 在已配置插件上重新运行] [--check-integrations
 
 在问任何事之前，展示分叉前引导语：
 
-> **`commercial-legal` 面向审查、谈判和管理商事合同（供应商协议、SaaS主协议、保密协议、续约）的人群。** 不是你关注的领域？`/legal-builder-hub:related-skills-surfacer`。
+> **`commercial-legal` 面向审查、谈判和管理商事合同（供应商协议、SaaS主协议、保密协议、续约）的人群。** 不是你关注的领域？`legal-builder-hub:related-skills-surfacer`。
 >
 > **2分钟** 获得角色、执业场景、管辖和审查指引方向（销售或采购），以及审查指引立场、上报阈值、责任上限、赔偿方向和行文风格的工作默认值。**15分钟** 增加你的真实审查指引立场（责任限制、赔偿、数据处理协议、期限、管辖法律）按你的方向校准、你的deal-breaker、带金额阈值和自动上报的完整上报矩阵、行文风格和续约提醒目的地，以及从你签署的协议中提取的立场。
 >
-> 快速还是完整？（随时用 `/commercial-legal:cold-start-interview --full` 升级。）
+> 快速还是完整？（随时用 `commercial-legal:cold-start-interview --full` 升级。）
 
 等待用户选择。
 
@@ -216,7 +221,7 @@ argument-hint: "[--redo 在已配置插件上重新运行] [--check-integrations
 
 展示插件功能、提示连接研究工具、建议起始技能、提供试运行、注明可修改性。
 
-> 完成。你的业务领域配置位于 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`。
+> 完成。你的业务领域配置位于 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md`。
 
 ## 语气
 

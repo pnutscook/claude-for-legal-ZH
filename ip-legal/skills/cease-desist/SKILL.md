@@ -7,16 +7,15 @@ description: >
 argument-hint: "<--send | --receive> [上下文、对方当事人或收函路径]"
 ---
 
-# /cease-desist
-
+# cease-desist
 两种模式。选一：
 
-- `/ip-legal:cease-desist --send` — 起草警告函，校准至你的执法姿态。发送前运行响亮的关口。
-- `/ip-legal:cease-desist --receive` — 对收到的警告函做分诊。产出选项备忘录附建议。
+- `ip-legal:cease-desist --send` — 起草警告函，校准至你的执法姿态。发送前运行响亮的关口。
+- `ip-legal:cease-desist --receive` — 对收到的警告函做分诊。产出选项备忘录附建议。
 
 ## 指令
 
-1. **读取实践档案。** 加载 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。如含占位符，停止并提示运行 `/ip-legal:cold-start-interview`。
+1. **读取实践档案。** 加载 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。如含占位符，停止并提示运行 `ip-legal:cold-start-interview`。
 2. **检查事项工作区。**
 3. **根据参数分发：** `--send` 运行发送模式。`--receive` 运行接收模式。无参数时询问一次。
 4. **尊重关口。** 发送模式中，响亮关口在草稿落盘前运行。不要跳过。
@@ -26,9 +25,9 @@ argument-hint: "<--send | --receive> [上下文、对方当事人或收函路径
 ## 示例
 
 ```
-/ip-legal:cease-desist --send
-/ip-legal:cease-desist --receive ~/Downloads/收函-acme.pdf
-/ip-legal:cease-desist
+ip-legal:cease-desist --send
+ip-legal:cease-desist --receive ~/Downloads/收函-acme.pdf
+ip-legal:cease-desist
 ```
 
 ---

@@ -18,26 +18,26 @@
 
 | 角色 | 运行 | 获得 |
 |---|---|---|
-| **指导老师** | `/cold-start-interview`（一次性）、`/supervisor-review-queue`（如启用正式审查） | 诊所上下文已配置，学生工作已审查 |
-| **学生** | `/ramp`（学期初），然后 `/client-intake`、`/draft`、`/memo`、`/research-start`、`/status`、`/client-letter` | 工作起点 — 绝非最终工作成果 |
+| **指导老师** | `legal-clinic:cold-start-interview`（一次性）、`legal-clinic:supervisor-review-queue`（如启用正式审查） | 诊所上下文已配置，学生工作已审查 |
+| **学生** | `legal-clinic:ramp`（学期初），然后 `legal-clinic:client-intake`、`legal-clinic:draft`、`legal-clinic:memo`、`legal-clinic:research-start`、`legal-clinic:status`、`legal-clinic:client-letter` | 工作起点 — 绝非最终工作成果 |
 
 ## 命令列表
 
 | 命令 | 做什么 | 不做什么 |
 |---|---|---|
-| `/cold-start-interview` | **指导老师。**一次性诊所配置：实践领域、管辖地、指导风格、手册/规则上传 | — |
-| `/build-guide` | **指导老师。**撰写按实践领域的指导：接待问题、教学姿态（协助 assist / 引导 guide / 教学 teach）、审查门控、跨插件检查 | 不替代 `/cold-start-interview` — 此为单个实践领域调优技能 |
-| `/ramp` | **学生。**学期导入：诊所程序、工具走查、练习 | 不替代指导老师的迎新培训 |
-| `/client-intake` | 结构化接待：按实践领域的模板、跨领域问题识别、冲突标记、分流 | 不决定是否接案 |
-| `/draft [doc]` | 初稿生成：法律援助申请书、民事答辩状、人身保护令申请等 — 管辖地感知 | 不生成最终工作成果 |
-| `/memo` | IRAC 框架的案例分析，附研究缺口标记 | 不撰写分析 — 搭建分析框架 |
-| `/research-start [issue]` | 研究路线图：法条、判例领域、搜索关键词 | **线索，非权威引注** — 学生核实一切 |
-| `/status [audience]` | 案件状态摘要：面向当事人、内部或法院版 | 不提交任何文件 |
-| `/client-letter [type]` | 例行函件：预约确认、材料索取、简要更新 | 不做实质性建议 — 那是 `/status client` 或对话 |
-| `/deadlines` | 追踪案件截止日期 — 添加、跨案件汇总、14/7/3/1 天预警、逾期标记 | 不从触发事件计算截止日期；学生按本地规则计算 |
-| `/client-comms-log [case]` | 仅追加（append-only）的每案沟通记录 — 通话、邮件、信函、面谈 | 不存储实质性法律分析；仅沟通记录 |
-| `/semester-handoff` | 学期末移交 — 为下一届学生准备的每案移交备忘录 | 不结案；学期末结案的案件获得最终的 `/status internal` 备忘录并在移交文件中标记为已结 |
-| `/supervisor-review-queue` | **指导老师，如启用了正式审查。**待处理事项，批准/编辑/退回 | 可选 — 三种指导模式之一 |
+| `legal-clinic:cold-start-interview` | **指导老师。**一次性诊所配置：实践领域、管辖地、指导风格、手册/规则上传 | — |
+| `legal-clinic:build-guide` | **指导老师。**撰写按实践领域的指导：接待问题、教学姿态（协助 assist / 引导 guide / 教学 teach）、审查门控、跨插件检查 | 不替代 `legal-clinic:cold-start-interview` — 此为单个实践领域调优技能 |
+| `legal-clinic:ramp` | **学生。**学期导入：诊所程序、工具走查、练习 | 不替代指导老师的迎新培训 |
+| `legal-clinic:client-intake` | 结构化接待：按实践领域的模板、跨领域问题识别、冲突标记、分流 | 不决定是否接案 |
+| `legal-clinic:draft [doc]` | 初稿生成：法律援助申请书、民事答辩状、人身保护令申请等 — 管辖地感知 | 不生成最终工作成果 |
+| `legal-clinic:memo` | IRAC 框架的案例分析，附研究缺口标记 | 不撰写分析 — 搭建分析框架 |
+| `legal-clinic:research-start [issue]` | 研究路线图：法条、判例领域、搜索关键词 | **线索，非权威引注** — 学生核实一切 |
+| `legal-clinic:status [audience]` | 案件状态摘要：面向当事人、内部或法院版 | 不提交任何文件 |
+| `legal-clinic:client-letter [type]` | 例行函件：预约确认、材料索取、简要更新 | 不做实质性建议 — 那是 `legal-clinic:status client` 或对话 |
+| `legal-clinic:deadlines` | 追踪案件截止日期 — 添加、跨案件汇总、14/7/3/1 天预警、逾期标记 | 不从触发事件计算截止日期；学生按本地规则计算 |
+| `legal-clinic:client-comms-log [case]` | 仅追加（append-only）的每案沟通记录 — 通话、邮件、信函、面谈 | 不存储实质性法律分析；仅沟通记录 |
+| `legal-clinic:semester-handoff` | 学期末移交 — 为下一届学生准备的每案移交备忘录 | 不结案；学期末结案的案件获得最终的 `legal-clinic:status internal` 备忘录并在移交文件中标记为已结 |
+| `legal-clinic:supervisor-review-queue` | **指导老师，如启用了正式审查。**待处理事项，批准/编辑/退回 | 可选 — 三种指导模式之一 |
 
 ## 伦理与保密性前置条件
 
@@ -48,7 +48,7 @@
 3. **保密材料如何处理** — 什么内容粘贴到会话中、输出存储在哪里、谁有访问权限、材料保留多长时间、学生轮换如何影响访问。
 4. **诊所的实践领域是否涉及需额外保障的高度保密事项**（刑事辩护、家庭暴力、某些婚姻家庭事项等）— 并决定插件是否适用于这些案件类型。
 
-不要跳过此步骤。cold-start 访谈（`/legal-clinic:cold-start-interview`）在任何其他配置之前将这些决定作为 Part 0 记录。
+不要跳过此步骤。cold-start 访谈（`legal-clinic:cold-start-interview`）在任何其他配置之前将这些决定作为 Part 0 记录。
 
 ## 置信度标记
 
@@ -57,7 +57,7 @@
 - `[AI-ASSISTED DRAFT — requires student analysis and attorney review]` — 适用于每份输出的基线标签。审查标签，非面向当事人内容的一部分；在发送之前剥离。
 - `[UNCERTAIN: specific reason]` — 技能在此具体判断上没有把握（少数规则、有争议的问题、技能不熟悉的管辖地）。用于 memo、intake、status、draft。
 - `[VERIFY: claim — check source]` — 所述主张可能但不一定正确。学生必须在依赖前确认 — 引注、本地规则格式、规则陈述。广泛用于 research-start、draft、status、memo。
-- `[RESEARCH NEEDED: ...]` — memo 框架标记，表示规则陈述是研究缺口而非结论。学生运行 `/research-start` 并填入。
+- `[RESEARCH NEEDED: ...]` — memo 框架标记，表示规则陈述是研究缺口而非结论。学生运行 `legal-clinic:research-start` 并填入。
 - `[STUDENT ANALYSIS: ...]` — memo 框架标记，表示分析部分有意留空。学生的推理填入。
 - `[STUDENT CONCLUSION: ...]` — memo 框架标记，表示结论部分有意留空。
 - `[FACT NEEDED: ...]` — draft 框架标记，表示案件笔记中缺少必需的事实。学生获取该事实；不得猜测。
@@ -76,7 +76,7 @@
 
 这些设计旨在强化诊所教育模式：学生负责思考，插件负责周边繁重工作。
 
-**研究输出特别注意：**`/research-start` 提供线索和框架供学生核实和展开。它明确**不**提供权威性法律引注。这既是伦理保障，也是教学特性 — 学生仍然学习研究和使用判断力；他们只是从更好的起点出发。
+**研究输出特别注意：**`legal-clinic:research-start` 提供线索和框架供学生核实和展开。它明确**不**提供权威性法律引注。这既是伦理保障，也是教学特性 — 学生仍然学习研究和使用判断力；他们只是从更好的起点出发。
 
 ## 指导工作流程（可配置）
 
@@ -88,13 +88,13 @@ cold-start 访谈要求指导老师选择：
 2. **可配置标记，非正式审查** — 某些触发器将输出标记为"与指导老师确认"，无队列机制
 3. **较轻触** — 所有内容标准保障标签，指导老师通过现有诊所结构（案件讨论会、一对一）进行指导
 
-之后可通过编辑 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` 更改。你的配置存储在该版本无关路径中，插件更新时不受影响。
+之后可通过编辑 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` 更改。你的配置存储在该版本无关路径中，插件更新时不受影响。
 
-## 学期轮换：`/ramp` 解决方案
+## 学期轮换：`legal-clinic:ramp` 解决方案
 
-每学期，诊所从零开始重建。新学生需要数周学习程序、工具、实践领域基础知识。`/ramp` 是互动式导入 — 它阅读指导老师在设置时上传的诊所手册并进行教学，包含低压力的练习（模拟接待、练习草稿、研究路线图），在真实案件之前让学中生先接触。
+每学期，诊所从零开始重建。新学生需要数周学习程序、工具、实践领域基础知识。`legal-clinic:ramp` 是互动式导入 — 它阅读指导老师在设置时上传的诊所手册并进行教学，包含低压力的练习（模拟接待、练习草稿、研究路线图），在真实案件之前让学中生先接触。
 
-`/ramp --card` 生成一页纸的学生参考卡片：命令、Claude 可以和不可以帮助的事项、核实习惯。第一天就发下去。
+`legal-clinic:ramp --card` 生成一页纸的学生参考卡片：命令、Claude 可以和不可以帮助的事项、核实习惯。第一天就发下去。
 
 ## 框架：中国法学院法律诊所实践规范
 
@@ -118,9 +118,9 @@ cold-start 访谈要求指导老师选择：
 | **supervisor-review-queue** | 可选的正式审查工作流程 — 仅在指导老师选择时启用 |
 | **deadlines** | 每案截止日期追踪，跨案汇总，预警节奏，逾期标记 |
 | **client-comms-log** | 仅追加的每案沟通记录 — 通话、邮件、信函、面谈 |
-| **semester-handoff** | 学期末移交备忘录；与 `/ramp` 对称 |
+| **semester-handoff** | 学期末移交备忘录；与 `legal-clinic:ramp` 对称 |
 
-*（两个已弃用技能 — `form-generation`、`plain-language-letters` — 分别重定向至 `/draft` 和 `/client-letter` + `/status client`。）*
+*（两个已弃用技能 — `form-generation`、`plain-language-letters` — 分别重定向至 `legal-clinic:draft` 和 `legal-clinic:client-letter` + `legal-clinic:status client`。）*
 
 ## 连接器与引注核实
 
@@ -135,13 +135,13 @@ cold-start 访谈要求指导老师选择：
 - **Slack** — 搜索消息、阅读频道、查找讨论
 - **Google Drive** — 搜索、阅读和获取文件
 
-案件管理系统（如国内法律科技平台）作为可选的未来集成。初始以文件上传起步；案件管理系统连接器将允许 `/client-intake` 和 `/status` 直接读取案件数据。
+案件管理系统（如国内法律科技平台）作为可选的未来集成。初始以文件上传起步；案件管理系统连接器将允许 `legal-clinic:client-intake` 和 `legal-clinic:status` 直接读取案件数据。
 
 账户层级（Team vs. Enterprise）对当事人保密性而言是每个诊所信息技术和伦理审查的待决问题。Cowork 的桌面架构在本地处理数据。
 
 ## 它是如何学习的
 
-你在 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` 中的实践画像不是静态的 — 它随着你使用插件而改善。技能会在输出使用了默认设置时提示你应该调整的地方。你可以重新运行设置、直接编辑文件，或者告诉某个技能记录新的偏好。
+你在 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` 中的实践画像不是静态的 — 它随着你使用插件而改善。技能会在输出使用了默认设置时提示你应该调整的地方。你可以重新运行设置、直接编辑文件，或者告诉某个技能记录新的偏好。
 
 ## 文件结构
 
@@ -149,10 +149,10 @@ cold-start 访谈要求指导老师选择：
 legal-clinic/
 ├── .claude-plugin/plugin.json
 ├── .mcp.json                          # 案件管理系统标注为可选
-├── CLAUDE.md                          # 指导老师的诊所配置 — 由 cold-start 写入
+├── PRACTICE.md                          # 指导老师的诊所配置 — 由 cold-start 写入
 ├── README.md
 ├── deadlines.yaml                     # 可操作的截止日期台账
-├── skills/                            # 每个技能同时是斜杠命令 /legal-clinic:<skill>
+├── skills/                            # 每个技能都可用 legal-clinic:<skill> 调用
 │   ├── cold-start-interview/          # 指导老师 — 一次性设置
 │   ├── build-guide/                   # 指导老师 — 按实践领域的指导
 │   ├── ramp/                          # 学生 — 学期导入
@@ -168,8 +168,8 @@ legal-clinic/
 │   ├── deadlines/
 │   ├── client-comms-log/
 │   ├── semester-handoff/
-│   ├── form-generation/               # 已弃用 → /draft（仅参考）
-│   └── plain-language-letters/        # 已弃用 → /client-letter, /status client（仅参考）
+│   ├── form-generation/               # 已弃用 → legal-clinic:draft（仅参考）
+│   └── plain-language-letters/        # 已弃用 → legal-clinic:client-letter, legal-clinic:status client（仅参考）
 ├── handoffs/                          # 新建 — 每学期移交备忘录
 │   └── [YYYY-term]/
 │       ├── _summary.md
@@ -185,4 +185,4 @@ legal-clinic/
 
 ## 前置条件
 
-部分功能引用外部集成（文件管理、启动跟踪器、电子证据开示（eDiscovery）、案件管理、监管信息推送）。这些未捆绑 — 如果你环境中有一个针对这些的 MCP 服务器，相关功能将使用它。没有则插件退回到文件上传和手动工作流程。运行 `/legal-clinic:integrations` 查看你环境中可用的集成。
+部分功能引用外部集成（文件管理、启动跟踪器、电子证据开示（eDiscovery）、案件管理、监管信息推送）。这些未捆绑 — 如果你环境中有一个针对这些的 MCP 服务器，相关功能将使用它。没有则插件退回到文件上传和手动工作流程。运行 `legal-clinic:integrations` 查看你环境中可用的集成。

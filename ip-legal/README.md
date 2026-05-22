@@ -21,33 +21,33 @@
 
 首次使用时，插件对你进行访谈——十至十五分钟，对话式——以了解你的实务如何实际运作。询问你的业务领域组合、管辖区域范围、维权姿态、审批矩阵和升级触发条件。然后要求你提供知识产权组合清单、品牌指南（如有）、侵权警告函模板（如有）、维权操作手册和开源政策（如有）——你有多少就给多少，以便提取而非要求你重新输入。
 
-它把学到的东西写入 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`——一份关于你实务的简明文件，其他每个技能在执行前都会读取。你编辑的是文件，不是配置文件。
+它把学到的东西写入 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`——一份关于你实务的简明文件，其他每个技能在执行前都会读取。你编辑的是文件，不是配置文件。
 
 ```
-/ip-legal:cold-start-interview
+ip-legal:cold-start-interview
 ```
 
 ## 命令
 
 | 命令 | 功能 |
 |---|---|
-| `/ip-legal:cold-start-interview` | 运行（或重新运行）冷启动访谈 |
-| `/ip-legal:cease-desist [context]` | 侵权警告函——发送或分类收到的函件，按你 CLAUDE.md 要求的审批路径 |
-| `/ip-legal:takedown [context]` | 信息网络传播权通知——发送、回应收到的通知或起草反通知 |
-| `/ip-legal:clearance [mark]` | 商标可注册性检索初筛——相同/近似检索 + 混淆可能性分析，律师最终签批 |
-| `/ip-legal:fto-triage [product / claim scope]` | 自由实施初步分析——列出阻碍性参考文献供律师审阅 |
-| `/ip-legal:invention-intake [disclosure]` | 发明披露初筛——新颖性、创造性、可授权主题、宽限期、可检测性、战略价值 |
-| `/ip-legal:infringement-triage [context]` | 侵权初步分析——是否值得追究、如何追究 |
-| `/ip-legal:ip-clause-review [file]` | 审查协议中的知识产权条款——权利归属、许可授予、知识产权赔偿、开源陈述 |
-| `/ip-legal:oss-review [repo / file list]` | 开源许可证合规检查——copyleft 义务、署名要求、许可证兼容性 |
-| `/ip-legal:portfolio` | 注册和续展跟踪——什么到期、什么已提交、什么需要行动 |
-| `/ip-legal:matter-workspace` | 管理事项工作区（仅多客户私人执业）— 新建、列表、切换、关闭、无 |
+| `ip-legal:cold-start-interview` | 运行（或重新运行）冷启动访谈 |
+| `ip-legal:cease-desist [context]` | 侵权警告函——发送或分类收到的函件，按你 PRACTICE.md 要求的审批路径 |
+| `ip-legal:takedown [context]` | 信息网络传播权通知——发送、回应收到的通知或起草反通知 |
+| `ip-legal:clearance [mark]` | 商标可注册性检索初筛——相同/近似检索 + 混淆可能性分析，律师最终签批 |
+| `ip-legal:fto-triage [product / claim scope]` | 自由实施初步分析——列出阻碍性参考文献供律师审阅 |
+| `ip-legal:invention-intake [disclosure]` | 发明披露初筛——新颖性、创造性、可授权主题、宽限期、可检测性、战略价值 |
+| `ip-legal:infringement-triage [context]` | 侵权初步分析——是否值得追究、如何追究 |
+| `ip-legal:ip-clause-review [file]` | 审查协议中的知识产权条款——权利归属、许可授予、知识产权赔偿、开源陈述 |
+| `ip-legal:oss-review [repo / file list]` | 开源许可证合规检查——copyleft 义务、署名要求、许可证兼容性 |
+| `ip-legal:portfolio` | 注册和续展跟踪——什么到期、什么已提交、什么需要行动 |
+| `ip-legal:matter-workspace` | 管理事项工作区（仅多客户私人执业）— 新建、列表、切换、关闭、无 |
 
 ## 技能
 
 | 技能 | 用途 |
 |---|---|
-| **cold-start-interview** | 首次运行访谈，写入 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` |
+| **cold-start-interview** | 首次运行访谈，写入 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` |
 | **cease-desist** | 起草或分类侵权警告函；发送前通过审批矩阵 |
 | **takedown** | 信息网络传播权通知、回应收到的通知或反通知 |
 | **clearance** | 相同/近似检索 + 混淆可能性初筛，针对拟议标识 |
@@ -90,17 +90,17 @@
 ### 1. 接受访谈
 
 ```
-/ip-legal:cold-start-interview
+ip-legal:cold-start-interview
 ```
 
 十至十五分钟。准备好你的知识产权组合清单、品牌指南（如有）、侵权警告函模板（如有）和开源政策（如有）。
 
-你的配置存储在 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`，可跨插件更新保留。
+你的配置存储在 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`，可跨插件更新保留。
 
 ### 2. 商标可注册性检索
 
 ```
-/ip-legal:clearance "APEXLEAF"
+ip-legal:clearance "APEXLEAF"
 ```
 
 输出：相同/近似命中清单、混淆可能性因素分析、供律师审阅的标注。不是通过/不通过决定。
@@ -108,7 +108,7 @@
 ### 3. 查看到期事项
 
 ```
-/ip-legal:portfolio
+ip-legal:portfolio
 ```
 
 输出：未来 90 天内到期的注册续展、宣誓或维护期限，按紧急程度分组。
@@ -119,7 +119,7 @@
 ip-legal/
 ├── .claude-plugin/plugin.json
 ├── .mcp.json
-├── CLAUDE.md                    # 你的实务画像——冷启动编写，你编辑
+├── PRACTICE.md                    # 你的实务画像——冷启动编写，你编辑
 ├── README.md
 ├── agents/
 │   └── ip-renewal-watcher.md
@@ -140,12 +140,12 @@ ip-legal/
 
 ## 如何持续学习
 
-你的实务画像位于 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` 不是静态的——随着你使用插件不断改进。技能会告知你输出何时使用了应调整的默认值。`ip-renewal-watcher` 代理跟踪知识产权组合登记并在你的频率下提示即将到期的续展期限。你可以重新运行设置、直接编辑文件或告知技能记录新立场。
+你的实务画像位于 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` 不是静态的——随着你使用插件不断改进。技能会告知你输出何时使用了应调整的默认值。`ip-renewal-watcher` 代理跟踪知识产权组合登记并在你的频率下提示即将到期的续展期限。你可以重新运行设置、直接编辑文件或告知技能记录新立场。
 
 ## 注意事项
 
-- 每个技能首先读取实务画像。如发现占位符，立即停止并告知你运行 `/ip-legal:cold-start-interview`。没有通用回退——通用的知识产权姿态比没有姿态更糟。
-- 发送侵权警告函就是开启纠纷。`/ip-legal:cease-desist` 技能本身不会发送任何东西；它起草草稿，显示审批矩阵条目，等待审批人。
-- `/ip-legal:clearance` 和 `/ip-legal:fto-triage` 是**初筛**。输出是供律师审阅的研究资料包，不是可注册性或自由实施意见。技能每次运行都会说明。
-- `/ip-legal:oss-review` 标注许可证义务和不兼容情况。它不为商业使用决定背书——这由工程和法律共同决定。
+- 每个技能首先读取实务画像。如发现占位符，立即停止并告知你运行 `ip-legal:cold-start-interview`。没有通用回退——通用的知识产权姿态比没有姿态更糟。
+- 发送侵权警告函就是开启纠纷。`ip-legal:cease-desist` 技能本身不会发送任何东西；它起草草稿，显示审批矩阵条目，等待审批人。
+- `ip-legal:clearance` 和 `ip-legal:fto-triage` 是**初筛**。输出是供律师审阅的研究资料包，不是可注册性或自由实施意见。技能每次运行都会说明。
+- `ip-legal:oss-review` 标注许可证义务和不兼容情况。它不为商业使用决定背书——这由工程和法律共同决定。
 - 专利权利要求撰写有意排除在本插件之外。本插件可与专利申请专业工具配合使用；它不替代专利代理师。

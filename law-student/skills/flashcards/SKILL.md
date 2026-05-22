@@ -7,12 +7,11 @@ description: >
 argument-hint: "[科目] [--generate | --drill | --review | --stats | --session <n>]"
 ---
 
-# /flashcards
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md` → 当前课程、薄弱科目、大纲位置。
+# flashcards
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` → 当前课程、薄弱科目、大纲位置。
 2. 应用以下框架。
 3. 按标志路由：
-   - `--generate`：从来源（大纲路径、笔记、教材）按卡片编写规则构建卡片。写入 `~/.claude/plugins/config/claude-for-legal/law-student/flashcards/[科目]/cards.md`。
+   - `--generate`：从来源（大纲路径、笔记、教材）按卡片编写规则构建卡片。写入 `~/.codex/plugins/config/claude-for-legal-zh/law-student/flashcards/[科目]/cards.md`。
    - `--drill`（默认）：优先到期卡片 + 新卡片；显示问题，等待回答，显示答案，接受自我评估，更新记忆桶 + 下次复习时间。
    - `--review`：按记忆桶浏览卡片组。
    - `--stats`：进度快照；标记卡住的卡片建议进行口头训练。
@@ -45,8 +44,8 @@ argument-hint: "[科目] [--generate | --drill | --review | --stats | --session 
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md` → 当前课程、薄弱科目、现有大纲
-- `~/.claude/plugins/config/claude-for-legal/law-student/flashcards/[科目]/cards.md`（如存在）（增量构建）
+- `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` → 当前课程、薄弱科目、现有大纲
+- `~/.codex/plugins/config/claude-for-legal-zh/law-student/flashcards/[科目]/cards.md`（如存在）（增量构建）
 - 用户提供的来源（大纲路径、笔记、教材节选）（如有）
 
 ## 模式
@@ -55,9 +54,9 @@ argument-hint: "[科目] [--generate | --drill | --review | --stats | --session 
 
 ### `--session <n>` — 集中 N 张卡片练习
 
-当学生说"来做5张合同法卡片"或运行 `/law-student:session 合同法 5 --flashcards` 时。
+当学生说"来做5张合同法卡片"或运行 `law-student:session 合同法 5 --flashcards` 时。
 
-- 加载 `~/.claude/plugins/config/claude-for-legal/law-student/study-plan.yaml`（如存在）并读取该科目的 `session_history`。
+- 加载 `~/.codex/plugins/config/claude-for-legal-zh/law-student/study-plan.yaml`（如存在）并读取该科目的 `session_history`。
 - 优先级：之前标记错误的卡片 > 到期卡片 > 新卡片。
 - 按 `--drill` 流程逐张运行 N 张卡片。
 - 练习结束时，将结果追加到 `study-plan.yaml` → `session_history`：
@@ -74,13 +73,13 @@ session_history:
     stuck_topics: [合同的订立-要约与承诺]
 ```
 
-- 如果无 `study-plan.yaml`，改为写入 `~/.claude/plugins/config/claude-for-legal/law-student/session-history.yaml`。
+- 如果无 `study-plan.yaml`，改为写入 `~/.codex/plugins/config/claude-for-legal-zh/law-student/session-history.yaml`。
 
 ### `--generate` — 创建卡片
 
 **输入：**
 - 科目（课程名称或主题）
-- 来源（大纲路径、笔记，或"使用我在 ~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md 中的现有大纲"）
+- 来源（大纲路径、笔记，或"使用我在 ~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md 中的现有大纲"）
 - 可选：目标卡片数量（默认每次 10-20 张）
 
 **卡片结构：**
@@ -131,12 +130,12 @@ session_history:
 
 ### `--stats` — 进度快照
 
-每个科目：总卡片数、记忆桶分布、今天到期、本周已复习。高亮显示任何弹回"新"桶超过两次的卡片——这些是需要通过 `/law-student:socratic-drill` 进行口头训练的卡住概念。
+每个科目：总卡片数、记忆桶分布、今天到期、本周已复习。高亮显示任何弹回"新"桶超过两次的卡片——这些是需要通过 `law-student:socratic-drill` 进行口头训练的卡住概念。
 
 ## 与其他技能的联动
 
 - **outline-builder：** 在构建或扩展大纲后，提议从新材料生成记忆卡片
-- **socratic-drill：** 如果某张卡片错了 2+ 次，将其路由到 `/law-student:socratic-drill` 进行口头深入理解——对于你实际上不理解的概念，记忆卡片不够用
+- **socratic-drill：** 如果某张卡片错了 2+ 次，将其路由到 `law-student:socratic-drill` 进行口头深入理解——对于你实际上不理解的概念，记忆卡片不够用
 - **bar-prep-questions：** 记忆卡片统计差的法考备考科目在客观题训练中权重更高
 
 ## 存储
@@ -154,4 +153,4 @@ flashcards/
 - **替代 Anki。** 如果你已经有一个记忆卡片习惯，保持它。这是当你在聊天中想不切换应用就训练时用的。
 - **为了达到数量目标而编造卡片。** 如果我从你的来源只能生成 8 张有把握的卡片，你就得到 8 张。用大量 `[需核实]` 的猜测填充比一个更小的卡片组更糟糕。
 - **强制执行学习纪律。** 错过的复习日会累积；技能只显示到期了什么。你决定是否训练。
-- **教你规则。** 卡片用于训练你已经学过的内容。如果一张卡片持续错误，问题在上游——使用 `/law-student:socratic-drill` 或重新阅读来源。
+- **教你规则。** 卡片用于训练你已经学过的内容。如果一张卡片持续错误，问题在上游——使用 `law-student:socratic-drill` 或重新阅读来源。

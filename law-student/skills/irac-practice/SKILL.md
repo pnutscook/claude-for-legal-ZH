@@ -7,14 +7,13 @@ description: >
 argument-hint: "[粘贴论文 或 草稿路径 或 --generate-hypo]"
 ---
 
-# /irac-practice
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md` → 课程、考试形式、大纲位置、学习风格。
+# irac-practice
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` → 课程、考试形式、大纲位置、学习风格。
 2. 应用以下框架。
 3. 确定模式：学生提供的案例假设 + 答案，或技能生成的案例假设配学生的答案。
 4. 仔细阅读答案。对照预期 IRAC 组成部分进行映射。
 5. 输出结构化反馈：识别/遗漏的考点、规则准确性、分析深度、组织、评分等级、前三位修改、最多 1-2 个标注示例句式（绝不提供完整的 IRAC 范文）。
-6. 追加到 `~/.claude/plugins/config/claude-for-legal/law-student/irac-sessions/[学生]/tracker.md` 供模式检测。3 次以上练习后呈现模式。
+6. 追加到 `~/.codex/plugins/config/claude-for-legal-zh/law-student/irac-sessions/[学生]/tracker.md` 供模式检测。3 次以上练习后呈现模式。
 
 ---
 
@@ -41,8 +40,8 @@ argument-hint: "[粘贴论文 或 草稿路径 或 --generate-hypo]"
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md` → 当前课程、考试形式、大纲位置、学习风格
-- `~/.claude/plugins/config/claude-for-legal/law-student/irac-sessions/[学生]/tracker.md`（如存在）——跨练习的模式追踪
+- `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` → 当前课程、考试形式、大纲位置、学习风格
+- `~/.codex/plugins/config/claude-for-legal-zh/law-student/irac-sessions/[学生]/tracker.md`（如存在）——跨练习的模式追踪
 - 学生提供的案例假设（如果在练习一个特定的题目）和他们写的答案
 
 ## 工作流
@@ -140,7 +139,7 @@ argument-hint: "[粘贴论文 或 草稿路径 或 --generate-hypo]"
 
 ### 第4步：追踪模式
 
-追加到 `~/.claude/plugins/config/claude-for-legal/law-student/irac-sessions/[学生]/tracker.md`：
+追加到 `~/.codex/plugins/config/claude-for-legal-zh/law-student/irac-sessions/[学生]/tracker.md`：
 
 ```markdown
 ## [日期] — [学科 / 案例假设主题]
@@ -153,14 +152,14 @@ argument-hint: "[粘贴论文 或 草稿路径 或 --generate-hypo]"
 3 次以上练习后，呈现模式：
 - "你持续遗漏反面论证——连续三次练习。"
 - "你在考点+规则上很强，但在适用上持续薄弱。"
-- "你的组织很强；缺口在规则准确性。用 /law-student:flashcards 训练重点法条。"
+- "你的组织很强；缺口在规则准确性。用 law-student:flashcards 训练重点法条。"
 
 模式检测是本技能的长期价值。一次性反馈帮一篇论文；模式反馈改变你如何学习。
 
 ## 与其他技能的联动
 
-- **legal-writing：** 对于非 IRAC 写作（备忘录、代理词、论文），改用 `/law-student:legal-writing`
-- **socratic-drill：** 如果考点识别是反复出现的缺口，在进行更多论文练习之前先用 `/law-student:socratic-drill` 训练该学科的考点识别
+- **legal-writing：** 对于非 IRAC 写作（备忘录、代理词、论文），改用 `law-student:legal-writing`
+- **socratic-drill：** 如果考点识别是反复出现的缺口，在进行更多论文练习之前先用 `law-student:socratic-drill` 训练该学科的考点识别
 - **flashcards：** 如果规则准确性是缺口，记忆卡片是正确的工具
 - **outline-builder：** 如果学生的规则在大纲中确实错误，修正大纲会修正许多未来的 IRAC
 

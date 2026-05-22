@@ -8,15 +8,14 @@ description: >
 argument-hint: "[配置节名称，或描述你要变更的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户输入了 `/regulatory-legal:customize`。他们希望更改监管配置中的某些内容——一个监测的监管机构、一个重要度阈值或一个动态源——而不重新运行完整的冷启动访谈，也不手动编辑配置文件。
+用户输入了 `regulatory-legal:customize`。他们希望更改监管配置中的某些内容——一个监测的监管机构、一个重要度阈值或一个动态源——而不重新运行完整的冷启动访谈，也不手动编辑配置文件。
 
 ## 做什么
 
-1. **读取配置。** 读取 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md`。如果插件配置不存在或仍包含 `[PLACEHOLDER]` 值，说明："你还没有运行设置。先运行 `/regulatory-legal:cold-start-interview`——定制功能用于调整已有的配置。"
+1. **读取配置。** 读取 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md`。如果插件配置不存在或仍包含 `[PLACEHOLDER]` 值，说明："你还没有运行设置。先运行 `regulatory-legal:cold-start-interview`——定制功能用于调整已有的配置。"
 
 2. **展示可定制的清单。** 列出配置中的内容，分组，附当前值的一行摘要：
 
@@ -34,13 +33,13 @@ argument-hint: "[配置节名称，或描述你要变更的内容]"
 4. **做出改变。** 展示当前值，询问新值，解释下游变化，确认，写入配置。
 
    例如：
-   - *将监管机构添加到监测清单：* "`/reg-feed-watcher` 将在下次运行时扫描此监管机构。`/policy-diff` 将接受来自此监管机构的法规动态输入。"
+   - *将监管机构添加到监测清单：* "`regulatory-legal:reg-feed-watcher` 将在下次运行时扫描此监管机构。`regulatory-legal:policy-diff` 将接受来自此监管机构的法规动态输入。"
    - *收紧重要度阈值：* "摘要将更简短——低于新阈值的事项将不再出现在摘要中。"
-   - *将新政策添加到库中：* "`/policy-diff` 在将新法规与库匹配时将包含此政策。"
+   - *将新政策添加到库中：* "`regulatory-legal:policy-diff` 在将新法规与库匹配时将包含此政策。"
 
-5. **对共享配置的变更**（公司名称、行业、管辖区域、执业设置、阶段）：写入 `~/.claude/plugins/config/claude-for-legal/company-profile.md` 并注明此变更影响所有插件。
+5. **对共享配置的变更**（公司名称、行业、管辖区域、执业设置、阶段）：写入 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` 并注明此变更影响所有插件。
 
-6. **关闭。** "完成。你的下一次输出将反映该变更。还有别的吗？你可以随时运行 `/regulatory-legal:customize`。"
+6. **关闭。** "完成。你的下一次输出将反映该变更。还有别的吗？你可以随时运行 `regulatory-legal:customize`。"
 
 ## 护栏
 

@@ -1,0 +1,152 @@
+{
+  "name": "claude-for-legal-zh-codex",
+  "interface": {
+    "displayName": "Claude for Legal ZH for Codex"
+  },
+  "plugins": [
+    {
+      "name": "commercial-legal",
+      "source": {
+        "source": "local",
+        "path": "./commercial-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "privacy-legal",
+      "source": {
+        "source": "local",
+        "path": "./privacy-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "product-legal",
+      "source": {
+        "source": "local",
+        "path": "./product-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "corporate-legal",
+      "source": {
+        "source": "local",
+        "path": "./corporate-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "employment-legal",
+      "source": {
+        "source": "local",
+        "path": "./employment-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "regulatory-legal",
+      "source": {
+        "source": "local",
+        "path": "./regulatory-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "ai-governance-legal",
+      "source": {
+        "source": "local",
+        "path": "./ai-governance-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "litigation-legal",
+      "source": {
+        "source": "local",
+        "path": "./litigation-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "law-student",
+      "source": {
+        "source": "local",
+        "path": "./law-student"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "legal-clinic",
+      "source": {
+        "source": "local",
+        "path": "./legal-clinic"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "legal-builder-hub",
+      "source": {
+        "source": "local",
+        "path": "./legal-builder-hub"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    },
+    {
+      "name": "ip-legal",
+      "source": {
+        "source": "local",
+        "path": "./ip-legal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Legal"
+    }
+  ]
+}

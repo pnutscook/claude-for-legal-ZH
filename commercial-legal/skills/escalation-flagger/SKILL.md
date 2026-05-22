@@ -7,8 +7,7 @@ description: >
 argument-hint: "[描述问题，或引用审查备忘录]"
 ---
 
-# /escalation-flagger
-
+# escalation-flagger
 根据审查指引中的上报矩阵指明合同问题的审批人并起草消息。
 
 ## 指令
@@ -26,12 +25,12 @@ argument-hint: "[描述问题，或引用审查备忘录]"
 ## 示例
 
 ```
-/commercial-legal:escalation-flagger
+commercial-legal:escalation-flagger
 Acme主协议有无上限的责任——谁批准，我说什么？
 ```
 
 ```
-/commercial-legal:escalation-flagger
+commercial-legal:escalation-flagger
 参考：acme-review-memo.md
 问题：§8.2 赔偿例外排除
 ```
@@ -40,7 +39,7 @@ Acme主协议有无上限的责任——谁批准，我说什么？
 
 ## 事项上下文
 
-**事项上下文。** 检查业务领域级 CLAUDE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`，跳过本段。如果已启用且没有活动事项，询问。
+**事项上下文。** 检查业务领域级 PRACTICE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`，跳过本段。如果已启用且没有活动事项，询问。
 
 ---
 

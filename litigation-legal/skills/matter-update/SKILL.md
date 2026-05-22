@@ -7,12 +7,11 @@ description: >
 argument-hint: "[代号] [简要事件描述]"
 ---
 
-# /matter-update
-
+# matter-update
 1. 按以下工作流操作。
-2. 确认代号在 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/` 和 `_log.yaml` 中存在。
+2. 确认代号在 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/` 和 `_log.yaml` 中存在。
 3. 提示输入：事件类型、日期（默认今天）、摘要，以及任何日志字段更新（风险变更、状态变更、下一节点变更、重要性重新分类）。
-4. 追加带日期条目至 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/history.md`。
+4. 追加带日期条目至 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/history.md`。
 5. 更新 `_log.yaml` —— `last_updated` 设为今天，应用任何字段更新。
 6. 确认。
 
@@ -26,14 +25,14 @@ argument-hint: "[代号] [简要事件描述]"
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml` —— 找到对应行
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/history.md` —— 追加目标
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/matter.md` —— 参考（不重写）
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` —— 风险校准（如需重评估风险）
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/_log.yaml` —— 找到对应行
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/history.md` —— 追加目标
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/matter.md` —— 参考（不重写）
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` —— 风险校准（如需重评估风险）
 
 **冲突门禁——不可绕过。** 在记录更新前，检查 `_log.yaml` 中是否存在该案件代号。如果案件不在 `_log.yaml` 中，拒绝并路由：
 
-> "我在案件日志中没有找到 [案件代号]。请先运行 `/litigation-legal:matter-intake`，以便冲突检索可以运行且案件工作空间已经建立。我不会向未登记的案件追加历史记录——冲突检索是门禁，且在案件完成登记之前没有 `history.md` 可供追加。"
+> "我在案件日志中没有找到 [案件代号]。请先运行 `litigation-legal:matter-intake`，以便冲突检索可以运行且案件工作空间已经建立。我不会向未登记的案件追加历史记录——冲突检索是门禁，且在案件完成登记之前没有 `history.md` 可供追加。"
 
 ## 输入
 
@@ -81,11 +80,11 @@ argument-hint: "[代号] [简要事件描述]"
 
 ### 4pre. 和解接受门禁
 
-如果策略更新为**接受和解**（公司正在接受和解要约、签署和解协议或原则性授权接受——不仅仅是记录要约的发出或收到）：读取 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` 中的 `## 使用者`。如果角色是**非律师**：
+如果策略更新为**接受和解**（公司正在接受和解要约、签署和解协议或原则性授权接受——不仅仅是记录要约的发出或收到）：读取 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 中的 `## 使用者`。如果角色是**非律师**：
 
 > 接受和解具有法律后果——它解决争议，通常需要签署免责协议，并可能影响保险、税务和关联事项。您是否已与律师审查过此事？如已审查，继续。如未审查，以下是带去给律师的简要材料：
 >
-> [生成一页摘要：案件、拟议和解条款（金额、结构、免责范围、保密、不得贬损条款）、涉及的敞口、授权层级状态（见 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` 和解授权）、可能出错的事项、接受前需要问律师的问题。]
+> [生成一页摘要：案件、拟议和解条款（金额、结构、免责范围、保密、不得贬损条款）、涉及的敞口、授权层级状态（见 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 和解授权）、可能出错的事项、接受前需要问律师的问题。]
 >
 > 如果您需要寻找律师：请联系当地律师协会或拨打 12348 法律援助热线获取推荐。
 
@@ -109,7 +108,7 @@ argument-hint: "[代号] [简要事件描述]"
 **理由：** [一句话]
 ```
 
-如重要性变更为"需计提"或"已披露"，且该案件此前未记录计提或披露，标注该事件需要按 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` 的重要性门槛通知财务/审计委员会。
+如重要性变更为"需计提"或"已披露"，且该案件此前未记录计提或披露，标注该事件需要按 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 的重要性门槛通知财务/审计委员会。
 
 ### 5. 文件关联提示（可选）
 
@@ -117,7 +116,7 @@ argument-hint: "[代号] [简要事件描述]"
 
 ## 写入
 
-### 追加至 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/history.md`
+### 追加至 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/history.md`
 
 最新记录在最前，直接放在标头后的 `---` 之下。
 
@@ -135,7 +134,7 @@ argument-hint: "[代号] [简要事件描述]"
 
 如无字段变更，省略"字段变更"块。
 
-### 更新 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml`
+### 更新 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/_log.yaml`
 
 - 应用任何字段变更。
 - 设置 `last_updated: [今天]`（如用户覆盖日期，使用事件日期——日志记录的是记录最后被触及的时间）。

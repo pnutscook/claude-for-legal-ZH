@@ -17,30 +17,30 @@
 ## 首次运行
 
 ```
-/corporate-legal:cold-start-interview
+corporate-legal:cold-start-interview
 ```
 
-依次完成模块选择，然后针对每个活跃业务领域进行简短访谈。将模块化的实务画像写入 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`，仅包含相关章节。您的配置存储于该路径并在插件更新后继续生效。
+依次完成模块选择，然后针对每个活跃业务领域进行简短访谈。将模块化的实务画像写入 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md`，仅包含相关章节。您的配置存储于该路径并在插件更新后继续生效。
 
 逐项交易设置（仅并购模块）：
 
 ```
-/corporate-legal:cold-start-interview --new-deal
+corporate-legal:cold-start-interview --new-deal
 ```
 
 ## 指令
 
 | 指令 | 功能 |
 |---|---|
-| `/corporate-legal:cold-start-interview` | 模块化冷启动，或 `--new-deal` / `--module [m&a \| board \| public \| entities]` |
-| `/corporate-legal:diligence-issue-extraction [文件夹]` | 读取数据室文件，按公司格式提取问题 |
-| `/corporate-legal:tabular-review` | 表格化审查——一行一份文件，一列一个数据点，每单元格附来源引用，输出Excel |
-| `/corporate-legal:material-contract-schedule` | 根据尽调发现制作重大合同披露函 |
-| `/corporate-legal:closing-checklist` | 交割检查表——哪些事项在阻断、关键路径是什么 |
-| `/corporate-legal:written-consent` | 书面决议（股东会/董事会）——匹配先例的草稿+签署跟踪 |
-| `/corporate-legal:entity-compliance` | 主体合规追踪器——初始化、报告、更新、体检、导出 |
-| `/corporate-legal:integration-management` | 交割后整合工作计划、同意函追踪、合同概括转让、状态报告 |
-| `/corporate-legal:matter-workspace` | 管理事项工作空间（仅多客户私人执业）——新建、列表、切换、关闭、无事项 |
+| `corporate-legal:cold-start-interview` | 模块化冷启动，或 `--new-deal` / `--module [m&a \| board \| public \| entities]` |
+| `corporate-legal:diligence-issue-extraction [文件夹]` | 读取数据室文件，按公司格式提取问题 |
+| `corporate-legal:tabular-review` | 表格化审查——一行一份文件，一列一个数据点，每单元格附来源引用，输出Excel |
+| `corporate-legal:material-contract-schedule` | 根据尽调发现制作重大合同披露函 |
+| `corporate-legal:closing-checklist` | 交割检查表——哪些事项在阻断、关键路径是什么 |
+| `corporate-legal:written-consent` | 书面决议（股东会/董事会）——匹配先例的草稿+签署跟踪 |
+| `corporate-legal:entity-compliance` | 主体合规追踪器——初始化、报告、更新、体检、导出 |
+| `corporate-legal:integration-management` | 交割后整合工作计划、同意函追踪、合同概括转让、状态报告 |
+| `corporate-legal:matter-workspace` | 管理事项工作空间（仅多客户私人执业）——新建、列表、切换、关闭、无事项 |
 
 ## 前提条件
 
@@ -90,7 +90,7 @@
 
 ## 如何学习
 
-您在 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 中的实务画像并非一成不变——它会随着您使用插件而持续改进。技能会告知您何时某次输出使用了应予调整的默认值。您可以重新运行设置、直接编辑文件或告知某项技能记录新的立场。
+您在 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 中的实务画像并非一成不变——它会随着您使用插件而持续改进。技能会告知您何时某次输出使用了应予调整的默认值。您可以重新运行设置、直接编辑文件或告知某项技能记录新的立场。
 
 ## 并购说明
 

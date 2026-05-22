@@ -18,27 +18,27 @@
 插件访谈你以了解：你是 AI 构建者、部署者还是两者兼有——哪些监管制度实际适用——你的应用场景红线是什么——以及好的影响评估在这里是什么样的。然后读取你的种子文件并学习你的真实立场和内部风格。
 
 ```
-/ai-governance-legal:cold-start-interview
+ai-governance-legal:cold-start-interview
 ```
 
 ## 命令
 
 | 命令 | 功能 |
 |---|---|
-| `/ai-governance-legal:cold-start-interview` | 冷启动访谈——编写你的实务画像 |
-| `/ai-governance-legal:use-case-triage [use case]` | 对照你的登记册分类应用场景（批准 / 有条件 / 从未） |
-| `/ai-governance-legal:aia-generation [use case]` | 按你的内部风格运行 AI 影响评估（算法安全评估/科技伦理审查） |
-| `/ai-governance-legal:vendor-ai-review [vendor/file]` | 对照你的立场审查 AI 供应商协议 |
-| `/ai-governance-legal:reg-gap-analysis [regulation]` | 对比新法规或指引与当前政策/实践的差异 |
-| `/ai-governance-legal:policy-monitor` | 每周扫描 AI 政策偏差，或针对拟议新实践直接查询 |
-| `/ai-governance-legal:policy-starter` | 从已发布的示范政策（生成式人工智能服务管理办法、科技伦理审查办法、算法推荐管理规定、行业自律公约）起草 AI 使用政策初稿，适配你的实务画像——供律师审阅的草案，非最终政策 |
-| `/ai-governance-legal:matter-workspace` | 管理事项工作区（仅多客户私人执业）— 新建、列表、切换、关闭、无 |
+| `ai-governance-legal:cold-start-interview` | 冷启动访谈——编写你的实务画像 |
+| `ai-governance-legal:use-case-triage [use case]` | 对照你的登记册分类应用场景（批准 / 有条件 / 从未） |
+| `ai-governance-legal:aia-generation [use case]` | 按你的内部风格运行 AI 影响评估（算法安全评估/科技伦理审查） |
+| `ai-governance-legal:vendor-ai-review [vendor/file]` | 对照你的立场审查 AI 供应商协议 |
+| `ai-governance-legal:reg-gap-analysis [regulation]` | 对比新法规或指引与当前政策/实践的差异 |
+| `ai-governance-legal:policy-monitor` | 每周扫描 AI 政策偏差，或针对拟议新实践直接查询 |
+| `ai-governance-legal:policy-starter` | 从已发布的示范政策（生成式人工智能服务管理办法、科技伦理审查办法、算法推荐管理规定、行业自律公约）起草 AI 使用政策初稿，适配你的实务画像——供律师审阅的草案，非最终政策 |
+| `ai-governance-legal:matter-workspace` | 管理事项工作区（仅多客户私人执业）— 新建、列表、切换、关闭、无 |
 
 ## 技能
 
 | 技能 | 用途 |
 |---|---|
-| **cold-start-interview** | 通过访谈 + 种子文件编写 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` |
+| **cold-start-interview** | 通过访谈 + 种子文件编写 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` |
 | **use-case-triage** | 对照登记册分类应用场景；标注缺失的评估 |
 | **aia-generation** | 按内部格式生成 AI 影响评估（算法安全评估/科技伦理审查） |
 | **vendor-ai-review** | 针对治理立场进行 AI 特定供应商合同审查 |
@@ -52,17 +52,17 @@
 ### 1. 设置
 
 ```
-/ai-governance-legal:cold-start-interview
+ai-governance-legal:cold-start-interview
 ```
 
 准备好（如存在）：你的 AI 或可接受使用政策、一份既往影响评估、关键 AI 供应商协议、模型清单或已批准工具列表。
 
-你的配置存储在 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`，可跨插件更新保留。
+你的配置存储在 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md`，可跨插件更新保留。
 
 ### 2. 分类新应用场景
 
 ```
-/ai-governance-legal:use-case-triage "销售团队希望使用 AI 自动评分潜在客户"
+ai-governance-legal:use-case-triage "销售团队希望使用 AI 自动评分潜在客户"
 ```
 
 输出：风险层级、登记册匹配或差距、所需条件、是否需要影响评估。
@@ -70,7 +70,7 @@
 ### 3. 运行影响评估
 
 ```
-/ai-governance-legal:aia-generation "面向 HR 的 AI 简历筛选"
+ai-governance-legal:aia-generation "面向 HR 的 AI 简历筛选"
 ```
 
 接收问题 -> 按内部格式生成影响评估 -> 政策一致性检查 -> 缓解条件。
@@ -78,7 +78,7 @@
 ### 4. 审查 AI 供应商协议
 
 ```
-/ai-governance-legal:vendor-ai-review openai-terms.pdf
+ai-governance-legal:vendor-ai-review openai-terms.pdf
 ```
 
 输出：逐条与你的立场对比、建议修订、需升级的差距。
@@ -87,9 +87,9 @@
 
 这三个插件设计为协同工作。AI 治理是第三支柱。
 
-- **产品律师**检测到产品上线含 AI 组件 -> 交接至 `/ai-governance-legal:use-case-triage` 和 `/ai-governance-legal:aia-generation`
-- **个人信息保护**检测到 AI 应用场景涉及个人数据 -> 交接至 `/privacy-legal:pia-generation`（如插件已安装）
-- **AI 治理**检测到影响评估涉及数据保护问题 -> 交接至 `/privacy-legal:pia-generation`（如插件已安装）
+- **产品律师**检测到产品上线含 AI 组件 -> 交接至 `ai-governance-legal:use-case-triage` 和 `ai-governance-legal:aia-generation`
+- **个人信息保护**检测到 AI 应用场景涉及个人数据 -> 交接至 `privacy-legal:pia-generation`（如插件已安装）
+- **AI 治理**检测到影响评估涉及数据保护问题 -> 交接至 `privacy-legal:pia-generation`（如插件已安装）
 
 交接是明确的：每个插件标注何时需要另一个插件并说明需回答的问题。
 
@@ -99,7 +99,7 @@
 ai-governance-legal/
 ├── .claude-plugin/plugin.json
 ├── .mcp.json
-├── CLAUDE.md
+├── PRACTICE.md
 ├── README.md
 └── skills/
     ├── cold-start-interview/
@@ -114,7 +114,7 @@ ai-governance-legal/
 
 ## 如何持续学习
 
-你的实务画像位于 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` 不是静态的——随着你使用插件不断改进。技能会告知你输出何时使用了应调整的默认值。`policy-monitor` 技能监测 AI 治理政策与实践之间的偏差并提议更新。你可以重新运行设置、直接编辑文件或告知技能记录新立场。
+你的实务画像位于 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` 不是静态的——随着你使用插件不断改进。技能会告知你输出何时使用了应调整的默认值。`policy-monitor` 技能监测 AI 治理政策与实践之间的偏差并提议更新。你可以重新运行设置、直接编辑文件或告知技能记录新立场。
 
 ## 注意事项
 

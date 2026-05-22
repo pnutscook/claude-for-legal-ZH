@@ -8,9 +8,8 @@ description: >
 argument-hint: "[--init | --report [--days N] | --update [--from-report] | --sweep | --audit | --export [--format csv|table]]"
 ---
 
-# /entity-compliance
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` → `## 主体管理`（主体清单、注册地、工商登记代办机构）。
+# entity-compliance
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → `## 主体管理`（主体清单、注册地、工商登记代办机构）。
 2. 按以下标志路由到正确的模式：
    - 无标志或 `--init`：模式1——从主体清单初始化追踪器
    - `--report`：模式2——呈现即将到来的截止日和逾期项
@@ -18,7 +17,7 @@ argument-hint: "[--init | --report [--days N] | --update [--from-report] | --swe
    - `--sweep`：模式3c——逐项排查未知/逾期项
    - `--audit`：模式4——全面健康审计
    - `--export`：模式5——产出 CSV 或表格导出
-3. 读取/写入 `~/.claude/plugins/config/claude-for-legal/corporate-legal/entities/compliance-tracker.yaml`。
+3. 读取/写入 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/entities/compliance-tracker.yaml`。
 4. 任何更新后：展示变更摘要和下一步行动。
 
 ---
@@ -33,7 +32,7 @@ argument-hint: "[--init | --report [--days N] | --update [--from-report] | --swe
 
 ## 注册地假设
 
-> 本追踪器按每个主体记录的设立地或经营地计算截止日。申报规则、截止日机制和费用结构在不同注册地之间存在实质性差异。如果主体的实际业务范围与 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 中记录的不同（未披露的外地经营备案、已注销主体、注册地迁移、由本地代理机构管理的跨省级申报），输出可能不完全适用——与工商登记代办机构或该辖区的当地律师确认。
+> 本追踪器按每个主体记录的设立地或经营地计算截止日。申报规则、截止日机制和费用结构在不同注册地之间存在实质性差异。如果主体的实际业务范围与 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 中记录的不同（未披露的外地经营备案、已注销主体、注册地迁移、由本地代理机构管理的跨省级申报），输出可能不完全适用——与工商登记代办机构或该辖区的当地律师确认。
 
 ## 主体类型区分
 
@@ -53,7 +52,7 @@ argument-hint: "[--init | --report [--days N] | --update [--from-report] | --swe
 
 ## 追踪器文件
 
-存放于 `~/.claude/plugins/config/claude-for-legal/corporate-legal/entities/compliance-tracker.yaml`。结构：
+存放于 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/entities/compliance-tracker.yaml`。结构：
 
 ```yaml
 # 主体合规追踪器
@@ -110,7 +109,7 @@ entities:
 
 ### 第1步：加载主体清单
 
-读取 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` → `## 主体管理` → 主体清单。如果主体清单已填充（来自冷启动时的组织架构图上传），直接使用。如果未填充，请用户运行冷启动模块或提供主体清单。
+读取 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → `## 主体管理` → 主体清单。如果主体清单已填充（来自冷启动时的组织架构图上传），直接使用。如果未填充，请用户运行冷启动模块或提供主体清单。
 
 ### 第2步：对每个主体 × 注册地，确认申报要求
 
@@ -164,7 +163,7 @@ custom_jurisdictions:
 
 ### 第3步：写入追踪器
 
-生成 `~/.claude/plugins/config/claude-for-legal/corporate-legal/entities/compliance-tracker.yaml`，包含全部主体及其计算出的申报要求。设置初始状态：
+生成 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/entities/compliance-tracker.yaml`，包含全部主体及其计算出的申报要求。设置初始状态：
 - `current` 如果 last_filed 在当前申报期内
 - `due_soon` 如果90天内到期且当期无 last_filed
 - `overdue` 如果截止日已过且当期无 last_filed
@@ -185,7 +184,7 @@ custom_jurisdictions:
   🔴 逾期：    [N]
   ❓ 未知：    [N]（与工商登记代办机构确认）
 
-运行 /corporate-legal:entity-compliance --report 查看待办事项。
+运行 corporate-legal:entity-compliance --report 查看待办事项。
 ```
 
 ---
@@ -195,7 +194,7 @@ custom_jurisdictions:
 呈现即将到来的截止日并标记逾期项。默认：未来90天。
 
 ```
-/corporate-legal:entity-compliance --report [--days 30|60|90|180]
+corporate-legal:entity-compliance --report [--days 30|60|90|180]
 ```
 
 输出格式：
@@ -227,7 +226,7 @@ custom_jurisdictions:
   最近12个月未确认的主体：[列表]
 ```
 
-如果追踪器覆盖超过约10个主体，或用户任何时候提问：提供仪表盘（见 CLAUDE.md `## 输出规范 → 数据密集产出的仪表盘选项`）。为本次产出定制：按申报状态计数（逾期/即将到期/已申报/未知）、按存续状态计数，以及带注册地、申报类型和下一个截止日的可排序主体表。
+如果追踪器覆盖超过约10个主体，或用户任何时候提问：提供仪表盘（见 PRACTICE.md `## 输出规范 → 数据密集产出的仪表盘选项`）。为本次产出定制：按申报状态计数（逾期/即将到期/已申报/未知）、按存续状态计数，以及带注册地、申报类型和下一个截止日的可排序主体表。
 
 ---
 
@@ -237,7 +236,7 @@ custom_jurisdictions:
 
 ### 后果性行动准入（填报年报/工商备案）
 
-**在指示或确认一项申报前：** 读取 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 中的 `## 使用者`。如果角色为**非法务人员**：
+**在指示或确认一项申报前：** 读取 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 中的 `## 使用者`。如果角色为**非法务人员**：
 
 > 向市场监督管理局提交年度报告、企业所得税申报或信息公示具有法律后果——这是主体的正式陈述，伴随费用，遗漏或不正确申报可能导致失去存续状态或处罚。在申报前你是否已与律师（或有资质的工商登记代办机构）审查？如已审查，继续记录申报。如未审查，以下是带给他们的简要说明：
 >
@@ -254,7 +253,7 @@ custom_jurisdictions:
 ### 3a：手动更新
 
 ```
-/corporate-legal:entity-compliance --update
+corporate-legal:entity-compliance --update
 ```
 
 律师告诉 Claude 什么已申报：
@@ -269,7 +268,7 @@ Claude 更新：
 ### 3b：工商登记代办机构报告上传
 
 ```
-/corporate-legal:entity-compliance --update --from-report
+corporate-legal:entity-compliance --update --from-report
 ```
 
 用户上传工商登记代办机构或类似合规报告（PDF、CSV 或 Excel）。Claude 读取并更新匹配的主体：
@@ -294,7 +293,7 @@ Claude 更新：
 ### 3c：批量状态排查
 
 ```
-/corporate-legal:entity-compliance --sweep
+corporate-legal:entity-compliance --sweep
 ```
 
 逐项排查每个状态为 `unknown` 或 `overdue` 的主体，每次一个，询问当前信息：
@@ -309,7 +308,7 @@ Claude 更新：
 ## 模式4：健康审计
 
 ```
-/corporate-legal:entity-compliance --audit
+corporate-legal:entity-compliance --audit
 ```
 
 超出申报状态的更广泛审查。呈现：
@@ -329,10 +328,10 @@ Claude 更新：
 - `confirmed_good_standing` 超过12个月的主体——过期；值得刷新，尤其如预期有并购或融资。
 
 **经营备案缺口：**
-- 基于 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 的主体清单：公司的业务足迹中是否有省份（办事处、员工）主体未办理经营备案？这需要律师确认业务存在——Claude 可以提出问题但不能独立判断业务存在。
+- 基于 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 的主体清单：公司的业务足迹中是否有省份（办事处、员工）主体未办理经营备案？这需要律师确认业务存在——Claude 可以提出问题但不能独立判断业务存在。
 
 **关联方交易协议订立情况：**
-- 从 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`：如果关联方交易协议订立情况标记为部分或否，标记哪些主体关系可能需要协议（母子公司服务、知识产权许可、贷款）。
+- 从 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md`：如果关联方交易协议订立情况标记为部分或否，标记哪些主体关系可能需要协议（母子公司服务、知识产权许可、贷款）。
 
 输出格式：
 
@@ -355,8 +354,8 @@ Claude 更新：
 
 潜在缺口
   经营备案：[标记问题——确认以下地区的业务存在：]
-    [足迹在追踪器中未显示为已备案的省份列表，来自 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`]
-  关联方交易协议订立：[来自 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 的状态]
+    [足迹在追踪器中未显示为已备案的省份列表，来自 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md`]
+  关联方交易协议订立：[来自 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 的状态]
 
 建议行动
   1. [最高优先级行动]
@@ -368,7 +367,7 @@ Claude 更新：
 ## 模式5：导出
 
 ```
-/corporate-legal:entity-compliance --export [--format csv|table]
+corporate-legal:entity-compliance --export [--format csv|table]
 ```
 
 产出适合与财务、法务运营或外部工商登记代办机构分享的平面导出。默认：CSV。

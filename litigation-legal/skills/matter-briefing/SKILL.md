@@ -7,11 +7,10 @@ description: >
 argument-hint: "[代号]"
 ---
 
-# /matter-briefing
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 风险校准 + 相关方。
+# matter-briefing
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 风险校准 + 相关方。
 2. 按以下工作流操作。
-3. 读取 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/matter.md` + `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/history.md` + `_log.yaml` 中的日志行。
+3. 读取 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/matter.md` + `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/history.md` + `_log.yaml` 中的日志行。
 4. 生成简报：当前姿态、自上次更新以来的变化、下个节点、待解决问题、风险重评估检查（"`risk:` 字段是否仍反映实际情况？"）。
 5. 标注陈旧度：如 `last_updated` > 30天，明确说明。
 
@@ -25,14 +24,14 @@ argument-hint: "[代号]"
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml` —— 结构化行
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/matter.md` —— 记述式登记
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/history.md` —— 事件日志
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` —— 风险校准（使"风险：高"有具体含义，而非泛泛）
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/_log.yaml` —— 结构化行
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/matter.md` —— 记述式登记
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/history.md` —— 事件日志
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` —— 风险校准（使"风险：高"有具体含义，而非泛泛）
 
 **冲突门禁——不可绕过。** 在生成简报前，检查 `_log.yaml` 中是否存在该案件代号。如果案件不在 `_log.yaml` 中，拒绝并路由：
 
-> "我在案件日志中没有找到 [案件代号]。请先运行 `/litigation-legal:matter-intake`，以便冲突检索可以运行且案件工作空间建立。我不会为未登记的案件生成简报——冲突检索是门禁。"
+> "我在案件日志中没有找到 [案件代号]。请先运行 `litigation-legal:matter-intake`，以便冲突检索可以运行且案件工作空间建立。我不会为未登记的案件生成简报——冲突检索是门禁。"
 
 ## 输入
 
@@ -95,7 +94,7 @@ argument-hint: "[代号]"
 
 ## 陈旧度
 
-如 `last_updated > 30天前`：在顶部标注并建议会议后运行 `/litigation-legal:matter-update [slug]` 以记录讨论内容。
+如 `last_updated > 30天前`：在顶部标注并建议会议后运行 `litigation-legal:matter-update [slug]` 以记录讨论内容。
 
 ## 语气
 
@@ -103,10 +102,10 @@ argument-hint: "[代号]"
 
 ## 以下一步决策树收尾
 
-以 CLAUDE.md `## 输出` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
+以 PRACTICE.md `## 输出` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
 
 ## 本技能不做什么
 
 - 预测结果。风险评级是记录在案的判断，不是预测。
 - 推荐策略。浮现问题；律师回答。
-- 重新分流。如用户希望重新分流，通过 `/matter-update` 进行字段变更——本技能只读，不写。
+- 重新分流。如用户希望重新分流，通过 `litigation-legal:matter-update` 进行字段变更——本技能只读，不写。

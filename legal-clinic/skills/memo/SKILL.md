@@ -7,16 +7,15 @@ description: >
 argument-hint: "[可选：具体需聚焦的问题]"
 ---
 
-# /memo
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 实践领域、管辖地。
+# memo
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 实践领域、管辖地。
 2. 使用以下工作流。阅读接待摘要/案件笔记。
 3. 将问题框定为疑问句。为每个问题搭建 IRAC 框架——规则部分是"待检索"，应用部分是"学生分析"提示，结论部分留空。
 4. 有利因素/不利因素/待解决问题。检索缺口摘要。
 5. 输出前置明显的"分析由你完成"标签。
 
 ```
-/legal-clinic:memo
+legal-clinic:memo
 ```
 
 ---
@@ -31,12 +30,12 @@ argument-hint: "[可选：具体需聚焦的问题]"
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/legal-clinic/CLAUDE.md` → 实践领域、管辖地、指导风格。
+`~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 实践领域、管辖地、指导风格。
 接待摘要和案件笔记用于获取事实。
 
 ## 教学检查
 
-读取该实践领域的指导老师指南，路径为 `~/.claude/plugins/config/claude-for-legal/legal-clinic/guides/<实践领域>.md`。检查 `pedagogy_posture` 设置：
+读取该实践领域的指导老师指南，路径为 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/guides/<实践领域>.md`。检查 `pedagogy_posture` 设置：
 
 - **`guide`（默认）：** 产出 IRAC 结构和检索缺口清单。要求学生自行从检索中撰写每段规则陈述，而非直接给出框架。对学生所写内容给予反馈。仅当学生已尝试一次后，才为某节提供填充框架规则。
 - **`assist`：** 产出备忘录框架并填充可填充内容。标注事项供学生审查。学生通过审查编辑来学习。（注意：本备忘录技能始终将 `[学生分析]` 和 `[学生结论]` 块留空——`assist` 指技能产出 IRAC 框架和框架规则陈述；不产出应用或结论。）
@@ -67,7 +66,7 @@ argument-hint: "[可选：具体需聚焦的问题]"
 > `[待检索：[省份]居住条件抗辩的裁判规则——可居住性默示担保的要件、
 > 哪些条件构成、可用的救济措施包括租金抵扣。
 > 检索起点：《民法典》合同编租赁合同相关条款，然后检索关于暖气/供暖
-> 条件的具体案例。参见 /research-start 获取路线图。]`
+> 条件的具体案例。参见 legal-clinic:research-start 获取路线图。]`
 
 如果技能对一般规则框架有较高信心（如"多数法域承认出租人负有可居住性默示担保义务"），将其表述为框架起手点——但**明确标注为未经核实**：
 
@@ -166,14 +165,14 @@ argument-hint: "[可选：具体需聚焦的问题]"
 ## 待解决问题
 
 **事实层面：** [列表]
-**法律层面：** [列表 — 这些送入 /research-start]
+**法律层面：** [列表 — 这些送入 legal-clinic:research-start]
 **策略层面：** [列表 — 这些是与指导老师讨论的议题]
 
 ---
 
 ## 检索缺口摘要
 
-[将所有待检索块汇总为一个清单，让学生可以系统性地逐一推进——并可对每个运行 /research-start]
+[将所有待检索块汇总为一个清单，让学生可以系统性地逐一推进——并可对每个运行 legal-clinic:research-start]
 
 ═══════════════════════════════════════════════════════════════════════
 
@@ -199,5 +198,5 @@ argument-hint: "[可选：具体需聚焦的问题]"
 
 ## 以下一步决策树收尾
 
-以 CLAUDE.md `## 产出保障` 中的下一步决策树收尾。根据本技能刚刚产出的内容自定义选项——五个默认分支（起草X、升级、获取更多事实、观察等待、其他）是起手点，不是锁定项。决策树本身就是输出；律师选择。
+以 PRACTICE.md `## 产出保障` 中的下一步决策树收尾。根据本技能刚刚产出的内容自定义选项——五个默认分支（起草X、升级、获取更多事实、观察等待、其他）是起手点，不是锁定项。决策树本身就是输出；律师选择。
 

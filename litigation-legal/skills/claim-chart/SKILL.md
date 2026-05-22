@@ -8,9 +8,8 @@ description: >
 argument-hint: '[--patent | --civil] [--infringement | --invalidity | --review] [--claim <n>] [--count <name>] [--target <slug>]'
 ---
 
-# /claim-chart
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 角色、工作成果标头、决策姿态、文件存储。
+# claim-chart
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 角色、工作成果标头、决策姿态、文件存储。
 2. 如果案件工作空间已启用，确认或选择活跃案件；加载 `matter.md`（立场、管辖、阶段、案件理论、诉状）。
 3. 遵循以下工作流和参考材料。
 4. 模式选择：
@@ -41,7 +40,7 @@ argument-hint: '[--patent | --civil] [--infringement | --invalidity | --review] 
 
 ## 案件上下文
 
-检查实务级 CLAUDE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`，跳过本段。如果已启用且无活跃案件，询问："这是哪个案件的？" 加载活跃案件的 `matter.md`。将输出写入案件文件夹。
+检查实务级 PRACTICE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`，跳过本段。如果已启用且无活跃案件，询问："这是哪个案件的？" 加载活跃案件的 `matter.md`。将输出写入案件文件夹。
 
 ---
 
@@ -186,7 +185,7 @@ argument-hint: '[--patent | --civil] [--infringement | --invalidity | --review] 
 
 ## 输出
 
-预置 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` `## Outputs` 中的工作成果标头。
+预置 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` `## Outputs` 中的工作成果标头。
 
 ### Markdown 表格（始终输出）
 

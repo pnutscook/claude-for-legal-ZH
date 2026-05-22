@@ -10,7 +10,7 @@ description: >
 
 ## 案件上下文
 
-**案件上下文。** 检查实务级 CLAUDE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`（法务用户默认值），跳过本段——技能使用实务级上下文，案件机制不可见。如果已启用且无活跃案件，询问："这是哪个案件的？运行 `/employment-legal:matter-workspace switch <slug>` 或说 `practice-level`。" 加载活跃案件的 `matter.md` 获取案件特定上下文和覆盖项。将输出写入案件文件夹。除非 `Cross-matter context` 为 `on`，否则不得读取其他案件的文件。
+**案件上下文。** 检查实务级 PRACTICE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`（法务用户默认值），跳过本段——技能使用实务级上下文，案件机制不可见。如果已启用且无活跃案件，询问："这是哪个案件的？运行 `employment-legal:matter-workspace switch <slug>` 或说 `practice-level`。" 加载活跃案件的 `matter.md` 获取案件特定上下文和覆盖项。将输出写入案件文件夹。除非 `Cross-matter context` 为 `on`，否则不得读取其他案件的文件。
 
 ---
 
@@ -20,7 +20,7 @@ description: >
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → 规章制度位置、省级补充条款列表、更新频率。
+`~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 规章制度位置、省级补充条款列表、更新频率。
 
 ## 工作流
 
@@ -51,7 +51,7 @@ description: >
 
 ### 步骤4：省级补充条款影响
 
-对于 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` 中的每个省/直辖市补充条款：
+对于 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` 中的每个省/直辖市补充条款：
 
 - 该补充条款是否修改正在变更的章节？
 - 变更是否使补充条款过时、错误或不完整？

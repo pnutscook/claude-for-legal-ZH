@@ -1,0 +1,40 @@
+{
+  "name": "employment-legal",
+  "version": "1.0.2",
+  "description": "中国劳动法插件：用工审查与解除风险评估、劳动关系认定（劳社部发〔2005〕12号三要素）、假期管理与法定期限跟踪、内部调查、劳动规章制度起草（含民主程序+公示要求）及各省/直辖市口径差异适配。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "employment-legal"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Employment Legal CN",
+    "shortDescription": "中国劳动法插件：用工审查与解除风险评估、劳动关系认定（劳社部发〔2005〕12号三要素）、假期管理与法定期限跟踪、内部调查、劳动规章制度起草（含民主程序+公示要求）及各省/直辖市口径差异适配。",
+    "longDescription": "中国劳动法插件：用工审查与解除风险评估、劳动关系认定（劳社部发〔2005〕12号三要素）、假期管理与法定期限跟踪、内部调查、劳动规章制度起草（含民主程序+公示要求）及各省/直辖市口径差异适配。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "审查这个劳动合同解除方案的风险"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

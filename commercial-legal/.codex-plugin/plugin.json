@@ -1,0 +1,40 @@
+{
+  "name": "commercial-legal",
+  "version": "1.0.2",
+  "description": "依据供应商或采购方合同手册审查供应商协议、保密协议及SaaS订阅协议；自动追踪合同续约及终止期限，避免遗漏；将审批事项按规则路由至适当审批人；将法律审查结论转化为业务相关方能真正读懂的商业语言摘要。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "commercial-legal"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Commercial Legal CN",
+    "shortDescription": "依据供应商或采购方合同手册审查供应商协议、保密协议及SaaS订阅协议；自动追踪合同续约及终止期限，避免遗漏；将审批事项按规则路由至适当审批人；将法律审查结论转化为业务相关方能真正读懂的商业语言摘要。",
+    "longDescription": "依据供应商或采购方合同手册审查供应商协议、保密协议及SaaS订阅协议；自动追踪合同续约及终止期限，避免遗漏；将审批事项按规则路由至适当审批人；将法律审查结论转化为业务相关方能真正读懂的商业语言摘要。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "审查这个供应商合同并输出风险备忘录"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

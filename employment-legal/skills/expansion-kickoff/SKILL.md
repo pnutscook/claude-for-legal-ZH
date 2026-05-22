@@ -8,21 +8,20 @@ description: >
 argument-hint: "[省/直辖市/地域名称]"
 ---
 
-# /expansion-kickoff
-
+# expansion-kickoff
 启动在新地域的用工扩张项目——收集基础信息，运行劳务派遣 vs 业务外包 vs 直接用工的用工结构分析，起草跨职能问题清单，浮现该地域的特定风险标记，并创建持续追踪文件。
 
 ## 指令
 
-1. 加载 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → 管辖范围、上报表。
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 管辖范围、上报表。
 2. 运行用工扩张规划全流程：
    - 收集用工需求信息（人数、岗位类型、预计时间线）
    - 分析用工结构选择：直接用工 vs 劳务派遣 vs 业务外包
    - 起草跨职能问题清单（HR、财务、行政等）
    - 浮现该地域特定标记
    - 创建追踪文件
-3. 如果该地域已有追踪文件（`~/.claude/plugins/config/claude-for-legal/employment-legal/expansion-[slug].yaml`），标记："[地域]的扩张追踪文件已存在。使用 `/employment-legal:expansion-update [地域]` 更新它，或确认要重新开始。"
-4. 完成后创建 `~/.claude/plugins/config/claude-for-legal/employment-legal/expansion-[slug].yaml`。
+3. 如果该地域已有追踪文件（`~/.codex/plugins/config/claude-for-legal-zh/employment-legal/expansion-[slug].yaml`），标记："[地域]的扩张追踪文件已存在。使用 `employment-legal:expansion-update [地域]` 更新它，或确认要重新开始。"
+4. 完成后创建 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/expansion-[slug].yaml`。
 
 ## 用工结构选择框架
 
@@ -47,10 +46,10 @@ argument-hint: "[省/直辖市/地域名称]"
 ## 示例
 
 ```
-/employment-legal:expansion-kickoff 成都
+employment-legal:expansion-kickoff 成都
 ```
 
 ```
-/employment-legal:expansion-kickoff
+employment-legal:expansion-kickoff
 （技能将询问哪个地域）
 ```

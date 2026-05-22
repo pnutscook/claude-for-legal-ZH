@@ -1,7 +1,7 @@
 ---
 name: gap-surfacer
 description: >
-  参考资料：支持 /regulatory-legal:gaps 和 /regulatory-legal:comments
+  参考资料：支持 regulatory-legal:gaps 和 regulatory-legal:comments
   的共享差距和意见征集跟踪框架。跟踪未关闭的政策差距及其整改状态，
   从 policy-diff 中获取差距，呈现开放和即将到期的事项，路由给负责人，
   并通过企业通讯工具通知差距负责人，每次发送前需确认。
@@ -31,7 +31,7 @@ user-invocable: false
 
 ## 跟踪文件
 
-位于 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/gap-tracker.yaml`：
+位于 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/gap-tracker.yaml`：
 
 ```yaml
 gaps:
@@ -133,7 +133,7 @@ gaps:
 
 ## 收尾
 
-以 CLAUDE.md `## 输出` 规定的下一步决策树收尾。
+以 PRACTICE.md `## 输出` 规定的下一步决策树收尾。
 
 如果跟踪器呈现超过约10个开放差距，或用户任何时候提出要求：提供仪表板——按严重程度统计、按截止日期排列的差距时间线、及附有负责人、状态和最后更新日期的可排序网格。
 

@@ -17,21 +17,21 @@
 询问你关注哪些监管机构，连接你的政策文件文件夹，学习"重要"对你意味着什么。建立监测清单并索引你的政策库。
 
 ```
-/regulatory-legal:cold-start-interview
+regulatory-legal:cold-start-interview
 ```
 
 ## 技能
 
 | 技能 | 功能 |
 |---|---|
-| `/regulatory-legal:cold-start-interview` | 冷启动：监测清单 + 政策索引 + 重要性阈值 |
-| `/regulatory-legal:reg-feed-watcher` | 即刻检查法规动态，报告新增内容 |
-| `/regulatory-legal:policy-diff [reg]` | 对比特定法规变化与政策库的差异 |
-| `/regulatory-legal:gaps` | 未闭合差距追踪器——已标注但未闭合的差距 |
-| `/regulatory-legal:comments` | 审查开放征求意见的征求意见稿，记录决策，跟踪期限 |
-| `/regulatory-legal:policy-redraft` | 提出标记修订的政策重述草案以闭合差距——供内部审查的初稿，非对源文件的直接编辑 |
-| `/regulatory-legal:matter-workspace` | 管理事项工作区（仅多客户私人执业）— 新建、列表、切换、关闭、无 |
-| **gap-surfacer** *(参考)* | `/gaps` 和 `/comments` 加载的共享差距和征求意见追踪框架 |
+| `regulatory-legal:cold-start-interview` | 冷启动：监测清单 + 政策索引 + 重要性阈值 |
+| `regulatory-legal:reg-feed-watcher` | 即刻检查法规动态，报告新增内容 |
+| `regulatory-legal:policy-diff [reg]` | 对比特定法规变化与政策库的差异 |
+| `regulatory-legal:gaps` | 未闭合差距追踪器——已标注但未闭合的差距 |
+| `regulatory-legal:comments` | 审查开放征求意见的征求意见稿，记录决策，跟踪期限 |
+| `regulatory-legal:policy-redraft` | 提出标记修订的政策重述草案以闭合差距——供内部审查的初稿，非对源文件的直接编辑 |
+| `regulatory-legal:matter-workspace` | 管理事项工作区（仅多客户私人执业）— 新建、列表、切换、关闭、无 |
+| **gap-surfacer** *(参考)* | `regulatory-legal:gaps` 和 `regulatory-legal:comments` 加载的共享差距和征求意见追踪框架 |
 
 ## 交互技能 vs 定时代理
 
@@ -63,7 +63,7 @@
 
 ## 如何持续学习
 
-你的实务画像位于 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md` 不是静态的——随着你使用插件不断改进。技能会告知你输出何时使用了应调整的默认值。`reg-change-monitor` 代理监测法规动态并对照你的政策库标注变化。你可以重新运行设置、直接编辑文件或告知技能记录新立场。
+你的实务画像位于 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` 不是静态的——随着你使用插件不断改进。技能会告知你输出何时使用了应调整的默认值。`reg-change-monitor` 代理监测法规动态并对照你的政策库标注变化。你可以重新运行设置、直接编辑文件或告知技能记录新立场。
 
 ## 注意事项
 
@@ -73,4 +73,4 @@
 
 ## 配置
 
-你的配置存储在 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md`，可跨插件更新保留——你只需运行设置一次。
+你的配置存储在 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md`，可跨插件更新保留——你只需运行设置一次。

@@ -10,7 +10,7 @@ description: >
 
 ## 事项上下文
 
-**事项上下文。** 检查实务级 CLAUDE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `/corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实务级 PRACTICE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
 
 ---
 
@@ -20,13 +20,13 @@ description: >
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` → 交易团队简报（频率、格式、业务方阅读的内容）
-- `~/.claude/plugins/config/claude-for-legal/corporate-legal/deals/[代码]/deal-context.md` → 交易负责人、时间线
+- `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → 交易团队简报（频率、格式、业务方阅读的内容）
+- `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/deals/[代码]/deal-context.md` → 交易负责人、时间线
 - `diligence-issue-extraction` 的当前发现
 
 ## 受众层级
 
-按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` ——业务方阅读的内容 vs. 归档的内容。默认层级：
+按 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` ——业务方阅读的内容 vs. 归档的内容。默认层级：
 
 | 受众 | 获得 | 不获得 |
 |---|---|---|
@@ -99,7 +99,7 @@ description: >
 
 ## 增量变化
 
-如果这是定期简报（按 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` 设定的频率），首先展示变化：
+如果这是定期简报（按 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` 设定的频率），首先展示变化：
 
 - 自上次简报以来的新发现
 - 严重程度升级/降级的发现
@@ -115,7 +115,7 @@ description: >
 
 ## 以下一步行动决策树收尾
 
-以 CLAUDE.md `## 输出规范` 中的下一步行动决策树收尾。根据本技能刚产出的内容定制选项——五个默认分支（起草X、上报、补充事实、监控等待、其他）是起点，不是锁定。决策树本身就是产出；律师选择。
+以 PRACTICE.md `## 输出规范` 中的下一步行动决策树收尾。根据本技能刚产出的内容定制选项——五个默认分支（起草X、上报、补充事实、监控等待、其他）是起点，不是锁定。决策树本身就是产出；律师选择。
 
 ## 本技能不做什么
 

@@ -7,9 +7,8 @@ description: >
 argument-hint: "[--apply 更新全部，否则仅通知]"
 ---
 
-# /auto-updater
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md` → 已安装技能 + 自动更新偏好。
+# auto-updater
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` → 已安装技能 + 自动更新偏好。
 2. 使用以下工作流。
 3. 检查每个已安装技能的源是否有更新版本。
 4. 按偏好：应用 / 通知 / 展示差异。
@@ -26,7 +25,7 @@ argument-hint: "[--apply 更新全部，否则仅通知]"
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md` → 已安装技能（附版本/提交 SHA）、更新偏好（通知 / 手动）。
+`~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` → 已安装技能（附版本/提交 SHA）、更新偏好（通知 / 手动）。
 
 ## 工作流
 
@@ -90,7 +89,7 @@ argument-hint: "[--apply 更新全部，否则仅通知]"
 
 **通知（默认）：** 展示完整差异和信任检查。"有可用更新。审查以上差异。应用？[y/n]"
 
-**手动：** 仅列出哪些有可用更新。用户准备好时运行 `/legal-builder-hub:auto-updater --apply [技能名称]`。
+**手动：** 仅列出哪些有可用更新。用户准备好时运行 `legal-builder-hub:auto-updater --apply [技能名称]`。
 
 没有"自动"模式。对在你法律环境中运行的代码的更新始终需要人工阅读差异。
 
@@ -100,7 +99,7 @@ argument-hint: "[--apply 更新全部，否则仅通知]"
 
 ## 回滚
 
-如果更新破坏了某些功能：`/legal-builder-hub:auto-updater --rollback [技能名称]` 从备份恢复。
+如果更新破坏了某些功能：`legal-builder-hub:auto-updater --rollback [技能名称]` 从备份恢复。
 
 ## 本技能不做什么
 

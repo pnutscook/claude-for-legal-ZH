@@ -8,15 +8,14 @@ description: >
 argument-hint: "[节名称，或描述你想更改的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户输入了 `/legal-builder-hub:customize`。他们想更改构建中心画像中的某项内容——监视的注册表、更新通知偏好、推荐的实践领域——无需重新运行整个冷启动访谈。
+用户输入了 `legal-builder-hub:customize`。他们想更改构建中心画像中的某项内容——监视的注册表、更新通知偏好、推荐的实践领域——无需重新运行整个冷启动访谈。
 
 ## 做什么
 
-1. **读取配置。** 读取 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md`。如果不存在或仍包含占位符，提示先运行设置。
+1. **读取配置。** 读取 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md`。如果不存在或仍包含占位符，提示先运行设置。
 
 2. **展示可定制的图谱。** 列出内容，分组，附当前值摘要：
 

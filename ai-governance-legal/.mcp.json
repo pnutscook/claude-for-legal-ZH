@@ -18,11 +18,5 @@
       "title": "Google Drive",
       "description": "搜索、读取和获取文档。"
     }
-  },
-  "recommendedCategories": [
-    "documents",
-    "chat",
-    "email",
-    "legal-research"
-  ]
+  }
 }

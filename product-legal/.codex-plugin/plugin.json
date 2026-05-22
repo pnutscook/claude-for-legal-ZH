@@ -1,0 +1,40 @@
+{
+  "name": "product-legal",
+  "version": "1.0.2",
+  "description": "依据您的风险校准审查产品上线，在数分钟内解答「这有问题吗？」类问题，审查营销文案中需证实的宣传主张，并在任何人开口之前标记即将需要法务介入的上线项目。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "product-legal"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Product Legal CN",
+    "shortDescription": "依据您的风险校准审查产品上线，在数分钟内解答「这有问题吗？」类问题，审查营销文案中需证实的宣传主张，并在任何人开口之前标记即将需要法务介入的上线项目。",
+    "longDescription": "依据您的风险校准审查产品上线，在数分钟内解答「这有问题吗？」类问题，审查营销文案中需证实的宣传主张，并在任何人开口之前标记即将需要法务介入的上线项目。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "审查这个产品上线或营销文案的法律风险"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

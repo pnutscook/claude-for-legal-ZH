@@ -8,20 +8,19 @@ description: >
 argument-hint: "[配置部分名称，或描述你想修改的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户键入 `/corporate-legal:customize`。他们想修改实务画像中的某项——风险姿态、上报联系人、模块开关、输出格式——而无需重新运行完整冷启动访谈，也无需手工编辑 YAML。
+用户键入 `corporate-legal:customize`。他们想修改实务画像中的某项——风险姿态、上报联系人、模块开关、输出格式——而无需重新运行完整冷启动访谈，也无需手工编辑 YAML。
 
 ## 做什么
 
 1. **读取配置。** 读取
-   `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md`
-   （以及上一级目录的 `~/.claude/plugins/config/claude-for-legal/company-profile.md`）。
+   `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md`
+   （以及上一级目录的 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`）。
    如果插件配置不存在或仍包含 `[PLACEHOLDER]`，说：
 
-   > 你还没有运行设置。先运行 `/corporate-legal:cold-start-interview`
+   > 你还没有运行设置。先运行 `corporate-legal:cold-start-interview`
    > ——定制功能用于调整已有的画像。
 
 2. **展示可定制项目清单。** 按组列出配置中的内容，附当前值的一行摘要：
@@ -53,8 +52,8 @@ argument-hint: "[配置部分名称，或描述你想修改的内容]"
 4. **进行修改。** 展示当前值、询问新值、说明下游变更影响、确认、写入配置。
 
    示例：
-   - *重要性阈值从250万元→500万元：* "`/diligence-issue-extraction`
-     和 `/material-contract-schedule` 现在将以500万元为界。
+   - *重要性阈值从250万元→500万元：* "`corporate-legal:diligence-issue-extraction`
+     和 `corporate-legal:material-contract-schedule` 现在将以500万元为界。
      已有发现保留原样；如需对新阈值做追溯适用，请重新运行。"
    - *开启公众公司模块：* "下次你运行该领域的任何操作时，我会提示你设置
      报告日历和信息披露控制。"
@@ -65,7 +64,7 @@ argument-hint: "[配置部分名称，或描述你想修改的内容]"
 
 6. **收尾。**
 
-   > 完成。你的下一个输出将反映该变更。随时可运行 `/corporate-legal:customize`。
+   > 完成。你的下一个输出将反映该变更。随时可运行 `corporate-legal:customize`。
 
 ## 防护措施
 

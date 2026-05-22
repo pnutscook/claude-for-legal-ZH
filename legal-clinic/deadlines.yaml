@@ -1,8 +1,8 @@
 # Clinic deadline ledger — legal-clinic
 #
-# Populated by /legal-clinic:deadlines --add (or by extraction from /client-intake,
-# /draft, /status when those skills surface a deadline). Read by
-# /legal-clinic:deadlines --report for cross-case rollup.
+# Populated by legal-clinic:deadlines --add (or by extraction from legal-clinic:client-intake,
+# legal-clinic:draft, legal-clinic:status when those skills surface a deadline). Read by
+# legal-clinic:deadlines --report for cross-case rollup.
 #
 # Missed deadlines in clinic work are malpractice exposure for the
 # supervising attorney. Treat this file as the operational record.
@@ -18,10 +18,10 @@
 #   description:    string — one-line what's due
 #   due_date:       YYYY-MM-DD
 #   time:           HH:MM (optional; for hearings or filing deadlines with specific cutoffs)
-#   timezone:       string (optional; default from CLAUDE.md jurisdiction)
+#   timezone:       string (optional; default from PRACTICE.md jurisdiction)
 #   source:         string — where the deadline came from (court order, statute, client doc, etc.)
 #   owner_student:  string — which student owns this deadline
-#   owner_attorney: string — supervising attorney (usually from CLAUDE.md)
+#   owner_attorney: string — supervising attorney (usually from PRACTICE.md)
 #   status:         upcoming | today | overdue | completed | closed
 #   completed_date: YYYY-MM-DD | null
 #   notes:          string | null

@@ -3,7 +3,7 @@ name: ip-renewal-watcher
 description: >
   定时代理，读取知识产权组合登记册，计算待办事项，
   发出按优先级排序的期限报告。默认每周运行一次。发至
-  `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`
+  `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`
   → 续展预警中指定的频道。触发短语："什么该续展了"、"IP 期限"、
   "组合检查"、"IP 续展报告"、或按排程。
 model: sonnet
@@ -22,7 +22,7 @@ tools: ["Read", "Write", "mcp__feishu__*"]
 
 ## What it does
 
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`，获取预警发往何处（飞书频道、邮件列表或仅内联）以及工作成果标头规则。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`，获取预警发往何处（飞书频道、邮件列表或仅内联）以及工作成果标头规则。
 
 2. 加载 `portfolio` 技能。刷新每项资产的推算期限——不单独信赖已存储的日期——然后以90天窗口运行。
 
@@ -76,5 +76,5 @@ Agent 在每次推送中重复核实提示。IP 期限因管辖地不同各有�
 - 不提交任何文件。它浮现的每条事项均由律师或外协代理机构执行。
 - 不缴纳年费或续展费。知识产权管理系统和代理机构做这些；本 agent 指向期限，不指向付款。
 - 不决定是否续展。那是商业和法律判断——agent 浮现期限、宽展期时钟和权利人信息。
-- 不修改登记册。它读取并报告；新增通过 `/ip-legal:portfolio --add`，更新通过 `--update`，同步来自知识产权管理系统。
+- 不修改登记册。它读取并报告；新增通过 `ip-legal:portfolio --add`，更新通过 `--update`，同步来自知识产权管理系统。
 - 不直接联系业务部门负责人。频道推送提及他们；他们决定如何处理。

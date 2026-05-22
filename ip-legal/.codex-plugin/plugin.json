@@ -1,0 +1,40 @@
+{
+  "name": "ip-legal",
+  "version": "1.0.2",
+  "description": "知识产权实务：商标可注册性检索（相同/近似分析）、自由实施（FTO）初步分析、发明披露初步专利性筛选、起草和分类侵权警告函及信息网络传播权通知（发送与应对）、开源许可证合规审查、知识产权条款审查、知识产权组合管理与续展跟踪。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "ip-legal"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "IP Legal CN",
+    "shortDescription": "知识产权实务：商标可注册性检索（相同/近似分析）、自由实施（FTO）初步分析、发明披露初步专利性筛选、起草和分类侵权警告函及信息网络传播权通知（发送与应对）、开源许可证合规审查、知识产权条款审查、知识产权组合管理与续展跟",
+    "longDescription": "知识产权实务：商标可注册性检索（相同/近似分析）、自由实施（FTO）初步分析、发明披露初步专利性筛选、起草和分类侵权警告函及信息网络传播权通知（发送与应对）、开源许可证合规审查、知识产权条款审查、知识产权组合管理与续展跟踪。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "对这个商标或知识产权问题做初步分流"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

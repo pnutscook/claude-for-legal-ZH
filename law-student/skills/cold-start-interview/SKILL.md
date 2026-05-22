@@ -7,16 +7,21 @@ description: >
 argument-hint: "[--redo] [--check-integrations]"
 ---
 
-# /cold-start-interview
+# cold-start-interview
 
-1. 检查 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`。如已填充且无 `--redo`，在覆盖前确认。如果在 `~/.claude/plugins/cache/claude-for-legal/law-student/*/CLAUDE.md` 存在已填充的 CLAUDE.md（无 `[PLACEHOLDER]` 标记）但不在配置路径，将其复制到配置路径并告知用户迁移了什么。
+## Codex 画像路径与旧 Claude 迁移
+
+本技能在 Codex 中使用 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` 作为唯一运行期画像。若该文件不存在，先检查旧 Claude 配置：`~/.claude/plugins/config/claude-for-legal-zh/law-student/CLAUDE.md` 和 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`。
+
+如旧文件存在且不含 `[PLACEHOLDER]`，创建 Codex 目录并复制为 `PRACTICE.md`，然后继续本次任务；如旧文件仍为模板或不存在，则按本访谈生成新的 `PRACTICE.md`。旧 `.claude-plugin/` 文件仅用于兼容，不再作为 Codex 的默认读取位置。
+1. 检查 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md`。如已填充且无 `--redo`，在覆盖前确认。如果在 `~/.codex/plugins/cache/claude-for-legal-zh/law-student/*/PRACTICE.md` 存在已填充的 PRACTICE.md（无 `[PLACEHOLDER]` 标记）但不在配置路径，将其复制到配置路径并告知用户迁移了什么。
 2. 应用以下访谈工作流。
 3. 逐步推进 Part 0（谁在使用 / 什么已连接——学生 vs. 毕业生 vs. 其他；文件存储可用性）、Part 1（你在哪里）、Part 2（你如何学习——追问训练型 vs 讲解引导型）、Part 3（强项/薄弱处/回避处）、Part 4（材料收录——目标 10-20 项）。
 4. 重读已记录的回答。捕捉矛盾、漂移的具体细节、现在值得指出的缺口。
-5. 写入 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`（按需创建父目录），包括 `## 谁在使用这个插件` 和 `## 可用集成`。如分享的材料少于10份，添加 `LIMITED DATA` 标记。
+5. 写入 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md`（按需创建父目录），包括 `## 谁在使用这个插件` 和 `## 可用集成`。如分享的材料少于10份，添加 `LIMITED DATA` 标记。
 6. 与用户确认："这是我记录的内容——有什么不对的吗？"
 
-**`--check-integrations`：** 仅重新运行 Part 0 集成可用性检查。更新 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md` 中的 `## 可用集成`，不触及身份或画像其余部分。在添加或移除 MCP 连接器后使用。
+**`--check-integrations`：** 仅重新运行 Part 0 集成可用性检查。更新 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` 中的 `## 可用集成`，不触及身份或画像其余部分。在添加或移除 MCP 连接器后使用。
 
 探测时：仅在实际 MCP 工具调用成功时报告 ✓。已配置但未测试的连接器应标记为 ⚪ 并附一行确认方法。绝不基于 `.mcp.json` 声明单独报告 ✓——这会误导用户以为某些东西已接入而实际未接入。
 
@@ -28,7 +33,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 ## 冷启动检查
 
-读取 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md`：
 - **不存在** → 开始访谈。
 - **包含 `<!-- SETUP PAUSED AT: -->`** → 欢迎学生并提供从该节恢复。
 - **包含 `[PLACEHOLDER]` 标记但无暂停注释** → 模板从未完成；提供从头开始或从占位符起始处恢复。
@@ -36,7 +41,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 ## 检查共享机构画像
 
-查找 `~/.claude/plugins/config/claude-for-legal/company-profile.md`。
+查找 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`。
 
 - **如存在：** 读取它。展示一行确认。如确认，跳过机构相关问题——直接进入插件特定问题。
 - **如不存在：** 你将是用户设置的第一个插件。在导览后，询问机构相关问题并写入共享画像，然后继续插件特定问题。
@@ -51,11 +56,11 @@ argument-hint: "[--redo] [--check-integrations]"
 
 先展示此导言（3-4短行，不多）：
 
-> **`law-student` 面向正在学习课程或备考法考的法学学生。** 不是你的领域？`/legal-builder-hub:related-skills-surfacer`。
+> **`law-student` 面向正在学习课程或备考法考的法学学生。** 不是你的领域？`legal-builder-hub:related-skills-surfacer`。
 >
 > **2分钟** 获得你的年级（大一/大二/大三/大四/研究生）、当前课程和法考日期（如适用）。**15分钟** 增加你的学习风格默认值（追问训练型 vs. 讲解引导型）、薄弱处、过往材料（大纲、有反馈的批改论文、历年考题）、从上传中提取的授课教师考试历史以及记忆卡片科目。
 >
-> 快速还是完整？（随时可通过 `/law-student:cold-start-interview --full` 升级。）
+> 快速还是完整？（随时可通过 `law-student:cold-start-interview --full` 升级。）
 
 ## 用户选择快速或完整后
 
@@ -63,7 +68,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 - **本插件维护什么：** 你的画像（课程、考试日期、薄弱处、学习风格）、学习计划、按科目的提纲、记忆卡片桶以及练习考试日志。
 - **本设置做什么：** 帮助法学学生学习——提纲、案例摘要、课堂提问准备、考试预测、法考备考——以适合他们实际学习方式的格式。学习你的学习风格、科目和考试日程，并将其写入插件每次读取的纯文本文件。一切可后续更改。
-- **数据来源：** 设置仅从学生的回答构建全新的学习画像。不读取个人 Claude 历史、其他对话或主目录 CLAUDE.md。
+- **数据来源：** 设置仅从学生的回答构建全新的学习画像。不读取个人 Claude 历史、其他对话或主目录 PRACTICE.md。
 
 **为什么重要。** 本插件的每项命令都从本访谈写入的配置读取。一个通用配置给出通用输出——默认提纲格式、默认追问强度、未对任何人实际课程校准的考试预测。告诉插件学生实际如何学习——追问训练型 vs. 讲解引导型、科目、授课教师、什么被回避——是"一个学习 AI 工具"和"一个以你需要的方式推动你的工具"之间的区别所在。
 
@@ -148,12 +153,12 @@ argument-hint: "[--redo] [--check-integrations]"
 
 ### Part 1：你在哪里（1分钟）
 
-*（这输入 `/law-student:study-plan` 和 `/law-student:outline-builder`——课程成为安排的学习模块，考试形式驱动 `/law-student:exam-forecast` 和 `/law-student:irac-practice` 为你准备的内容，法考日期反向安排 `/law-student:bar-prep-questions`。）*
+*（这输入 `law-student:study-plan` 和 `law-student:outline-builder`——课程成为安排的学习模块，考试形式驱动 `law-student:exam-forecast` 和 `law-student:irac-practice` 为你准备的内容，法考日期反向安排 `law-student:bar-prep-questions`。）*
 
 - 年级（大一、大二、大三、大四、法律硕士（JM）、法学硕士（LLM）、法学博士）
 - 学校类型。这为下游追问和考试预测技能校准难度；学校*名称*不需要。
 - 本学期的课程——名称、考试形式、你在教学大纲中的位置
-- 法考报考地和目标日期（如已知）（这输入 `/law-student:bar-prep-questions`——从此日期反向安排客观题组和主观题练习，过滤到你报考地的考试科目。）
+- 法考报考地和目标日期（如已知）（这输入 `law-student:bar-prep-questions`——从此日期反向安排客观题组和主观题练习，过滤到你报考地的考试科目。）
 
 **不适合标准分类的情况。** 如果你的情况不匹配标准选项（非中国法学院、双学位、在职学习、跨考等），说出来。我将切换："听起来你的课程不适合我的常规分类。用你自己的话告诉我——你在学什么、时间表是什么样的、前方有什么（考试、法考、论文）——我将基于此构建你的画像，而非强迫你进入不匹配的分类。"
 
@@ -161,7 +166,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 ### Part 2：你如何学习（关键问题）（2分钟）
 
-*（这输入 `/law-student:socratic-drill`、`/law-student:irac-practice` 和 `/law-student:cold-call-prep`——追问训练型推回而不给答案；讲解引导型先搭建支架，再测试。默认值可每次会话覆盖。）*
+*（这输入 `law-student:socratic-drill`、`law-student:irac-practice` 和 `law-student:cold-call-prep`——追问训练型推回而不给答案；讲解引导型先搭建支架，再测试。默认值可每次会话覆盖。）*
 
 > 有人通过被问难题并被推回来学习。有人通过先有清晰讲解再自我测试来学习。你是哪种？
 
@@ -173,7 +178,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 ### Part 3：你的强项和薄弱处（1分钟）
 
-*（这输入 `/law-student:study-plan` 和 `/law-student:bar-prep-questions`——薄弱处和回避科目获得比强势科目更多的安排时间和更多追问练习。）*
+*（这输入 `law-student:study-plan` 和 `law-student:bar-prep-questions`——薄弱处和回避科目获得比强势科目更多的安排时间和更多追问练习。）*
 
 - 什么容易？
 - 什么难？
@@ -181,7 +186,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 ### Part 4：材料（3-5分钟）——种子文件所在
 
-*（这输入 `/law-student:outline-builder`（你的格式和深度）、`/law-student:exam-forecast`（从历年考题看授课教师模式）、`/law-student:legal-writing`（从有反馈的批改论文看你的写作风格）和 `/law-student:irac-practice`（反馈模式）。少于10项 = LIMITED DATA 标记，更多补充前输出更薄。）*
+*（这输入 `law-student:outline-builder`（你的格式和深度）、`law-student:exam-forecast`（从历年考题看授课教师模式）、`law-student:legal-writing`（从有反馈的批改论文看你的写作风格）和 `law-student:irac-practice`（反馈模式）。少于10项 = LIMITED DATA 标记，更多补充前输出更薄。）*
 
 先说一次，作为一次提问：
 
@@ -238,14 +243,14 @@ argument-hint: "[--redo] [--check-integrations]"
 
 > **这是我在法学学习中擅长的：**
 >
-> - **以你的格式做案例摘要** — 如"输入裁判文书，输出摘要——以你实际用于课堂的格式。" 尝试：`/law-student:case-brief`
-> - **批改 IRAC 论文** — 如"结构、考点识别、规则、分析、组织——不代写。" 尝试：`/law-student:irac-practice`
-> - **构建或扩展课程提纲** — 如"你的格式，你的科目，随着你推进迭代构建。" 尝试：`/law-student:outline-builder`
-> - **为明天的课做课堂提问准备** — 如"预测你授课教师的提问并进行追问。" 尝试：`/law-student:cold-call-prep`
-> - **按科目带莱特纳桶的记忆卡片** — 如"生成、追问，跨会话升级/降级。" 尝试：`/law-student:flashcards`
-> - **针对薄弱科目的法考备考题** — 如"客观题或主观题，从你的薄弱科目列表中抽取。" 尝试：`/law-student:bar-prep-questions`
+> - **以你的格式做案例摘要** — 如"输入裁判文书，输出摘要——以你实际用于课堂的格式。" 尝试：`law-student:case-brief`
+> - **批改 IRAC 论文** — 如"结构、考点识别、规则、分析、组织——不代写。" 尝试：`law-student:irac-practice`
+> - **构建或扩展课程提纲** — 如"你的格式，你的科目，随着你推进迭代构建。" 尝试：`law-student:outline-builder`
+> - **为明天的课做课堂提问准备** — 如"预测你授课教师的提问并进行追问。" 尝试：`law-student:cold-call-prep`
+> - **按科目带莱特纳桶的记忆卡片** — 如"生成、追问，跨会话升级/降级。" 尝试：`law-student:flashcards`
+> - **针对薄弱科目的法考备考题** — 如"客观题或主观题，从你的薄弱科目列表中抽取。" 尝试：`law-student:bar-prep-questions`
 >
-> **我对你的第一个建议：** 对下一篇你必须阅读的案例运行 `/law-student:case-brief`——它会告诉你摘要格式是否匹配你实际的学习方式。或者告诉我你手头的事，我来选。
+> **我对你的第一个建议：** 对下一篇你必须阅读的案例运行 `law-student:case-brief`——它会告诉你摘要格式是否匹配你实际的学习方式。或者告诉我你手头的事，我来选。
 
 **如果学生处于法考备考模式**（身份为"准备法考的近期毕业生"或他们告诉你他们正在备考法考）：直接跳入提问——那是法考备考用户想要的。
 
@@ -254,7 +259,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 **如果学生是普通法学学生**（非法考备考）：建议先做计划再追问。计划比学期中的冷追问更好。
 
-- **从这里开始：** `/law-student:study-plan`——从你的课程、考试日期和薄弱处构建学习时间表。它将建议何时追问、何时做提纲、何时做练习考试。
+- **从这里开始：** `law-student:study-plan`——从你的课程、考试日期和薄弱处构建学习时间表。它将建议何时追问、何时做提纲、何时做练习考试。
 
 **无论如何：**
 - 如果标记了数据有限（LIMITED DATA）："实践画像较薄——下游技能在更多材料补充前将是通用的。最大缺口：[列表]。想标记要收集的首要事项吗？"
@@ -262,7 +267,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 然后以"你可以稍后更改任何内容"结束：
 
-> 完成。你的配置位于 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`——一份你可以直接阅读和编辑的纯文本文件。你的任何回答都可以更改。
+> 完成。你的配置位于 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md`——一份你可以直接阅读和编辑的纯文本文件。你的任何回答都可以更改。
 >
 > 学生后期最常调整的事项：你的课程列表（替换为下学期的）、你的法考报考地或考试日期、以及你的学习风格默认值（追问训练型 vs 讲解引导型）。你的配置将随着你使用插件而改进——如果某份提纲感觉不对或某次课堂提问准备遗漏了你授课教师实际关心的内容，修复通常在这里。
 
@@ -274,6 +279,6 @@ argument-hint: "[--redo] [--check-integrations]"
 >
 > - 当某技能输出感觉不对时，那通常是一个需要调节的立场。输出会告诉你哪个。
 > - 你可以随时说"更新我的手册倾向 X"或"将我的升级阈值改为 Y"，相关技能将写入更改。
-> - 运行 `/law-student:cold-start-interview --redo <节>` 重新访谈一部分，或直接编辑配置文件。
+> - 运行 `law-student:cold-start-interview --redo <节>` 重新访谈一部分，或直接编辑配置文件。
 >
 > 十分钟的设置给你一个可工作的画像。一个月的使用给你一个读起来像你自己写的一样的画像。

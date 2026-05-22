@@ -7,9 +7,8 @@ description: >
 argument-hint: "[制度主题——如'远程办公'、'考勤管理'、'绩效考核']"
 ---
 
-# /policy-drafting
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → 管辖范围、规章制度位置。
+# policy-drafting
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 管辖范围、规章制度位置。
 2. 使用以下工作流。
 3. 起草核心制度。检查管辖范围中每个省/直辖市是否需要差异化版本。
 4. 输出：核心制度 + 省级补充条款。标记法律正在变动的领域。
@@ -18,7 +17,7 @@ argument-hint: "[制度主题——如'远程办公'、'考勤管理'、'绩效�
 
 ## 案件上下文
 
-**案件上下文。** 检查实务级 CLAUDE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`（法务用户默认值），跳过本段——技能使用实务级上下文，案件机制不可见。如果已启用且无活跃案件，询问："这是哪个案件的？运行 `/employment-legal:matter-workspace switch <slug>` 或说 `practice-level`。" 加载活跃案件的 `matter.md` 获取案件特定上下文和覆盖项。将输出写入案件文件夹。除非 `Cross-matter context` 为 `on`，否则不得读取其他案件的文件。
+**案件上下文。** 检查实务级 PRACTICE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`（法务用户默认值），跳过本段——技能使用实务级上下文，案件机制不可见。如果已启用且无活跃案件，询问："这是哪个案件的？运行 `employment-legal:matter-workspace switch <slug>` 或说 `practice-level`。" 加载活跃案件的 `matter.md` 获取案件特定上下文和覆盖项。将输出写入案件文件夹。除非 `Cross-matter context` 为 `on`，否则不得读取其他案件的文件。
 
 ---
 
@@ -28,7 +27,7 @@ argument-hint: "[制度主题——如'远程办公'、'考勤管理'、'绩效�
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → 管辖范围、规章制度位置和格式。
+`~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 管辖范围、规章制度位置和格式。
 
 ## 工作流
 

@@ -3,7 +3,7 @@ name: skill-manager
 description: >
   参考：针对通过法律构建中心安装的社区技能的详细卸载、禁用和重新启用工作流。
   默认安全——拒绝触碰第一方插件技能，删除文件前确认，记录每次操作。
-  由 /legal-builder-hub:uninstall 和 /legal-builder-hub:disable 技能加载。
+  由 legal-builder-hub:uninstall 和 legal-builder-hub:disable 技能加载。
 user-invocable: false
 ---
 
@@ -18,7 +18,7 @@ user-invocable: false
 仅限通过本中心安装的社区技能。识别规则：
 
 - 技能名称必须出现在
-  `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/install-log.yaml`
+  `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/install-log.yaml`
   中，且最新操作记录为 `install` 或 `enable`（非 `uninstall`）。
 - 技能文件必须解析到 claude-for-legal 附带的预装插件目录之外的路径。
 
@@ -26,7 +26,7 @@ user-invocable: false
 
 ## 预装插件（不可触碰）
 
-claude-for-legal 附带的 12 个核心插件对此命令不可触碰。规范列表在中心的 CLAUDE.md 的"预装插件"下。示例包括 `commercial-legal`、`corporate-legal`、`employment-legal`、`privacy-legal`、`product-legal`、`regulatory-legal`、`ai-governance-legal`、`litigation-legal`、`law-student`、`legal-clinic` 和中心本身（`legal-builder-hub`）。如果调用者命名的技能解析到以上任何一个，拒绝。
+claude-for-legal 附带的 12 个核心插件对此命令不可触碰。规范列表在中心的 PRACTICE.md 的"预装插件"下。示例包括 `commercial-legal`、`corporate-legal`、`employment-legal`、`privacy-legal`、`product-legal`、`regulatory-legal`、`ai-governance-legal`、`litigation-legal`、`law-student`、`legal-clinic` 和中心本身（`legal-builder-hub`）。如果调用者命名的技能解析到以上任何一个，拒绝。
 
 ## 工作流 — 卸载
 
@@ -38,7 +38,7 @@ claude-for-legal 附带的 12 个核心插件对此命令不可触碰。规范�
 ### 第2步：解析文件
 
 从安装日志中确定安装路径（安装时写入）。
-列举每个文件和子目录。同时识别技能写入用户 `~/.claude/plugins/config/...` 的任何配置——向用户展示但默认不删除（配置可能值得保留以备后续重新安装）。
+列举每个文件和子目录。同时识别技能写入用户 `~/.codex/plugins/config/...` 的任何配置——向用户展示但默认不删除（配置可能值得保留以备后续重新安装）。
 
 ### 第3步：展示并确认
 
@@ -53,7 +53,7 @@ claude-for-legal 附带的 12 个核心插件对此命令不可触碰。规范�
 
 移除技能目录。
 
-### 第5步：记录日志并更新 CLAUDE.md
+### 第5步：记录日志并更新 PRACTICE.md
 
 追加到 `install-log.yaml`：
 
@@ -64,7 +64,7 @@ claude-for-legal 附带的 12 个核心插件对此命令不可触碰。规范�
   path: <已删除路径>
 ```
 
-从中心 CLAUDE.md 的已安装入门包表中移除该技能的行。
+从中心 PRACTICE.md 的已安装入门包表中移除该技能的行。
 
 ## 工作流 — 禁用
 
@@ -103,5 +103,5 @@ claude-for-legal 附带的 12 个核心插件对此命令不可触碰。规范�
 ## 本技能不做什么
 
 - 卸载第一方插件技能。使用 `/plugin` 进行插件管理。
-- 默认删除用户配置。`~/.claude/plugins/config/claude-for-legal/<plugin>/` 中的配置默认保留，除非用户明确要求删除。
+- 默认删除用户配置。`~/.codex/plugins/config/claude-for-legal-zh/<plugin>/` 中的配置默认保留，除非用户明确要求删除。
 - 每次调用操作超过一个技能。一个名称，一个操作。

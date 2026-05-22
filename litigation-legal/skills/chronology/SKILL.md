@@ -8,16 +8,15 @@ description: >
 argument-hint: "[slug] [--format=working|sof|witness-[name]]"
 ---
 
-# /chronology
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/matter.md` → 案件理论、关键事实。
-2. 加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 文件存储来源、默认案件文件夹模式。
+# chronology
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]/matter.md` → 案件理论、关键事实。
+2. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 文件存储来源、默认案件文件夹模式。
 3. 按以下工作流。
 4. 按顺序识别来源：本次会话用户提供的路径、默认案件文件夹、配置中声明的来源。
 5. 对于可读来源：提取带日期的事件。对于不可达来源：在缺口中注明。
 6. 去重，合并每个事件的来源列表。
 7. 按案件理论标记重要性（🔴/🟡/⚪）。
-8. 写入 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/[slug]/chronology.md`。
+8. 写入 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/[slug]litigation-legal:chronology.md`。
 9. 如先行版本存在：版本号递增，向用户呈现diff摘要。
 10. 最终确定前确认："这是我构建的内容。浏览🔴条目——有无我判定错误的地方？"
 
@@ -38,7 +37,7 @@ argument-hint: "[slug] [--format=working|sof|witness-[name]]"
 
 ## 加载上下文
 
-- 插件配置 CLAUDE.md → 案件理论上下文、`## Outputs` 获取工作成果标头
+- 插件配置 PRACTICE.md → 案件理论上下文、`## Outputs` 获取工作成果标头
 - 本案件的先行 `chronology.md`（如存在）
 - 用户上传或提供的任何文件
 

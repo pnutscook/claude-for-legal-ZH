@@ -7,9 +7,14 @@ description: >
 argument-hint: "[--redo] [--check-integrations]"
 ---
 
-# /cold-start-interview
+# cold-start-interview
 
-1. 检查 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md`。
+## Codex 画像路径与旧 Claude 迁移
+
+本技能在 Codex 中使用 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` 作为唯一运行期画像。若该文件不存在，先检查旧 Claude 配置：`~/.claude/plugins/config/claude-for-legal-zh/legal-builder-hub/CLAUDE.md` 和 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/CLAUDE.md`。
+
+如旧文件存在且不含 `[PLACEHOLDER]`，创建 Codex 目录并复制为 `PRACTICE.md`，然后继续本次任务；如旧文件仍为模板或不存在，则按本访谈生成新的 `PRACTICE.md`。旧 `.claude-plugin/` 文件仅用于兼容，不再作为 Codex 的默认读取位置。
+1. 检查 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md`。
 2. 运行 Part 0（身份 + 集成检查），然后按以下工作流运行五个问题（实践类型、行业、团队、工具熟练度）。
 3. 将画像匹配到注册表技能。推荐入门包。
 4. 展示每个推荐技能的 SKILL.md 摘要。用户选择。
@@ -25,7 +30,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 ## 检查共享机构画像
 
-查找 `~/.claude/plugins/config/claude-for-legal/company-profile.md`。如存在则确认并跳过机构问题。
+查找 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`。如存在则确认并跳过机构问题。
 
 ## 目的
 
@@ -41,7 +46,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 先展示导言：
 
-> **`legal-builder-hub` 面向发现、安装和管理社区贡献的法律技能。** 在寻找实践领域工作流？直接安装 `legal-*` 插件之一；运行 `/legal-builder-hub:registry-browser` 查看外面有什么。
+> **`legal-builder-hub` 面向发现、安装和管理社区贡献的法律技能。** 在寻找实践领域工作流？直接安装 `legal-*` 插件之一；运行 `legal-builder-hub:registry-browser` 查看外面有什么。
 >
 > **2分钟** 获得身份和实践领域——外加注册表监视列表、更新节奏和宽松默认白名单的工作默认值。**15分钟** 增加匹配你实践的校准入门包、写入 `allowlist.yaml` 的受信任来源政策、更新通知偏好以及你的行业/团队规模信号用于推荐。
 >
@@ -89,7 +94,7 @@ argument-hint: "[--redo] [--check-integrations]"
 
 **部署上下文。** 在写入文件前询问："你将如何使用你安装的技能——仅为自己使用、在律所内共享、还是嵌入你对外发布的产品或服务中？（个人 / 律所内部 / 产品嵌入）"
 
-**将白名单写入 `allowlist.yaml`。** 安装器的门控从 `~/.claude/plugins/config/claude-for-legal/legal-builder-hub/allowlist.yaml` 读取。根据部署上下文播种许可证列表。
+**将白名单写入 `allowlist.yaml`。** 安装器的门控从 `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/allowlist.yaml` 读取。根据部署上下文播种许可证列表。
 
 **新鲜度提醒。** 询问："当社区技能打包了参考材料——法规、法条、程序模板——应该信任多久后提醒你核实是否仍为现行有效？（法规内容通常默认为 6 个月。程序/格式内容为 12 个月。）"
 
@@ -133,4 +138,4 @@ argument-hint: "[--redo] [--check-integrations]"
 ## 默认监视的注册表
 
 - **lpm-skills** (github.com/legalopsconsulting/lpm-skills) — 法律项目管理技能
-- 用户可通过 `/legal-builder-hub:registry-browser` 添加其他注册表
+- 用户可通过 `legal-builder-hub:registry-browser` 添加其他注册表

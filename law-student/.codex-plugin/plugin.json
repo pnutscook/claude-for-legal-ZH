@@ -1,0 +1,40 @@
+{
+  "name": "law-student",
+  "version": "1.0.2",
+  "description": "互动式案例教学训练、案例摘要（case brief）、知识体系搭建（outline builder）、法考备考（客观题+主观题）、IRAC 写作评估、学习计划制定 — 始终引导思考，不替答不代写。适配中国法学教育与国家统一法律职业资格考试。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "law-student"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Law Student CN",
+    "shortDescription": "互动式案例教学训练、案例摘要（case brief）、知识体系搭建（outline builder）、法考备考（客观题+主观题）、IRAC 写作评估、学习计划制定 — 始终引导思考，不替答不代写。适配中国法学教育与国家统",
+    "longDescription": "互动式案例教学训练、案例摘要（case brief）、知识体系搭建（outline builder）、法考备考（客观题+主观题）、IRAC 写作评估、学习计划制定 — 始终引导思考，不替答不代写。适配中国法学教育与国家统一法律职业资格考试。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "围绕这个法考科目做一组练习题"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

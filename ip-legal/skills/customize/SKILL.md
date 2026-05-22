@@ -10,11 +10,10 @@ description: >
 argument-hint: "[section name, or describe what you want to change]"
 ---
 
-# /customize
-
+# customize
 ## When this runs
 
-The user typed `/ip-legal:customize`. They want to change something in their
+The user typed `ip-legal:customize`. They want to change something in their
 practice profile — a risk posture, an escalation contact, a portfolio
 position, an enforcement tactic — without re-running the whole cold-start
 interview and without hand-editing YAML.
@@ -22,12 +21,12 @@ interview and without hand-editing YAML.
 ## What to do
 
 1. **Read the config.** Read
-   `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`
-   (and `~/.claude/plugins/config/claude-for-legal/company-profile.md` one
+   `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`
+   (and `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` one
    level up). If the plugin config does not exist or still contains
    `[PLACEHOLDER]` values, say:
 
-   > You haven't run setup yet. Run `/ip-legal:cold-start-interview` first —
+   > You haven't run setup yet. Run `ip-legal:cold-start-interview` first —
    > customize is for adjusting a profile you already have.
 
 2. **Show the customizable map.** List what's in the profile, grouped, with a
@@ -67,18 +66,18 @@ interview and without hand-editing YAML.
    what changes downstream, confirm, write it to the config.
 
    Examples:
-   - *Adding a new trademark watch class:* "`/portfolio` will include class
-     XX in watch reports and `/infringement-triage` will route class-XX
+   - *Adding a new trademark watch class:* "`ip-legal:portfolio` will include class
+     XX in watch reports and `ip-legal:infringement-triage` will route class-XX
      findings accordingly."
-   - *Enforcement posture aggressive → middle:* "`/cease-desist` will offer
+   - *Enforcement posture aggressive → middle:* "`ip-legal:cease-desist` will offer
      cure-letter drafts as a first option for ambiguous cases instead of
      going straight to C&D."
-   - *New ship-blocker OSS license:* "`/oss-review` will fail reviews that
+   - *New ship-blocker OSS license:* "`ip-legal:oss-review` will fail reviews that
      include this license rather than warning."
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,
    practice setting, stage): write to
-   `~/.claude/plugins/config/claude-for-legal/company-profile.md` and note:
+   `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` and note:
 
    > This change affects all 12 plugins — any plugin that reads your
    > jurisdiction footprint now sees [new value].
@@ -86,7 +85,7 @@ interview and without hand-editing YAML.
 6. **Close.**
 
    > Done. Your next output will reflect the change. Anything else? You can
-   > run `/ip-legal:customize` anytime.
+   > run `ip-legal:customize` anytime.
 
 ## Guardrails
 
@@ -98,6 +97,6 @@ interview and without hand-editing YAML.
   counsel"), flag the tension.
 - **Flag guardrail degradation.** The `[需审查]` flag, source attribution
   tags, and `[verify]` tags on cited authorities are load-bearing — do not
-  remove. Clearance confidence is load-bearing on `/clearance` output — do
+  remove. Clearance confidence is load-bearing on `ip-legal:clearance` output — do
   not suppress.
 - **One change at a time.** Don't re-ask the whole interview.

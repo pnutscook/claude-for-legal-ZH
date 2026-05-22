@@ -8,15 +8,14 @@ description: >
 argument-hint: "[配置部分名称，或描述你想修改的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户键入 `/commercial-legal:customize`。他们想修改业务领域配置中的某项——风险姿态、上报联系人、审查指引立场、管辖、输出格式——而无需重新运行完整冷启动访谈。
+用户键入 `commercial-legal:customize`。他们想修改业务领域配置中的某项——风险姿态、上报联系人、审查指引立场、管辖、输出格式——而无需重新运行完整冷启动访谈。
 
 ## 做什么
 
-1. **读取配置。** 读取 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md`。如果不存在或仍有占位符，说：你还没有运行设置。先运行 `/commercial-legal:cold-start-interview`——定制功能用于调整已有的配置。
+1. **读取配置。** 读取 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md`。如果不存在或仍有占位符，说：你还没有运行设置。先运行 `commercial-legal:cold-start-interview`——定制功能用于调整已有的配置。
 
 2. **展示可定制项目清单。** 按组列出配置中的内容：
    - **公司/你是谁** — 名称、行业、法域范围、执业场景
@@ -34,12 +33,12 @@ argument-hint: "[配置部分名称，或描述你想修改的内容]"
 4. **进行修改。** 展示当前值、询问新值、说明下游变更影响、确认、写入配置。
 
    示例：
-   - *责任上限让步从12个月→6个月：* "`/review`现在会将超过6个月的任何条款标注为偏离。"
+   - *责任上限让步从12个月→6个月：* "`commercial-legal:review`现在会将超过6个月的任何条款标注为偏离。"
    - *新的上报审批人：* "任何超出你自身权限的修订现在将路由至此审批人。"
 
 5. **共享配置变更** 写入 `company-profile.md` 并注明该变更影响所有插件。
 
-6. **收尾。** "完成。你的下一个输出将反映该变更。随时可运行 `/commercial-legal:customize`。"
+6. **收尾。** "完成。你的下一个输出将反映该变更。随时可运行 `commercial-legal:customize`。"
 
 ## 防护措施
 

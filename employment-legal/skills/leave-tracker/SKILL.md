@@ -7,15 +7,14 @@ description: >
 argument-hint: "[无需参数——从假期登记册 leave-register.yaml 读取]"
 ---
 
-# /leave-tracker
-
+# leave-tracker
 检查所有有法定硬性截止日期的进行中假期，仅呈现需要决策或行动的项目。不是状态面板——告诉你需要做什么及为什么。
 
 ## 指令
 
-1. 加载 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → 管辖地表和假期管理部分。
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 管辖地表和假期管理部分。
 
-2. 如果 `~/.claude/plugins/config/claude-for-legal/employment-legal/leave-register.yaml` 不存在或无数据，提示律师上传假期电子表格或使用 `/employment-legal:log-leave` 添加条目。
+2. 如果 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/leave-register.yaml` 不存在或无数据，提示律师上传假期电子表格或使用 `employment-legal:log-leave` 添加条目。
 
 3. 仅对需要行动的假期发出预警。无问题的假期每项一行总结。
 
@@ -32,7 +31,7 @@ argument-hint: "[无需参数——从假期登记册 leave-register.yaml 读取
 ## 示例
 
 ```
-/employment-legal:leave-tracker
+employment-legal:leave-tracker
 ```
 
-建议每周运行——设置周一上午提醒调用 `/employment-legal:leave-tracker`。自动排期需要单独的集成（日历提醒、定时任务等）；Claude Code 不自行排期。
+建议每周运行——设置周一上午提醒调用 `employment-legal:leave-tracker`。自动排期需要单独的集成（日历提醒、定时任务等）；Codex 不自行排期。

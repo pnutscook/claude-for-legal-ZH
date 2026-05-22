@@ -24,11 +24,5 @@
       "title": "北大法宝",
       "description": "中国法律资源总库 — 法律法规、司法案例、法学期刊、英文译本、法考真题与法律职业资格考试资料检索。"
     }
-  },
-  "recommendedCategories": [
-    "legal-research",
-    "case-law",
-    "documents",
-    "chat"
-  ]
+  }
 }

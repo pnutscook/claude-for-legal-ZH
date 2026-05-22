@@ -7,8 +7,7 @@ description: >
 argument-hint: "[调查事项名称] [问题]"
 ---
 
-# /investigation-query
-
+# investigation-query
 针对调查日志回答问题——证人说了什么、哪些地方陈述互相矛盾、存在哪些证据缺口、每个问题上最有证明力的证据是什么。
 
 ## 指令
@@ -34,16 +33,16 @@ argument-hint: "[调查事项名称] [问题]"
 ## 示例
 
 ```
-/employment-legal:investigation-query [调查事项名称]
+employment-legal:investigation-query [调查事项名称]
 被投诉人关于12月部门聚餐说了什么？
 ```
 
 ```
-/employment-legal:investigation-query [调查事项名称]
+employment-legal:investigation-query [调查事项名称]
 投诉人和被投诉人的陈述在哪些地方互相矛盾？
 ```
 
 ```
-/employment-legal:investigation-query [调查事项名称]
+employment-legal:investigation-query [调查事项名称]
 我们还缺什么？
 ```

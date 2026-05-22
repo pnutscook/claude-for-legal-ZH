@@ -17,31 +17,31 @@
 
 首次使用时，插件将通过对话形式对您进行访谈——约十分钟——了解您团队的实际运作方式。询问您的合同手册立场、审批上报规则以及让您在材料到桌时头疼的事项。然后要求您提供5-10份近期已签署协议（越多越好，20份能呈现更清晰的模式），以便实地观察您的立场。
 
-将学习到的内容写入 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` —— 一份关于您团队的通俗英语文档，所有其他技能在工作前均会读取。您编辑的是文档，而非配置文件。
+将学习到的内容写入 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md` —— 一份关于您团队的通俗英语文档，所有其他技能在工作前均会读取。您编辑的是文档，而非配置文件。
 
 ```
-/commercial-legal:cold-start-interview
+commercial-legal:cold-start-interview
 ```
 
-**合同手册操作方。** 在设置初期，您将被问及是构建**销售方**合同手册（您出售产品/服务；您是供应商；通常使用您的合同模板）、**采购方**合同手册（您向供应商采购；您是客户；通常使用对方合同模板）还是两者。回答将翻转合同手册中几乎所有立场——责任上限、赔偿方向、合同解除权、知识产权归属——所以设置初期就需确定。如果选择两者，设置将先构建销售方；之后运行 `/commercial-legal:cold-start-interview --side purchasing` 构建另一方。您的配置将并行保存双方，审查技能在读取合同手册前先判断适用哪一方。
+**合同手册操作方。** 在设置初期，您将被问及是构建**销售方**合同手册（您出售产品/服务；您是供应商；通常使用您的合同模板）、**采购方**合同手册（您向供应商采购；您是客户；通常使用对方合同模板）还是两者。回答将翻转合同手册中几乎所有立场——责任上限、赔偿方向、合同解除权、知识产权归属——所以设置初期就需确定。如果选择两者，设置将先构建销售方；之后运行 `commercial-legal:cold-start-interview --side purchasing` 构建另一方。您的配置将并行保存双方，审查技能在读取合同手册前先判断适用哪一方。
 
 ## 指令
 
 | 指令 | 功能 |
 |---|---|
-| `/commercial-legal:cold-start-interview` | 运行（或重新运行）冷启动访谈 |
-| `/commercial-legal:review [文件]` | 对照您的合同手册审查供应商协议、保密协议或SaaS订阅协议 |
-| `/commercial-legal:renewal-tracker` | 未来90天内哪些合同需要续约，以及各合同的终止期限 |
-| `/commercial-legal:escalation-flagger` | 将问题路由至适当审批人并起草审批请求 |
-| `/commercial-legal:amendment-history [文件]` | 追溯合同从基础协议到各补充协议的变更轨迹 |
-| `/commercial-legal:review-proposals` | 逐项审阅来自监控代理的待定合同手册更新提案 |
-| `/commercial-legal:matter-workspace` | 管理事项工作空间（仅多客户私人执业）——新建、列表、切换、关闭、无事项 |
+| `commercial-legal:cold-start-interview` | 运行（或重新运行）冷启动访谈 |
+| `commercial-legal:review [文件]` | 对照您的合同手册审查供应商协议、保密协议或SaaS订阅协议 |
+| `commercial-legal:renewal-tracker` | 未来90天内哪些合同需要续约，以及各合同的终止期限 |
+| `commercial-legal:escalation-flagger` | 将问题路由至适当审批人并起草审批请求 |
+| `commercial-legal:amendment-history [文件]` | 追溯合同从基础协议到各补充协议的变更轨迹 |
+| `commercial-legal:review-proposals` | 逐项审阅来自监控代理的待定合同手册更新提案 |
+| `commercial-legal:matter-workspace` | 管理事项工作空间（仅多客户私人执业）——新建、列表、切换、关闭、无事项 |
 
 ## 技能
 
 | 技能 | 用途 |
 |---|---|
-| **cold-start-interview** | 首次运行访谈，写入 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` |
+| **cold-start-interview** | 首次运行访谈，写入 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md` |
 | **vendor-agreement-review** | 完整合同手册对合同偏差分析，附修订文本 |
 | **nda-review** | 快速 GREEN/YELLOW/RED 分流，法务仅阅读需要介入的保密协议 |
 | **saas-msa-review** | SaaS订阅专属叠加层：自动续约、价格递增、数据迁出、SLA |
@@ -83,17 +83,17 @@
 ### 1. 接受访谈
 
 ```
-/commercial-legal:cold-start-interview
+commercial-legal:cold-start-interview
 ```
 
 约十分钟。准备好5-10份近期已签署协议以供分享（越多越好，20份能呈现更清晰的模式）。
 
-您的配置存储于 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` 并在插件更新后继续生效。
+您的配置存储于 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md` 并在插件更新后继续生效。
 
 ### 2. 审查合同
 
 ```
-/commercial-legal:review 供应商主协议.pdf
+commercial-legal:review 供应商主协议.pdf
 ```
 
 输出：对照您的合同手册逐项偏差分析备忘录，附具体修订语言和指定审批人。
@@ -101,14 +101,14 @@
 ### 3. 查看哪些合同即将续约
 
 ```
-/commercial-legal:renewal-tracker
+commercial-legal:renewal-tracker
 ```
 
 输出：未来90天内具有终止期限的所有合同，按紧急程度分组。
 
 ## 如何学习
 
-您在 `~/.claude/plugins/config/claude-for-legal/commercial-legal/CLAUDE.md` 中的实务画像并非一成不变——它会随着您使用插件而持续改进。技能会告知您何时某次输出使用了应予调整的默认值。`playbook-monitor` 代理在您的实务操作偏离合同手册时提议更新。您可以重新运行设置、直接编辑文件或告知某项技能记录新的立场。
+您在 `~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/PRACTICE.md` 中的实务画像并非一成不变——它会随着您使用插件而持续改进。技能会告知您何时某次输出使用了应予调整的默认值。`playbook-monitor` 代理在您的实务操作偏离合同手册时提议更新。您可以重新运行设置、直接编辑文件或告知某项技能记录新的立场。
 
 ## 文件结构
 
@@ -116,7 +116,7 @@
 commercial-legal/
 ├── .claude-plugin/plugin.json
 ├── .mcp.json
-├── CLAUDE.md                    # 您的团队实务画像 —— 由冷启动访谈撰写，由您编辑
+├── PRACTICE.md                    # 您的团队实务画像 —— 由冷启动访谈撰写，由您编辑
 ├── README.md
 ├── agents/
 │   ├── renewal-watcher.md

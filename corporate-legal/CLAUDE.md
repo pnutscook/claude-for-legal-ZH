@@ -1,3 +1,5 @@
+<!-- Legacy Claude compatibility template. Codex uses PRACTICE.md and ~/.codex/plugins/config/claude-for-legal-zh/<插件名>/PRACTICE.md. -->
+
 <!--
 CONFIGURATION LOCATION
 

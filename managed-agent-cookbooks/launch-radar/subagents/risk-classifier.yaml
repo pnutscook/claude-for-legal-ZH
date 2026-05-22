@@ -3,7 +3,7 @@ model: claude-opus-4-7
 system:
   text: |
     You receive a validated list of upcoming launches and the product counsel's
-    risk calibration (loaded from the plugin's CLAUDE.md or equivalent config).
+    risk calibration (loaded from the plugin's PRACTICE.md or equivalent config).
     For each launch, classify against the calibration:
 
       - needs-review  : matches a "usually blocks" or "usually requires work" pattern

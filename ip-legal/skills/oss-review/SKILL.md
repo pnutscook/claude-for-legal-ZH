@@ -7,14 +7,13 @@ description: >
 argument-hint: "[清单/SBOM的文件路径 | 包名 | 仓库路径 | 粘贴文本]"
 ---
 
-# /oss-review
-
-对照 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` 中的实务画像执行开源许可证合规检查。
+# oss-review
+对照 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` 中的实务画像执行开源许可证合规检查。
 按许可证族分类依赖、将义务映射到部署模式、标注许可证未知和伪装为开源的假开源包、并建议行动——合规、替换、移除、寻求法律审查、寻求商业许可。
 
 ## 使用说明
 
-1. **加载 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。** 如含占位符，停止并提示："先运行 `/ip-legal:cold-start-interview`——在审查前我需要了解你的实务画像（及开源政策，如有）。"如实务画像指向已上传的开源政策，亦阅读该文件——它是团队认可/审查/禁止许可证的真实来源。
+1. **加载 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。** 如含占位符，停止并提示："先运行 `ip-legal:cold-start-interview`——在审查前我需要了解你的实务画像（及开源政策，如有）。"如实务画像指向已上传的开源政策，亦阅读该文件——它是团队认可/审查/禁止许可证的真实来源。
 
 2. **确定范围：** 依赖列表（package.json、requirements.txt、go.mod、Gemfile、Cargo.toml、pom.xml、SBOM）、单个库或团队准备开源的对外发布代码。如用户传递了路径，从文件推断；否则询问。
 
@@ -34,10 +33,10 @@ argument-hint: "[清单/SBOM的文件路径 | 包名 | 仓库路径 | 粘贴文�
 ## 示例
 
 ```
-/ip-legal:oss-review ~/code/my-project/package.json
-/ip-legal:oss-review ~/code/my-project/requirements.txt
-/ip-legal:oss-review redis
-/ip-legal:oss-review ~/code/my-project  # 仓库根目录 — 扫描所有清单
+ip-legal:oss-review ~/code/my-project/package.json
+ip-legal:oss-review ~/code/my-project/requirements.txt
+ip-legal:oss-review redis
+ip-legal:oss-review ~/code/my-project  # 仓库根目录 — 扫描所有清单
 ```
 
 ---
@@ -51,7 +50,7 @@ Jira、Linear 或 Asana 后，本技能可以：监控进入的开源请求、�
 
 ## 事项上下文
 
-**事项上下文。** 检查实务级 CLAUDE.md 中的 `## 事项工作区`。如 `Enabled` 为 `✗`（法务用户的默认状态），跳过本段其余内容——各技能使用实务级上下文，事项机制不可见。如已启用且无活跃事项，询问："此事项属于哪个案件？运行 `/ip-legal:matter-workspace switch <slug>` 或回复 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖设置。将输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/ip-legal/matters/<事项slug>/`。除非 `跨事项上下文` 开启，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实务级 PRACTICE.md 中的 `## 事项工作区`。如 `Enabled` 为 `✗`（法务用户的默认状态），跳过本段其余内容——各技能使用实务级上下文，事项机制不可见。如已启用且无活跃事项，询问："此事项属于哪个案件？运行 `ip-legal:matter-workspace switch <slug>` 或回复 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖设置。将输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/matters/<事项slug>/`。除非 `跨事项上下文` 开启，否则绝不读取其他事项的文件。
 
 ---
 
@@ -63,7 +62,7 @@ Jira、Linear 或 Asana 后，本技能可以：监控进入的开源请求、�
 
 ## 前置条件：加载实务画像
 
-**扫描依赖前，先读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。** 如缺失或仍含占位符，停止并运行 `/ip-legal:cold-start-interview`。实务画像告诉你：
+**扫描依赖前，先读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。** 如缺失或仍含占位符，停止并运行 `ip-legal:cold-start-interview`。实务画像告诉你：
 
 - 谁在团队中负责开源审查（通常为工程师 + 法务签署）
 - Copyleft 义务的升级路由
@@ -193,7 +192,7 @@ Jira、Linear 或 Asana 后，本技能可以：监控进入的开源请求、�
 
 ### 第七步：组装备忘录
 
-在 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md` → `## 输出` 前附加工作成果页眉（因角色不同而异——见 `## 使用者`）。
+在 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md` → `## 输出` 前附加工作成果页眉（因角色不同而异——见 `## 使用者`）。
 
 本备忘录及审查的依赖列表可能属于保密和/或特权保护。输出继承来源状态。仅在保密圈内分发；对外交付前去除工作成果页眉。
 
@@ -272,6 +271,6 @@ Jira、Linear 或 Asana 后，本技能可以：监控进入的开源请求、�
 
 ## 以行动选项决策树收尾
 
-以 CLAUDE.md `## 输出` 规定的行动选项决策树收尾。将选项定制为本技能刚生成的内容——五个默认分支（起草X、升级、收集更多事实、观察等待、其他事项）仅为起点，非固定模板。由律师从决策树中选择。
+以 PRACTICE.md `## 输出` 规定的行动选项决策树收尾。将选项定制为本技能刚生成的内容——五个默认分支（起草X、升级、收集更多事实、观察等待、其他事项）仅为起点，非固定模板。由律师从决策树中选择。
 
 如扫描超过约10个包，或在用户需要时：提供数据仪表板。呈现样式为：按许可证族（宽松型 / 弱 copyleft / 强 copyleft / AGPL / 专有 / 未知）、风险分布计数，以及含严重程度和包版本的可排序发现物表格。

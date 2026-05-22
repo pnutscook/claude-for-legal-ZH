@@ -13,7 +13,7 @@ system:
     deadlines (next 30 days, flagged by `needs_verification` and
     `confidence`), Overdue deliverables, Posture changes since the last
     report. Prepend the work-product header from the deploying team's
-    litigation-legal CLAUDE.md (PRIVILEGED & CONFIDENTIAL — ATTORNEY WORK
+    litigation-legal PRACTICE.md (PRIVILEGED & CONFIDENTIAL — ATTORNEY WORK
     PRODUCT for lawyer deployments; the research-notes header otherwise).
 
     Every deadline with `needs_verification: true` must display a visible

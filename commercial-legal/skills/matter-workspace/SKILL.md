@@ -7,17 +7,16 @@ description: >
 argument-hint: "<new | list | switch | close | none> [简称]"
 ---
 
-# /matter-workspace
-
+# matter-workspace
 多客户执业者跨多个客户和事项工作。事项工作区将一个客户或委托的上下文与其他客户或委托隔离开来。本命令管理这些工作区。
 
 ## 子命令
 
-- `/commercial-legal:matter-workspace new <slug>` — 创建新事项工作区，运行简短收案访谈，写入 `matter.md`
-- `/commercial-legal:matter-workspace list` — 列出事项及其状态
-- `/commercial-legal:matter-workspace switch <slug>` — 设置当前事项
-- `/commercial-legal:matter-workspace close <slug>` — 归档事项（移至 `_archived/`，绝不删除）
-- `/commercial-legal:matter-workspace none` — 脱离任何当前事项，纯业务领域级工作
+- `commercial-legal:matter-workspace new <slug>` — 创建新事项工作区，运行简短收案访谈，写入 `matter.md`
+- `commercial-legal:matter-workspace list` — 列出事项及其状态
+- `commercial-legal:matter-workspace switch <slug>` — 设置当前事项
+- `commercial-legal:matter-workspace close <slug>` — 归档事项（移至 `_archived/`，绝不删除）
+- `commercial-legal:matter-workspace none` — 脱离任何当前事项，纯业务领域级工作
 
 ## 指令
 
@@ -28,7 +27,7 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 
 ## 说明
 
-- 除非业务领域级 CLAUDE.md 中 `跨事项上下文` 为 `on`，技能绝不跨事项读取文件。
+- 除非业务领域级 PRACTICE.md 中 `跨事项上下文` 为 `on`，技能绝不跨事项读取文件。
 - 归档不是删除——已关闭的事项保持可读状态以供保留/利益冲突目的。
 - 简称使用小写加连字符。如简称在已归档和当前事项中被重用，已归档的保留在 `_archived/<slug>/` 下。
 
@@ -43,8 +42,8 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 所有事项数据位于：
 
 ```
-~/.claude/plugins/config/claude-for-legal/commercial-legal/
-├── CLAUDE.md                       # 业务领域级审查指引
+~/.codex/plugins/config/claude-for-legal-zh/commercial-legal/
+├── PRACTICE.md                       # 业务领域级审查指引
 └── matters/
     ├── <slug>/
     │   ├── matter.md               # 客户、对方当事人、事项类型、关键事实、覆盖规则

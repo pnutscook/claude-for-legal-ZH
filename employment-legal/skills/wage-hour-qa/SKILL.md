@@ -9,9 +9,8 @@ description: >
 argument-hint: "[问题]"
 ---
 
-# /wage-hour-qa
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → 管辖范围。
+# wage-hour-qa
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 管辖范围。
 2. 使用以下工作流。
 3. 识别问题涉及的管辖地。如未指定，询问。
 4. 按该管辖地的规则回答。引用。标记是否为临界问题或法律在变动中。
@@ -20,7 +19,7 @@ argument-hint: "[问题]"
 
 ## 案件上下文
 
-**案件上下文。** 检查实务级 CLAUDE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`（法务用户默认值），跳过本段——技能使用实务级上下文，案件机制不可见。如果已启用且无活跃案件，询问："这是哪个案件的？运行 `/employment-legal:matter-workspace switch <slug>` 或说 `practice-level`。" 加载活跃案件的 `matter.md` 获取案件特定上下文和覆盖项。将输出写入案件文件夹。除非 `Cross-matter context` 为 `on`，否则不得读取其他案件的文件。
+**案件上下文。** 检查实务级 PRACTICE.md 中的 `## Matter workspaces`。如果 `Enabled` 为 `✗`（法务用户默认值），跳过本段——技能使用实务级上下文，案件机制不可见。如果已启用且无活跃案件，询问："这是哪个案件的？运行 `employment-legal:matter-workspace switch <slug>` 或说 `practice-level`。" 加载活跃案件的 `matter.md` 获取案件特定上下文和覆盖项。将输出写入案件文件夹。除非 `Cross-matter context` 为 `on`，否则不得读取其他案件的文件。
 
 ---
 
@@ -30,7 +29,7 @@ argument-hint: "[问题]"
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` → 管辖范围。如果问题未指定管辖地，询问——或以员工最多的管辖地回答并注明。
+`~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 管辖范围。如果问题未指定管辖地，询问——或以员工最多的管辖地回答并注明。
 
 ## 回答
 
@@ -63,7 +62,7 @@ argument-hint: "[问题]"
 - "X 是否需要支付加班费？"——研究《工资支付暂行规定》第13条 `[法条原文]`（工作日延长150%、休息日不补休200%、法定节假日300%）+ 各省/直辖市工资支付条例是否有更高标准。
 - "最终工资何时到期？"——研究适用规则，包括解除和辞职的支付时间是否有区别（《工资支付暂行规定》第9条：解除或终止时一次付清 `[法条原文]` + 各省/直辖市工资支付条例）。
 - "未休年休假需要支付补偿吗？"——研究《职工带薪年休假条例》第5条（按日工资收入的300%支付）`[法条原文]` + 《企业职工带薪年休假实施办法》第10-12条。
-- "此人可否认定为劳务关系而非劳动关系？"——路由至 `/employment-legal:worker-classification`，如事实尚不清楚。
+- "此人可否认定为劳务关系而非劳动关系？"——路由至 `employment-legal:worker-classification`，如事实尚不清楚。
 
 ### 步骤2a：加班费计算基数和补发工资计算
 
@@ -121,7 +120,7 @@ argument-hint: "[问题]"
 
 ## 以下一步决策树收尾
 
-以 CLAUDE.md `## Outputs` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
+以 PRACTICE.md `## Outputs` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
 
 ## 本技能不做什么
 

@@ -6,8 +6,7 @@ description: >
 argument-hint: "[调查事项名称] [受众：hr / 管理层 / 外部律师]"
 ---
 
-# /investigation-summary
-
+# investigation-summary
 从调查备忘录起草精简的、适合受众的摘要。HR摘要不包含保密分析和法律风险暴露评估。管理层摘要为高层次概述。外部律师简报包含完整上下文。
 
 ## 指令
@@ -31,13 +30,13 @@ argument-hint: "[调查事项名称] [受众：hr / 管理层 / 外部律师]"
 ## 示例
 
 ```
-/employment-legal:investigation-summary [调查事项名称] hr
+employment-legal:investigation-summary [调查事项名称] hr
 ```
 
 ```
-/employment-legal:investigation-summary [调查事项名称] 管理层
+employment-legal:investigation-summary [调查事项名称] 管理层
 ```
 
 ```
-/employment-legal:investigation-summary [调查事项名称] 外部律师
+employment-legal:investigation-summary [调查事项名称] 外部律师
 ```

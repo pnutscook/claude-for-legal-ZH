@@ -1,5 +1,5 @@
 # Watched Registries
-# Default set. User adds more via /legal-builder-hub:registry-browser.
+# Default set. User adds more via legal-builder-hub:registry-browser.
 
 registries:
   - name: "lpm-skills"

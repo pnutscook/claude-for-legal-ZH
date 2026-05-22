@@ -7,11 +7,10 @@ description: >
 argument-hint: "[--all | --risk=high | --stale]"
 ---
 
-# /portfolio-status
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` → 风险校准（定义如何解读 `risk:` 字段）。
+# portfolio-status
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 风险校准（定义如何解读 `risk:` 字段）。
 2. 按以下工作流操作。
-3. 解析 `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml`。默认过滤已结案件（使用 `--all` 包含）。
+3. 解析 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/_log.yaml`。默认过滤已结案件（使用 `--all` 包含）。
 4. 生成汇总：风险分布、未来 14/30/60 天内到期节点、超过30天未更新案件、重要性汇总、阶段分布。
 5. 标注异常——所有标记为危急、`next_deadline` 已逾期、风险为中或高但未指定外聘律师的案件。
 
@@ -25,8 +24,8 @@ argument-hint: "[--all | --risk=high | --stale]"
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/matters/_log.yaml` —— 真实来源
-- `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` —— 风险校准（正确解读风险/重要性字段）
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/matters/_log.yaml` —— 真实来源
+- `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` —— 风险校准（正确解读风险/重要性字段）
 
 ## 标记与过滤
 
@@ -112,9 +111,9 @@ argument-hint: "[--all | --risk=high | --stale]"
 
 ## 以下一步决策树收尾
 
-以 CLAUDE.md `## 输出` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
+以 PRACTICE.md `## 输出` 中的下一步决策树收尾。根据本技能刚产生的内容自定义选项——五个默认分支（起草X、上报、获取更多事实、观察等待、其他选择）是起点而非锁定项。决策树本身就是输出；由律师选择。
 
-如案件组合超过约10个案件，或在用户任何要求时：提出仪表板方案（见 CLAUDE.md `## 输出 → 数据密集输出的仪表板提议`）。为此输出定制提议——按风险级别计数、即将到期节点的时间线、及带状态、冲突检查和最后触及日期的可排序案件台账。
+如案件组合超过约10个案件，或在用户任何要求时：提出仪表板方案（见 PRACTICE.md `## 输出 → 数据密集输出的仪表板提议`）。为此输出定制提议——按风险级别计数、即将到期节点的时间线、及带状态、冲突检查和最后触及日期的可排序案件台账。
 
 ## 本技能不做什么
 

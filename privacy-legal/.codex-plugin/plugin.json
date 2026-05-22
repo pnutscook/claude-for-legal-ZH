@@ -1,0 +1,40 @@
+{
+  "name": "privacy-legal",
+  "version": "1.0.2",
+  "description": "个人信息保护实务：处理活动分类、生成个人信息保护影响评估（个保法第55条）、审查个人信息处理协议（作为处理者或受托处理者）、在法定期限内起草个人信息主体权利响应（个保法第44-50条）、监测隐私政策与实践之间的偏差。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "privacy-legal"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Privacy Legal CN",
+    "shortDescription": "个人信息保护实务：处理活动分类、生成个人信息保护影响评估（个保法第55条）、审查个人信息处理协议（作为处理者或受托处理者）、在法定期限内起草个人信息主体权利响应（个保法第44-50条）、监测隐私政策与实践之间的偏差。",
+    "longDescription": "个人信息保护实务：处理活动分类、生成个人信息保护影响评估（个保法第55条）、审查个人信息处理协议（作为处理者或受托处理者）、在法定期限内起草个人信息主体权利响应（个保法第44-50条）、监测隐私政策与实践之间的偏差。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "判断这个个人信息处理场景是否需要影响评估"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}

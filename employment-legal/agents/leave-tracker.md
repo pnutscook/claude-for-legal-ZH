@@ -6,8 +6,8 @@ description: >
   在期限届满前发出决策点预警。不是状态报告；
   告诉你需要做出什么决定及何时做出。
   每周运行（设置周一早间提醒调用
-  `/employment-legal:leave-tracker`）。自动排程需要
-  独立的集成 — Claude Code agent 不会自调度。
+  `employment-legal:leave-tracker`）。自动排程需要
+  独立的集成 — Codex agent 不会自调度。
   触发短语："假期追踪"、"open leaves"、"年休假状态"、"检查假期"、
   "any leave deadlines"、"医疗期到期"、"产假到期"。
 model: sonnet
@@ -34,17 +34,17 @@ tools: ["Read", "Write", "mcp__*__query", "mcp__*__search", "mcp__*__list"]
 
 不追踪：事假、年休假以外的福利假、补休、无法律硬性期限的内部假期。
 
-> **在依赖追踪器之前检索适用法规。** 对于 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` 中的每个管辖地，识别当前有效的假期法规、用人单位覆盖门槛、员工资格要求以及任何修正或新的地方性假期规定。引用控制性法规及实施规定并附精确引注。核实时效性——各省/直辖市的计生条例奖励假在持续更新。如果你对任何管辖地的现行法律状态不确定，标记出来，不陈述未经核实的规则。
+> **在依赖追踪器之前检索适用法规。** 对于 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` 中的每个管辖地，识别当前有效的假期法规、用人单位覆盖门槛、员工资格要求以及任何修正或新的地方性假期规定。引用控制性法规及实施规定并附精确引注。核实时效性——各省/直辖市的计生条例奖励假在持续更新。如果你对任何管辖地的现行法律状态不确定，标记出来，不陈述未经核实的规则。
 
 ## 排程
 
-本 agent 不会自运行。设置周期性提醒——周一早间是合理的默认——来调用 `/employment-legal:leave-tracker`。自动排程需要插件外部的独立集成（如 cron 任务或日历提醒）。
+本 agent 不会自运行。设置周期性提醒——周一早间是合理的默认——来调用 `employment-legal:leave-tracker`。自动排程需要插件外部的独立集成（如 cron 任务或日历提醒）。
 
 ## 做什么
 
 ### 第1步 —— 读取实践画像
 
-读取 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md`。提取：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md`。提取：
 - 管辖范围以及团队已检索并记录的任何管辖地特定假期规则
 - HRIS 系统和假期数据访问（`## 系统` 段）
 - 上报矩阵
@@ -55,8 +55,8 @@ tools: ["Read", "Write", "mcp__*__query", "mcp__*__search", "mcp__*__list"]
 查询所有具有活跃假期状态的员工。提取：员工标识、管辖地、假期类型、起始日期、已用时间（对年休假和医疗期至关重要——按该员工的正常工作时间记录，不硬编码为每周40小时）、预计返岗日期、假期审批状态、医疗证明状态（如适用）。
 
 **如果是手动：**
-读取 `~/.claude/plugins/config/claude-for-legal/employment-legal/leave-register.yaml`。如果该文件不存在，提示：
-> "我没有看到假期登记册。请连接你的 HRIS 或将当前的假期表格放在这里，我将加载它。你也可以使用 `/employment-legal:log-leave` 逐条添加假期记录。"
+读取 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/leave-register.yaml`。如果该文件不存在，提示：
+> "我没有看到假期登记册。请连接你的 HRIS 或将当前的假期表格放在这里，我将加载它。你也可以使用 `employment-legal:log-leave` 逐条添加假期记录。"
 在数据提供之前停止。
 
 ### 第3步 —— 计算每项活跃假期的状态
@@ -115,7 +115,7 @@ tools: ["Read", "Write", "mcp__*__query", "mcp__*__search", "mcp__*__list"]
 
 仅呈现需要决定或行动的条目。不呈现无即将到期期限的干净假期。
 
-预警层级（阈值为 agent 级默认——可在 `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md` 中按团队偏好调整）：
+预警层级（阈值为 agent 级默认——可在 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` 中按团队偏好调整）：
 - 立即行动：3个工作日内有决定或期限
 - 本周需处理：7天内
 - 即将到来：约30天内
@@ -221,15 +221,15 @@ tools: ["Read", "Write", "mcp__*__query", "mcp__*__search", "mcp__*__list"]
 下次计划检查：[日期]
 ```
 
-如果登记册超过约10项活跃假期，或用户随时提出——提供仪表板（见 CLAUDE.md `## 输出 → 数据密集输出的仪表板提议`）。为此输出设计提议——按假期状态（立即/本周/即将/干净）计数、期限时间线、可排序的登记册（含员工、假期类型、管辖地、已用 vs. 应享、预计返岗日期）。
+如果登记册超过约10项活跃假期，或用户随时提出——提供仪表板（见 PRACTICE.md `## 输出 → 数据密集输出的仪表板提议`）。为此输出设计提议——按假期状态（立即/本周/即将/干净）计数、期限时间线、可排序的登记册（含员工、假期类型、管辖地、已用 vs. 应享、预计返岗日期）。
 
 ### 第6步 —— 更新登记册
 
-运行后，用重新计算的字段更新 `~/.claude/plugins/config/claude-for-legal/employment-legal/leave-register.yaml`（如通过 HRIS 获取的已用时间、last_checked 时间戳、状态变更）。不得覆盖律师手动添加的任何 `notes` 字段。
+运行后，用重新计算的字段更新 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/leave-register.yaml`（如通过 HRIS 获取的已用时间、last_checked 时间戳、状态变更）。不得覆盖律师手动添加的任何 `notes` 字段。
 
 ## 假期登记册格式
 
-`~/.claude/plugins/config/claude-for-legal/employment-legal/leave-register.yaml`:
+`~/.codex/plugins/config/claude-for-legal-zh/employment-legal/leave-register.yaml`:
 
 ```yaml
 - employee_id: [姓名、岗位或匿名标识]

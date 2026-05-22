@@ -7,33 +7,32 @@ description: >
 argument-hint: "<new | list | switch | close | none> [代号]"
 ---
 
-# /matter-workspace
-
+# matter-workspace
 执业者跨多个客户和委托工作。事项工作区使一个客户或委托的上下文与其他所有分开。本技能管理这些工作区。
 
 ## 子命令
 
-- `/privacy-legal:matter-workspace new <代号>` — 创建新事项工作区，运行简短录入，写入 `matter.md`
-- `/privacy-legal:matter-workspace list` — 列出事项并显示状态和活动标记
-- `/privacy-legal:matter-workspace switch <代号>` — 设置活动事项
-- `/privacy-legal:matter-workspace close <代号>` — 归档事项（移至 `~/.claude/plugins/config/claude-for-legal/privacy-legal/matters/_archived/`，绝不删除）
-- `/privacy-legal:matter-workspace none` — 脱离任何活动事项，仅以实践级工作
+- `privacy-legal:matter-workspace new <代号>` — 创建新事项工作区，运行简短录入，写入 `matter.md`
+- `privacy-legal:matter-workspace list` — 列出事项并显示状态和活动标记
+- `privacy-legal:matter-workspace switch <代号>` — 设置活动事项
+- `privacy-legal:matter-workspace close <代号>` — 归档事项（移至 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/matters/_archived/`，绝不删除）
+- `privacy-legal:matter-workspace none` — 脱离任何活动事项，仅以实践级工作
 
 ## 指令
 
-1. 读取 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` — 确认 `## 事项工作区` 节已填充。如果 `已启用` 为 `✗`，告诉用户："事项工作区关闭——你被配置为法务实践，单一客户，因此插件自动使用实践级上下文。如果你实际跨多个客户工作，重新运行 `/privacy-legal:cold-start-interview --redo` 并选择非单一客户设置。否则，你完全不需要 `/matter-workspace`。"不要报错——关闭状态是法务用户的预期状态。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` — 确认 `## 事项工作区` 节已填充。如果 `已启用` 为 `✗`，告诉用户："事项工作区关闭——你被配置为法务实践，单一客户，因此插件自动使用实践级上下文。如果你实际跨多个客户工作，重新运行 `privacy-legal:cold-start-interview --redo` 并选择非单一客户设置。否则，你完全不需要 `privacy-legal:matter-workspace`。"不要报错——关闭状态是法务用户的预期状态。
 2. 使用以下子命令逻辑。
 3. 根据 `$ARGUMENTS` 的第一个 token 分发：
-   - `new` → 运行录入访谈，写入 `~/.claude/plugins/config/claude-for-legal/privacy-legal/matters/<代号>/matter.md`，种子化 `history.md` 和 `notes.md`。
-   - `list` → 枚举 `~/.claude/plugins/config/claude-for-legal/privacy-legal/matters/*/matter.md`，打印表格，标记活动事项。
-   - `switch` → 更新实践级 CLAUDE.md 中的 `活动事项：` 行。
-   - `close` → 移动 `~/.claude/plugins/config/claude-for-legal/privacy-legal/matters/<代号>/` 至 `~/.claude/plugins/config/claude-for-legal/privacy-legal/matters/_archived/<代号>/`，在 `history.md` 中记录关闭日期。
+   - `new` → 运行录入访谈，写入 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/matters/<代号>/matter.md`，种子化 `history.md` 和 `notes.md`。
+   - `list` → 枚举 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/matters/*/matter.md`，打印表格，标记活动事项。
+   - `switch` → 更新实践级 PRACTICE.md 中的 `活动事项：` 行。
+   - `close` → 移动 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/matters/<代号>/` 至 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/matters/_archived/<代号>/`，在 `history.md` 中记录关闭日期。
    - `none` → 将 `活动事项：` 设为 `无 — 仅实践级上下文`。
 4. 展示变更内容并在写入前请用户确认。
 
 ## 备注
 
-- 除非实践级 CLAUDE.md 中 `跨事项上下文` 为 `开启`，否则技能绝不跨事项读取。
+- 除非实践级 PRACTICE.md 中 `跨事项上下文` 为 `开启`，否则技能绝不跨事项读取。
 - 归档非删除——已关闭的事项仍可被读取，供保留记录/利益冲突检查目的。
 - 代号为小写字母加连字符。如果代号在已归档和活动事项之间重复使用，已归档的以 `_archived/<代号>/` 保存。
 
@@ -43,15 +42,15 @@ argument-hint: "<new | list | switch | close | none> [代号]"
 
 跨客户执业者（非单一客户——独立执业、小所、大所）跨多个委托工作。一个委托的上下文不得泄露到另一个中。本技能是实现这一点的薄文件管理层。
 
-**默认状态是关闭。** 法务用户永远看不到这个——他们仅以实践级运行。事项工作区在冷启动时对非单一客户用户启用，或通过编辑实践级 CLAUDE.md 中的 `## 事项工作区` 启用。如果 `已启用` 为 `✗`，本技能不运行；上述工作流解释了关闭状态，并建议确实需要事项隔离的用户运行 `/privacy-legal:cold-start-interview --redo`。
+**默认状态是关闭。** 法务用户永远看不到这个——他们仅以实践级运行。事项工作区在冷启动时对非单一客户用户启用，或通过编辑实践级 PRACTICE.md 中的 `## 事项工作区` 启用。如果 `已启用` 为 `✗`，本技能不运行；上述工作流解释了关闭状态，并建议确实需要事项隔离的用户运行 `privacy-legal:cold-start-interview --redo`。
 
 ## 存储布局
 
 所有事项数据存放于：
 
 ```
-~/.claude/plugins/config/claude-for-legal/privacy-legal/
-├── CLAUDE.md                       # 实践级实践档案
+~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/
+├── PRACTICE.md                       # 实践级实践档案
 └── matters/
     ├── <代号>/
     │   ├── matter.md               # 客户、对方当事人、事项类型、关键事实、覆盖项
@@ -64,9 +63,9 @@ argument-hint: "<new | list | switch | close | none> [代号]"
 
 代号为小写字母加连字符。示例：`acme-msa-2026`、`zenith-renewal`、`vendor-xyz-nda`。
 
-## 活动事项在实践 CLAUDE.md 中
+## 活动事项在实践 PRACTICE.md 中
 
-实践级 CLAUDE.md 中 `## 事项工作区` 下的 `活动事项：` 行是唯一真相来源。切换事项编辑该行。无单独状态文件。
+实践级 PRACTICE.md 中 `## 事项工作区` 下的 `活动事项：` 行是唯一真相来源。切换事项编辑该行。无单独状态文件。
 
 ## 子命令逻辑
 
@@ -84,7 +83,7 @@ argument-hint: "<new | list | switch | close | none> [代号]"
 3. 使用以下模板写入 `matters/<代号>/matter.md`。
 4. 种子化 `matters/<代号>/history.md` 为单条"已开启"记录。
 5. 创建空 `matters/<代号>/notes.md`。
-6. **不**自动切换至新事项。询问："是否要现在切换到 `<代号>`？（`/privacy-legal:matter-workspace switch <代号>`）"
+6. **不**自动切换至新事项。询问："是否要现在切换到 `<代号>`？（`privacy-legal:matter-workspace switch <代号>`）"
 
 ### `list`
 
@@ -97,8 +96,8 @@ argument-hint: "<new | list | switch | close | none> [代号]"
 
 ### `switch <代号>`
 
-1. 确认 `matters/<代号>/matter.md` 存在。如果不存在，提供 `/privacy-legal:matter-workspace new <代号>`。
-2. 编辑实践级 CLAUDE.md 中的 `活动事项：` 行为 `活动事项：<代号>`。
+1. 确认 `matters/<代号>/matter.md` 存在。如果不存在，提供 `privacy-legal:matter-workspace new <代号>`。
+2. 编辑实践级 PRACTICE.md 中的 `活动事项：` 行为 `活动事项：<代号>`。
 3. 向用户展示 matter.md 摘要，以便用户确认在正确的事项上。
 
 ### `close <代号>`
@@ -110,12 +109,12 @@ argument-hint: "<new | list | switch | close | none> [代号]"
 
 ### `none`
 
-将实践级 CLAUDE.md 中的 `活动事项：` 设为 `无 — 仅实践级上下文`。与用户确认。
+将实践级 PRACTICE.md 中的 `活动事项：` 设为 `无 — 仅实践级上下文`。与用户确认。
 
 ## `matter.md` 模板
 
 ```markdown
-[工作成果抬头 — 按插件配置 ## 输出 — 因角色不同而异；见实践级 CLAUDE.md 中的 `## 谁在使用`]
+[工作成果抬头 — 按插件配置 ## 输出 — 因角色不同而异；见实践级 PRACTICE.md 中的 `## 谁在使用`]
 
 # 事项：[客户] — [简短描述]
 
@@ -173,7 +172,7 @@ argument-hint: "<new | list | switch | close | none> [代号]"
 
 ## 跨事项上下文
 
-实践级 CLAUDE.md 有一个 `跨事项上下文：` 标记。当它为 `关闭` 时（默认），在事项 A 中工作的技能**绝不**读取 `matters/B/` 中任何其他 `B` 的文件。绝对不。这是该设置存在旨在提供的保密保证。
+实践级 PRACTICE.md 有一个 `跨事项上下文：` 标记。当它为 `关闭` 时（默认），在事项 A 中工作的技能**绝不**读取 `matters/B/` 中任何其他 `B` 的文件。绝对不。这是该设置存在旨在提供的保密保证。
 
 当它为 `开启` 时，技能可以跨事项文件夹读取文件，但仅在用户明确要求时（如"比较我们在过去五个供应商事项中的责任上限立场"）。即使为 `开启`，默认也是仅加载活动事项，除非用户要求跨事项视图。
 

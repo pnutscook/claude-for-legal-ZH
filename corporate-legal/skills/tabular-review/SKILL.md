@@ -8,9 +8,8 @@ description: >
   "批量审查"或指向文件夹并要求比较时使用。
 ---
 
-# /tabular-review
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` → 尽调结构、阈值、内部格式。
+# tabular-review
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → 尽调结构、阈值、内部格式。
 2. 确认：什么文件、什么列、输出到哪里。
 3. 构建类型化模式。写入 `.review-schema.yaml`。与用户确认。
 4. 样本运行（3-5份文件）。调整模式。确认。
@@ -20,9 +19,9 @@ description: >
 8. 摘要：核实工作量（每列 not_present / unclear / needs_review 的计数）、标记的列、文件位置、提醒每个单元格是线索而非发现。
 
 ```
-/corporate-legal:tabular-review
-/corporate-legal:tabular-review --schema .review-schema.yaml --docs ./vdr/02-Contracts/
-/corporate-legal:tabular-review --template ma-diligence
+corporate-legal:tabular-review
+corporate-legal:tabular-review --schema .review-schema.yaml --docs ./vdr/02-Contracts/
+corporate-legal:tabular-review --template ma-diligence
 ```
 
 **`--schema <路径>`:** 使用已有的模式文件而非新建。用于重新运行和增量添加。
@@ -39,7 +38,7 @@ description: >
 
 ## 事项上下文
 
-**事项上下文。** 检查实务级 CLAUDE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `/corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实务级 PRACTICE.md 中的 `## 事项工作区`。如果 `Enabled` 为 `✗`（企业法务用户的默认值），跳过本段其余内容——技能使用实务级上下文，事项机制不可见。如果已启用且无活跃事项，询问："这是哪个事项？运行 `corporate-legal:matter-workspace switch <事项简称>` 或说 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖规则。输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/<事项简称>/`。除非 `跨事项上下文` 为 `开`，否则绝不读取其他事项的文件。
 
 ---
 
@@ -53,8 +52,8 @@ description: >
 
 ## 加载上下文
 
-- `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` → 尽调结构、重要性阈值、内部格式偏好
-- `~/.claude/plugins/config/claude-for-legal/corporate-legal/deals/[代码]/deal-context.md`（如处理特定交易）
+- `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → 尽调结构、重要性阈值、内部格式偏好
+- `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/deals/[代码]/deal-context.md`（如处理特定交易）
 - 用户已有的模式文件（`.review-schema.yaml`）
 
 ## 列类型系统
@@ -213,7 +212,7 @@ schema:
 
 ## 以下一步行动决策树收尾
 
-以 CLAUDE.md `## 输出规范` 中的下一步行动决策树收尾。根据本技能刚产出的内容定制选项——五个默认分支（起草X、上报、补充事实、监控等待、其他）是起点，不是锁定。决策树本身就是产出；律师选择。
+以 PRACTICE.md `## 输出规范` 中的下一步行动决策树收尾。根据本技能刚产出的内容定制选项——五个默认分支（起草X、上报、补充事实、监控等待、其他）是起点，不是锁定。决策树本身就是产出；律师选择。
 
 ## 本技能不做什么
 

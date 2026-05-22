@@ -2,32 +2,37 @@
 name: cold-start-interview
 description: >
   运行冷启动访谈——学习你的隐私实践并从你的处理规则、DPA模板和一份参考PIA写入
-  CLAUDE.md。在首次运行、CLAUDE.md缺失或有占位符、或用户说"设置隐私插件"
+  PRACTICE.md。在首次运行、PRACTICE.md缺失或有占位符、或用户说"设置隐私插件"
   "引导我""配置隐私""，或想重新运行访谈或重新检查集成时使用。
 argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集成]"
 ---
 
-# /cold-start-interview
+# cold-start-interview
 
-1. 检查 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` — 如已填充且无 `--redo`，覆盖前先确认。
+## Codex 画像路径与旧 Claude 迁移
+
+本技能在 Codex 中使用 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` 作为唯一运行期画像。若该文件不存在，先检查旧 Claude 配置：`~/.claude/plugins/config/claude-for-legal-zh/privacy-legal/CLAUDE.md` 和 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`。
+
+如旧文件存在且不含 `[PLACEHOLDER]`，创建 Codex 目录并复制为 `PRACTICE.md`，然后继续本次任务；如旧文件仍为模板或不存在，则按本访谈生成新的 `PRACTICE.md`。旧 `.claude-plugin/` 文件仅用于兼容，不再作为 Codex 的默认读取位置。
+1. 检查 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` — 如已填充且无 `--redo`，覆盖前先确认。
 2. 运行以下访谈工作流。
 3. 种子文档：个人信息处理规则（URL或文件）、DPA模板、一份参考PIA。全部读取。
 4. 抽取：处理规则承诺、DPA立场（标注与声明的差异）、PIA结构。
-5. 迁移：如果已填充的 CLAUDE.md（无 `[占位符]` 标记）存在于旧缓存路径但不在配置路径，复制到配置路径并向用户展示迁移了什么。
-6. 写入 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`（按需创建父目录）。展示摘要。提供首次任务。
+5. 迁移：如果已填充的 PRACTICE.md（无 `[占位符]` 标记）存在于旧缓存路径但不在配置路径，复制到配置路径并向用户展示迁移了什么。
+6. 写入 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md`（按需创建父目录）。展示摘要。提供首次任务。
 
 ## `--check-integrations`
 
-重新运行集成可用性检查（文档存储、即时通讯、定时任务）并更新 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` 中的 `## 可用集成`。不重新访谈。当你连接或断开一个 MCP 并希望插件在不重新运行完整设置的情况下感知时使用。
+重新运行集成可用性检查（文档存储、即时通讯、定时任务）并更新 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` 中的 `## 可用集成`。不重新访谈。当你连接或断开一个 MCP 并希望插件在不重新运行完整设置的情况下感知时使用。
 
 探测时：仅在实际 MCP 工具调用成功时报告 ✓。已配置但未测试的连接器应标记为 ⚪ 并附一行确认方法。绝不基于单独的 `.mcp.json` 声明报告 ✓——这会误导用户以为某物已接通而实际没有。
 
 ```
-/privacy-legal:cold-start-interview
+privacy-legal:cold-start-interview
 ```
 
 ```
-/privacy-legal:cold-start-interview --check-integrations
+privacy-legal:cold-start-interview --check-integrations
 ```
 
 ---
@@ -36,25 +41,25 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 ## 目的
 
-了解*这个*隐私团队如何工作——什么法规实际适用于他们，他们在 DPA 中愿意/不愿意接受什么，一份好的 PIA 在这里和别处有什么不同。写入 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`，使每个其他技能从同一理解中读取。
+了解*这个*隐私团队如何工作——什么法规实际适用于他们，他们在 DPA 中愿意/不愿意接受什么，一份好的 PIA 在这里和别处有什么不同。写入 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md`，使每个其他技能从同一理解中读取。
 
 隐私实践因公司而异。一家 B2B SaaS 受托处理者与一家面向消费者的应用处理者几乎没有共同之处。访谈在任何其他事情之前搞清楚这是哪一种。
 
 ## 冷启动检查
 
-读取 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md`：
 - **不存在** → 开始访谈。
 - **包含 `<!-- 设置暂停于：-->`** → 问候用户并提供从该节恢复。
 - **包含 `[占位符]` 标记但无暂停注释** → 模板从未完成；提供从头开始或从占位符起始处恢复。
 - **已填充（无占位符，无暂停注释）** → 已配置；跳过除非 `--redo`。
 
-模板结构位于 `${CLAUDE_PLUGIN_ROOT}/CLAUDE.md`——用作章节支架。将完成的实践档案写入配置路径，按需创建父目录。
+模板结构位于 `${CLAUDE_PLUGIN_ROOT}/PRACTICE.md`——用作章节支架。将完成的实践档案写入配置路径，按需创建父目录。
 
-如果旧的缓存路径 `~/.claude/plugins/cache/claude-for-legal/privacy-legal/*/CLAUDE.md` 中存在 CLAUDE.md 但不在配置路径，复制过来。
+如果旧的缓存路径 `~/.codex/plugins/cache/claude-for-legal-zh/privacy-legal/*/PRACTICE.md` 中存在 PRACTICE.md 但不在配置路径，复制过来。
 
 ## 检查共享的公司档案
 
-查找 `~/.claude/plugins/config/claude-for-legal/company-profile.md`。
+查找 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`。
 
 - **如果存在：** 读取。显示一行确认："你是[姓名]，[执业环境]，在[公司]，[行业]，运营于[法域]。对吗？（或说'更新'以更改共享档案。）"如果确认，跳过公司问题——直接进入插件特定问题。
 - **如果不存在：** 你将是该用户设置的第一个插件。在定位和分叉之后，提问公司问题并将其写入共享档案（按插件根目录下 `references/company-profile-template.md` 的模板），然后继续插件特定问题。告诉用户："我已保存你的公司档案——其他法律插件将读取它并跳过这些问题。"
@@ -73,11 +78,11 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 在提问任何其他事之前，显示分叉前导语——3-4短行，不过长：
 
-> **`privacy-legal` 是为运行个人信息保护计划的人准备的：个人信息保护影响评估、数据处理协议审查、个人信息主体权利请求回复、法规差距分析。** 不是你的领域？ `/legal-builder-hub:related-skills-surfacer`。
+> **`privacy-legal` 是为运行个人信息保护计划的人准备的：个人信息保护影响评估、数据处理协议审查、个人信息主体权利请求回复、法规差距分析。** 不是你的领域？ `legal-builder-hub:related-skills-surfacer`。
 >
 > **2分钟** 给你你的角色、你在 DPA 中坐在哪一边（处理者/受托处理者/两者）和主要法域，其他用合理默认值。**15分钟** 加入你的 DPA 操作手册立场（处理者侧和受托处理者侧）、从一份参考 PIA 中获取的 PIA 模板结构、你的完整监管覆盖范围以及你的处理活动种子。
 >
-> 快速还是完整？（随时通过 `/cold-start-interview --full` 升级。）
+> 快速还是完整？（随时通过 `privacy-legal:cold-start-interview --full` 升级。）
 
 等待用户的选择再展示任何其他内容。
 
@@ -87,15 +92,15 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 > "本插件维护你的实践档案（DPA操作手册、PIA内部规范、监管覆盖范围）、处理活动登记册以及每项活动的 PIA 和 DPA 审查。本次设置访谈了解你实际如何工作——你的实践、你的DPA立场、你的PIA内部规范——并将其写入一份纯文本文件，插件每次从中读取。你回答的所有内容都可以以后更改。一旦完成，插件的命令将按你的工作方式工作，而非按通用模板的方式。"
 >
-> 然后："设置从你的回答中构建全新的专业档案。它不会读取你的个人 Claude 历史、其他对话或你的主目录 CLAUDE.md。如果我注意到我们对话上下文中存在相关信息——例如你之前提到了你的公司——我会在使用前询问。除非你输入或批准，否则不会将任何个人信息纳入你的实践配置。"
+> 然后："设置从你的回答中构建全新的专业档案。它不会读取你的个人 Claude 历史、其他对话或你的主目录 PRACTICE.md。如果我注意到我们对话上下文中存在相关信息——例如你之前提到了你的公司——我会在使用前询问。除非你输入或批准，否则不会将任何个人信息纳入你的实践配置。"
 >
 > 然后："准备好了？先来几个快速问题，然后我们再深入。"
 
 **为什么这很重要。** 本插件中的每个命令都从本次访谈写入的配置中读取。通用配置给出通用输出——默认的 DPA 立场、默认的 PIA 格式、默认的个人信息主体权利请求工作流，以及将你的 B2B 受托处理者协议与面向消费者的处理者协议同等对待的审查。告诉插件你实际的监管覆盖范围、你实际的 DPA 立场以及你实际的 PIA 内部规范，是"一个隐私 AI 工具"和"一个按你的个人信息保护计划方式工作的工具"之间的区别。你的回答越具体，输出看起来越像你自己写的。
 
-仅从用户输入的回答和三份种子文件填充实践档案。不要读取 `~/CLAUDE.md` 或从环境上下文中拉取实践事实。如果对话中已经可见相关信息，在使用前询问。
+仅从用户输入的回答和三份种子文件填充实践档案。不要读取 `~/PRACTICE.md` 或从环境上下文中拉取实践事实。如果对话中已经可见相关信息，在使用前询问。
 
-**快速启动路径：** 仅提问第0部分（角色、执业环境、集成）和监管覆盖范围。在其他所有内容上用 `[默认]` 标记写入配置。以以下内容结束："完成。你现在可以开始使用命令了。我已对 DPA 立场、个人信息主体权利请求时限和 PIA 阈值使用了合理默认值。当某技能的输出感觉不对劲时，通常是某个你应该调整的默认值——它会告诉你是哪一个。随时运行 `/privacy-legal:cold-start-interview --full` 以完成完整访谈，或 `/privacy-legal:cold-start-interview --redo <section>` 重做某一部分。"
+**快速启动路径：** 仅提问第0部分（角色、执业环境、集成）和监管覆盖范围。在其他所有内容上用 `[默认]` 标记写入配置。以以下内容结束："完成。你现在可以开始使用命令了。我已对 DPA 立场、个人信息主体权利请求时限和 PIA 阈值使用了合理默认值。当某技能的输出感觉不对劲时，通常是某个你应该调整的默认值——它会告诉你是哪一个。随时运行 `privacy-legal:cold-start-interview --full` 以完成完整访谈，或 `privacy-legal:cold-start-interview --redo <section>` 重做某一部分。"
 
 **完整设置路径：** 以下现有访谈流。
 
@@ -110,9 +115,9 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 - **对于种子文件上传：** "粘贴内容、分享文件路径或 URL，或说'暂时跳过。'如果跳过，我会在你的实践档案中标注该缺口以便以后填补。"然后实际等待。
 - **在写入实践档案前：** 回顾访谈。列出任何被跳过或以占位符回答的问题（特别是三份种子文件和 DPA 立场）。说："在我写入你的实践档案之前，以下仍待处理：[列表]。想现在填补这些，还是保留为占位符？"然后等待回答。
 - **绝不**写出带有静默缺口的实践档案。每个 `[占位符]` 应是用户选择跳过的有意决定，而非滚过去的问题。如果 DPA 模板或参考 PIA 被跳过，标注 `[立场未测试]` 以使下游技能知道。
-- **暂停和恢复。** 预先告诉用户："如果你需要停止，说'暂停'（或'停'，或'让我回头再来'）我会保存你的进度。稍后再次运行 `/privacy-legal:cold-start-interview` 我会从你停下的地方继续。"当用户暂停时，向 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` 写入部分配置，并在顶部附 `<!-- 设置暂停于：[章节名称] — 运行 /privacy-legal:cold-start-interview 以恢复 -->` 注释，未填写的字段用 `[待处理]` 标记（区别于 `[占位符]`）。当设置重新运行并发现暂停的配置时，问候用户："欢迎回来。你暂停于[章节]。你此前的回答已保存。从停下的地方继续，还是从头开始？"不要重新提问已回答的问题。
+- **暂停和恢复。** 预先告诉用户："如果你需要停止，说'暂停'（或'停'，或'让我回头再来'）我会保存你的进度。稍后再次运行 `privacy-legal:cold-start-interview` 我会从你停下的地方继续。"当用户暂停时，向 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` 写入部分配置，并在顶部附 `<!-- 设置暂停于：[章节名称] — 运行 privacy-legal:cold-start-interview 以恢复 -->` 注释，未填写的字段用 `[待处理]` 标记（区别于 `[占位符]`）。当设置重新运行并发现暂停的配置时，问候用户："欢迎回来。你暂停于[章节]。你此前的回答已保存。从停下的地方继续，还是从头开始？"不要重新提问已回答的问题。
 
-**在设置过程中即时核实用户陈述的法律事实。** 当用户用具体规则引用、法条编号、案例名称、期限、阈值、法域或注册号回答访谈问题时——且是你可以做合理性检查的——在写进配置前进行检查。如果他们说的与你的理解或他们粘贴的某物冲突，呈现出来："你说阈值是X；我的理解是Y——能否确认哪个放入档案？`[前提已标注 — 请核实]`"一个被写进 CLAUDE.md 的错误事实会传播到每个未来的输出中；在此处捕捉它是产品的最高杠杆时刻之一。
+**在设置过程中即时核实用户陈述的法律事实。** 当用户用具体规则引用、法条编号、案例名称、期限、阈值、法域或注册号回答访谈问题时——且是你可以做合理性检查的——在写进配置前进行检查。如果他们说的与你的理解或他们粘贴的某物冲突，呈现出来："你说阈值是X；我的理解是Y——能否确认哪个放入档案？`[前提已标注 — 请核实]`"一个被写进 PRACTICE.md 的错误事实会传播到每个未来的输出中；在此处捕捉它是产品的最高杠杆时刻之一。
 
 ## 访谈
 
@@ -178,17 +183,17 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 - 如果你不能测试（无法从此处探测），报告 ⚪"已配置但未验证——打开你的MCP设置以确认"并附单一行的操作方法。
 - 绝不基于单独的配置报告 ✓。
 
-对于显示为未连接的连接器，告诉用户如何连接。示例措辞："网盘未连接。在 Claude Cowork：Settings → Connectors → Add → 网盘 → 登录。在 Claude Code：将网盘 MCP 添加到你的配置或通过 `/mcp`。本插件不依赖它即可工作——你将粘贴文件而非拉取——但连接它使文件拉取自动化。"
+对于显示为未连接的连接器，告诉用户如何连接。示例措辞："网盘未连接。在 Claude Cowork：Settings → Connectors → Add → 网盘 → 登录。在 Codex：将网盘 MCP 添加到你的配置或通过 `/mcp`。本插件不依赖它即可工作——你将粘贴文件而非拉取——但连接它使文件拉取自动化。"
 
 然后以此形式报告发现：
 
 > - ✓ [集成] — 已连接（已测试）
 > - ⚪ [集成] — 已配置但未验证。打开你的MCP设置以确认。
-> - ✗ [集成] — 未找到。[功能]将降级为[手动替代]。[如何连接。]如果你以后设置了这个，重新运行 `/privacy-legal:cold-start-interview --check-integrations`。
+> - ✗ [集成] — 未找到。[功能]将降级为[手动替代]。[如何连接。]如果你以后设置了这个，重新运行 `privacy-legal:cold-start-interview --check-integrations`。
 >
 > 你不需要所有这些。核心功能仅靠文件访问即可工作。
 
-#### 记录至 CLAUDE.md
+#### 记录至 PRACTICE.md
 
 在 `## 我们是谁` 之后紧接着写入 `## 谁在使用` 和 `## 可用集成` 节，并更新 `## 输出` 使工作成果抬头以角色为条件（见下面的实践档案模板）。
 
@@ -199,11 +204,11 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 > **[你的公司]做什么？** 这是唯一最重要的上下文——一家 SaaS 供应商的操作手册、一家硬件经销商的操作手册和一家服务公司的手册完全不同。你不必输入：粘贴你公司网站的链接、你的"关于"页面、你的百度百科条目或你最新的年报，我会抽取我需要的。或给我一句话版本：你销售什么、给谁、如何销售（直销 / 渠道 / 电商平台 / 订阅）。
 
 - 谁的数据流经公司？
-- 你主要是**个人信息处理者**（你自己的用户、你自己的目的）还是主要是**受托处理者**（客户的数据、他们的目的）？两者？（这送入 `/dpa-review`——技能自动检测你在 DPA 的哪一边并应用你操作手册的正确半部分。）
+- 你主要是**个人信息处理者**（你自己的用户、你自己的目的）还是主要是**受托处理者**（客户的数据、他们的目的）？两者？（这送入 `privacy-legal:dpa-review`——技能自动检测你在 DPA 的哪一边并应用你操作手册的正确半部分。）
 - B2B、B2C 还是两者？大企业客户还是中小企业客户？
 
 **监管覆盖范围：**
-- 哪些法规实际适用？个保法？数据安全法？网络安全法？行业监管？（这送入 `/reg-gap-analysis`——每项新法规针对此列表做差异对比以判断是否涉及你，且 `/use-case-triage` 用它来识别哪些制度适用于新的处理活动。）
+- 哪些法规实际适用？个保法？数据安全法？网络安全法？行业监管？（这送入 `privacy-legal:reg-gap-analysis`——每项新法规针对此列表做差异对比以判断是否涉及你，且 `privacy-legal:use-case-triage` 用它来识别哪些制度适用于新的处理活动。）
 - 是否有任何监管机关知道你名字了？公开调查、行政指导、什么？
 - 数据实际存放在哪里？仅在中国境内？有多区域部署？
 
@@ -213,7 +218,7 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 ### 第2部分：DPA 谈判立场（3-4分钟）
 
-*（这些立场送入 `/dpa-review`——每份进来的 DPA 针对你的标准、退让和绝不接受进行修订标记。此处错误的立场 = 每次错误的修订标记。）*
+*（这些立场送入 `privacy-legal:dpa-review`——每份进来的 DPA 针对你的标准、退让和绝不接受进行修订标记。此处错误的立场 = 每次错误的修订标记。）*
 
 在结构化问题前："你有现有的DPA模板、DPA谈判操作手册或退让立场备忘录我可以阅读吗？粘贴内容或分享文件路径，我会提取立场而非让你重新输入。如果没有，说'没有'我一个个问问题。"
 
@@ -239,12 +244,12 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 ### 第3部分：内部规范（1-2分钟）
 
-**PIA：** *（这送入 `/pia-generation`——技能将你的触发条件、格式、深度和审批人作为它起草每份PIA的默认模板。）*
+**PIA：** *（这送入 `privacy-legal:pia-generation`——技能将你的触发条件、格式、深度和审批人作为它起草每份PIA的默认模板。）*
 - 什么在你公司触发 PIA？每个新功能？还是仅某些类别（个保法第55条所列情形）？
 - 一份好的 PIA 多长——两页还是二十页？
 - 谁签署——仅你，还是有审核委员会？
 
-**个人信息主体权利请求：** *（这送入 `/dsar-response`——系统清单驱动定位步骤，处理人驱动谁拿操作手册，SLA驱动期限计算。）*
+**个人信息主体权利请求：** *（这送入 `privacy-legal:dsar-response`——系统清单驱动定位步骤，处理人驱动谁拿操作手册，SLA驱动期限计算。）*
 - 量级——一个月一件还是一百件？
 - 谁处理——你，还是一个有操作手册的支持团队？
 - 个人信息主体权利请求涉及多少系统——用户数据存在多少地方？
@@ -271,7 +276,7 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 > "最后两件事——我需要知道去哪里看才能保持你的处理规则最新。"
 
-- **你把已完成的 PIA、DPA审查和分诊结果保存在哪里？** 一个文件夹路径或共享盘位置。这是处理规则监控技能扫描的地方，以检测你的实践何时已漂移到书面处理规则之前。（这送入 `/policy-monitor`——没有此路径，漂移扫描仅在直接查询模式下运行。）
+- **你把已完成的 PIA、DPA审查和分诊结果保存在哪里？** 一个文件夹路径或共享盘位置。这是处理规则监控技能扫描的地方，以检测你的实践何时已漂移到书面处理规则之前。（这送入 `privacy-legal:policy-monitor`——没有此路径，漂移扫描仅在直接查询模式下运行。）
 - **实际的处理规则文件在哪里？** 被发布或分享给客户的那份。当发现漂移时我需要读取它以建议编辑。
 - **输出文件有命名规范吗？**（如 `PIA_功能名称_YYYY-MM-DD`）还是临时性的？
 
@@ -312,7 +317,7 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 | 即时通讯 | [✓ / ✗] | 个人信息泄露/分诊通知以行内方式递送，非推送 |
 | 定时任务 | [✓ / ✗] | 处理规则监控扫描仅按需运行 |
 
-*重新检查：`/privacy-legal:cold-start-interview --check-integrations`*
+*重新检查：`privacy-legal:cold-start-interview --check-integrations`*
 
 ---
 
@@ -416,7 +421,7 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 ---
 
-*重新运行：`/privacy-legal:cold-start-interview --redo`*
+*重新运行：`privacy-legal:cold-start-interview --redo`*
 ```
 
 ## 写入之后
@@ -429,14 +434,14 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 > **以下是隐私实践中我擅长的事：**
 >
-> - **依据你的操作手册审查 DPA** — 如"自动检测受托处理者 vs. 处理者；标示偏离你立场的地方。"试试：`/privacy-legal:dpa-review`
-> - **对处理活动分诊** — 如"PIA、个保法第55条法定评估、或可直接推进——附带处理规则冲突排查。"试试：`/privacy-legal:use-case-triage`
-> - **按内部格式生成 PIA** — 如"结构化录入、风险分析、制度分类、建议。"试试：`/privacy-legal:pia-generation`
-> - **处理个人信息主体权利请求** — 如"验证、定位、评估豁免、起草回复函。"试试：`/privacy-legal:dsar-response`
-> - **将新法规与你的处理规则做差异对比** — 如"输出差距清单和带负责人与截止日期的整改计划。"试试：`/privacy-legal:reg-gap-analysis`
-> - **扫描处理规则漂移** — 如"遍历已保存的PIA、DPA审查和分诊结果，找到处理规则不再匹配实践的地方。"试试：`/privacy-legal:policy-monitor`
+> - **依据你的操作手册审查 DPA** — 如"自动检测受托处理者 vs. 处理者；标示偏离你立场的地方。"试试：`privacy-legal:dpa-review`
+> - **对处理活动分诊** — 如"PIA、个保法第55条法定评估、或可直接推进——附带处理规则冲突排查。"试试：`privacy-legal:use-case-triage`
+> - **按内部格式生成 PIA** — 如"结构化录入、风险分析、制度分类、建议。"试试：`privacy-legal:pia-generation`
+> - **处理个人信息主体权利请求** — 如"验证、定位、评估豁免、起草回复函。"试试：`privacy-legal:dsar-response`
+> - **将新法规与你的处理规则做差异对比** — 如"输出差距清单和带负责人与截止日期的整改计划。"试试：`privacy-legal:reg-gap-analysis`
+> - **扫描处理规则漂移** — 如"遍历已保存的PIA、DPA审查和分诊结果，找到处理规则不再匹配实践的地方。"试试：`privacy-legal:policy-monitor`
 >
-> **我对你的第一个建议：** 对一个真实的处理活动运行 `/use-case-triage`——这是最快看到你的操作手册是否捕捉到正确判断的方法。或告诉我你手头在做什么，我来选。
+> **我对你的第一个建议：** 对一个真实的处理活动运行 `privacy-legal:use-case-triage`——这是最快看到你的操作手册是否捕捉到正确判断的方法。或告诉我你手头在做什么，我来选。
 
 这在一个提议中解决了冷启动问题（监工不知道先做什么）和价值主张问题（他们不知道插件能做什么）。让列表具体。如果监工在访谈期间已经指定了具体的首个任务，跳过这步。
 
@@ -444,7 +449,7 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 2. **检索连接器提示。** 说：
 
-   > "在你的第一次 DPA 审查或 PIA 之前：连接一个检索工具。没有它，我会将每处引用标记为未验证——有了它，我对照现行数据库验证它们。在 Cowork：Settings → Connectors。在 Claude Code：当技能提示你时授权。"
+   > "在你的第一次 DPA 审查或 PIA 之前：连接一个检索工具。没有它，我会将每处引用标记为未验证——有了它，我对照现行数据库验证它们。在 Cowork：Settings → Connectors。在 Codex：当技能提示你时授权。"
 
 3. **提议首次任务：**
    - "需要我将你的处理规则与你实际的数据收集做一下差异对比吗？这些有时会漂移。"
@@ -455,11 +460,11 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 5. **以"你可以以后更改任何东西"的提示结束：**
 
-   > "你的实践档案位于 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`——一份你可以直接阅读和编辑的纯文本文件。你回答的任何内容都可以更改：
+   > "你的实践档案位于 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md`——一份你可以直接阅读和编辑的纯文本文件。你回答的任何内容都可以更改：
    >
    > - 直接编辑文件进行快速更改
-   > - 运行 `/privacy-legal:cold-start-interview --redo` 进行完整重新访谈
-   > - 运行 `/privacy-legal:cold-start-interview --check-integrations` 重新检查连接了什么
+   > - 运行 `privacy-legal:cold-start-interview --redo` 进行完整重新访谈
+   > - 运行 `privacy-legal:cold-start-interview --check-integrations` 重新检查连接了什么
    >
    > 人们最常调整的三个章节：**DPA 操作手册**（随着你谈判更多并硬化立场）、**监管覆盖范围**（随着公司进入新市场）和**个人信息主体权利请求回复时限与系统清单**（随着数据版图变化）。"
 
@@ -470,7 +475,7 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
    > - 当某技能的输出感觉不对劲时，通常是某个你应该调整的立场。输出会告诉你是哪一个。
    > - `policy-monitor` 技能监控你的处理规则和你实际实践之间的漂移。当它发现漂移时，它会提议匹配现实的编辑。
    > - 你随时可以说"将我的操作手册更新为偏好X"或"将我的升级阈值更改为Y"，相关技能将写入该变更。
-   > - 运行 `/privacy-legal:cold-start-interview --redo <section>` 重新访谈某部分，或直接编辑配置文件。
+   > - 运行 `privacy-legal:cold-start-interview --redo <section>` 重新访谈某部分，或直接编辑配置文件。
    >
    > 十分钟的设置给你一个可工作的档案。一个月的使用给你一份读起来像你自己写的档案。
 
@@ -478,4 +483,4 @@ argument-hint: "[--redo 重新运行] [--check-integrations 仅重新探测集�
 
 - **不要假设个保法适用。** 许多纯粹的 B2B 国产公司被告诉它们"应该关心个保法"——询问它们是否实际处理个人信息。
 - **不要让他们跳过处理者/受托处理者问题。** 如果他们不确定，引导一遍："当你的客户的用户数据进入你的系统时，谁的处理规则约束它——你的还是客户的？"
-- **不要从通用立场编写 DPA 操作手册。** 如果他们没谈判过多少 DPA，在配置 CLAUDE.md 中说明：`[立场未测试 — 本团队尚未谈判过多份DPA。将这些视为起点，而非已沉淀的立场。]`
+- **不要从通用立场编写 DPA 操作手册。** 如果他们没谈判过多少 DPA，在配置 PRACTICE.md 中说明：`[立场未测试 — 本团队尚未谈判过多份DPA。将这些视为起点，而非已沉淀的立场。]`

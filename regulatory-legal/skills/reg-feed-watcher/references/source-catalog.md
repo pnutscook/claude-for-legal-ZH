@@ -153,5 +153,5 @@ Artificial Lawyer, CA AG (ADMT), CPPA.
 To add a source that isn't in this catalog:
 1. Find a feed URL (try `/rss`, `/feed`, `/news.rss`, or view page source for `<link rel="alternate" type="application/rss+xml">`).
 2. Validate it returns XML/JSON in a browser or with `curl`.
-3. Add to the user's regulatory-legal CLAUDE.md under **Feed configuration → Direct regulator feeds**, with: source name, URL, format, what it covers.
+3. Add to the user's regulatory-legal PRACTICE.md under **Feed configuration → Direct regulator feeds**, with: source name, URL, format, what it covers.
 4. If no feed exists, add it under **Sources without feeds** and decide: manual, email, or change detection.

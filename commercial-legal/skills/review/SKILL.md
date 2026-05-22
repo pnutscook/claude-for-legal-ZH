@@ -7,13 +7,12 @@ description: >
 argument-hint: '[文件路径 | 云文档链接 | 合同管理系统ID | 粘贴文本]'
 ---
 
-# /review
-
+# review
 根据审查指引审查接收方协议。从标题识别协议结构，选择合适的技能，如 `confirm_routing` 启用则在继续前与用户确认。
 
 ## 指令
 
-1. **加载审查指引。** 如果存在占位符，停止并提示运行 `/commercial-legal:cold-start-interview`。同时读取 `## 审查偏好` → `confirm_routing`。
+1. **加载审查指引。** 如果存在占位符，停止并提示运行 `commercial-legal:cold-start-interview`。同时读取 `## 审查偏好` → `confirm_routing`。
 
 2. **获取协议：** 从文件路径、云文档链接、合同管理系统ID或粘贴文本获取。
 
@@ -53,9 +52,9 @@ argument-hint: '[文件路径 | 云文档链接 | 合同管理系统ID | 粘贴�
 ## 示例
 
 ```
-/commercial-legal:review vendor-msa.pdf
-/commercial-legal:review https://drive.google.com/file/d/ABC123
-/commercial-legal:review
+commercial-legal:review vendor-msa.pdf
+commercial-legal:review https://drive.google.com/file/d/ABC123
+commercial-legal:review
 [粘贴协议文本]
 ```
 

@@ -17,13 +17,13 @@ Product counsel gets blindsided when a launch shows up two days before ship date
 
 ## Schedule
 
-Run daily. Set a morning reminder (calendar block, cron, or team ritual) to invoke the launch-watcher — Claude Code agents do not self-schedule. Pulls tickets with launch dates in the next 30 days.
+Run daily. Set a morning reminder (calendar block, cron, or team ritual) to invoke the launch-watcher — Codex agents do not self-schedule. Pulls tickets with launch dates in the next 30 days.
 
 **Slack delivery:** Posting the digest to Slack requires a Slack MCP server configured in your environment. If no Slack MCP is available, write the digest to a file (e.g., `launch-radar-[date].md`) instead — the filtering logic is independent of the delivery path.
 
 ## What it does
 
-1. Read `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md` → launch tracker location, calibration table, escalation channel.
+1. Read `~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md` → launch tracker location, calibration table, escalation channel.
 2. Query the tracker for tickets with a target date ≤30 days out.
 3. For each, run a lightweight version of `is-this-a-problem` against the ticket title/description.
 4. Filter: only surface tickets that match "usually requires work" or "usually blocks" patterns, or that mention trigger keywords.

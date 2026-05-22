@@ -2,7 +2,7 @@
 
 ## Overview
 
-Checks regulatory feeds on a schedule, filters by the deploying team's materiality threshold, runs a quick gap check against the policy library for always-material items, and writes a digest. Same source as the [`reg-change-monitor`](../../regulatory-legal/agents/reg-change-monitor.md) Claude Code agent and the [`reg-feed-watcher`](../../regulatory-legal/skills/reg-feed-watcher) / [`policy-diff`](../../regulatory-legal/skills/policy-diff) skills — this directory is the Managed Agent cookbook for `POST /v1/agents`.
+Checks regulatory feeds on a schedule, filters by the deploying team's materiality threshold, runs a quick gap check against the policy library for always-material items, and writes a digest. Same source as the [`reg-change-monitor`](../../regulatory-legal/agents/reg-change-monitor.md) Codex agent and the [`reg-feed-watcher`](../../regulatory-legal/skills/reg-feed-watcher) / [`policy-diff`](../../regulatory-legal/skills/policy-diff) skills — this directory is the Managed Agent cookbook for `POST /v1/agents`.
 
 ## ⚠️ Before you deploy
 

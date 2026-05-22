@@ -6,8 +6,7 @@ description: >
 argument-hint: "[调查事项名称]"
 ---
 
-# /investigation-memo
-
+# investigation-memo
 从调查日志起草第一版调查备忘录，或当新数据已添加时更新现有草案。
 
 ## 指令
@@ -61,10 +60,10 @@ argument-hint: "[调查事项名称]"
 ## 示例
 
 ```
-/employment-legal:investigation-memo [调查事项名称]
+employment-legal:investigation-memo [调查事项名称]
 ```
 
 ```
-/employment-legal:investigation-memo [调查事项名称]
+employment-legal:investigation-memo [调查事项名称]
 （如已有草案则更新）
 ```

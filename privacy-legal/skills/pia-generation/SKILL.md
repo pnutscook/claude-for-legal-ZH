@@ -7,9 +7,8 @@ description: >
 argument-hint: "[功能名称或描述]"
 ---
 
-# /pia-generation
-
-1. 加载 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → PIA 内部规范（触发标准、结构、深度、审批）。
+# pia-generation
+1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` → PIA 内部规范（触发标准、结构、深度、审批）。
 2. 执行以下工作流。
 3. 检查：是否确实需要 PIA？（内部触发标准 + 检索各适用制度的法定评估触发条件——引用主源，核实时效。）
 4. 录入：向产品团队提问。可抽取已提供的 PRD 信息。
@@ -17,11 +16,11 @@ argument-hint: "[功能名称或描述]"
 6. 输出附条件清单和指定负责人。路由审批。
 
 ```
-/privacy-legal:pia-generation "位置共享功能"
+privacy-legal:pia-generation "位置共享功能"
 ```
 
 ```
-/privacy-legal:pia-generation
+privacy-legal:pia-generation
 PRD: [网盘链接]
 ```
 
@@ -31,13 +30,13 @@ PRD: [网盘链接]
 
 ## 事项上下文
 
-**事项上下文。** 检查实践级 CLAUDE.md 中的 `## 事项工作区`。如果 `已启用` 为 `✗`（法务用户的默认值），跳过本段——技能使用实践级上下文，事项机制不可见。如果已启用且无活动事项，询问："这是哪个事项？运行 `/privacy-legal:matter-workspace switch <slug>` 或说 `实践级`。"加载活动事项的 `matter.md` 获取事项特定上下文和覆盖项。将输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/privacy-legal/matters/<matter-slug>/`。除非 `跨事项上下文` 为 `开启`，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实践级 PRACTICE.md 中的 `## 事项工作区`。如果 `已启用` 为 `✗`（法务用户的默认值），跳过本段——技能使用实践级上下文，事项机制不可见。如果已启用且无活动事项，询问："这是哪个事项？运行 `privacy-legal:matter-workspace switch <slug>` 或说 `实践级`。"加载活动事项的 `matter.md` 获取事项特定上下文和覆盖项。将输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/matters/<matter-slug>/`。除非 `跨事项上下文` 为 `开启`，否则绝不读取其他事项的文件。
 
 ---
 
 ## 目的地检查
 
-在生成输出前，检查输出目的地。如果用户指定了目的地（渠道、分发列表、对方当事人、"所有人"），询问是否在保密圈内。公共渠道、全公司列表、对方当事人/对方律师、供应商和客户（就工作成果而言）会放弃保护。当目的地疑似在圈外时，标示并提供 (a) 仅供法务的保密版本，(b) 供更广泛渠道的净化版本，或 (c) 两者——不要默默加上保密抬头然后帮助粘贴到该抬头无法保护的地方。参见本插件 CLAUDE.md 中的 `## 共享护栏 → 目的地检查`。
+在生成输出前，检查输出目的地。如果用户指定了目的地（渠道、分发列表、对方当事人、"所有人"），询问是否在保密圈内。公共渠道、全公司列表、对方当事人/对方律师、供应商和客户（就工作成果而言）会放弃保护。当目的地疑似在圈外时，标示并提供 (a) 仅供法务的保密版本，(b) 供更广泛渠道的净化版本，或 (c) 两者——不要默默加上保密抬头然后帮助粘贴到该抬头无法保护的地方。参见本插件 PRACTICE.md 中的 `## 共享护栏 → 目的地检查`。
 
 ## 目的
 
@@ -49,7 +48,7 @@ PIA 是与产品团队的对话，被记录下来。它问：什么数据，为�
 
 ## 加载关于本功能/活动的先前上下文
 
-在撰写新 PIA 之前，检查输出文件夹中是否有关于同一功能、处理活动或对方当事人的先前工作。读取 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## 输出` 获取路径。扫描：
+在撰写新 PIA 之前，检查输出文件夹中是否有关于同一功能、处理活动或对方当事人的先前工作。读取 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` → `## 输出` 获取路径。扫描：
 
 - **先前的 `use-case-triage` 结果**涵盖本活动——分诊的风险评级、强制条件和标注的关注点是 PIA 的入口。
 - **先前的 `pia-generation` 输出**涵盖相同或重叠的活动——新 PIA 应做好衔接（什么变了，什么延续）。一个对着同一活动静默产生不同结论的 PIA 是审核律师无法发现的矛盾。
@@ -62,23 +61,23 @@ PIA 是与产品团队的对话，被记录下来。它问：什么数据，为�
 如果先前存在 PIA：
 > "本 PIA 取代[日期]的 PIA，因为[原因——范围变化、新数据类别、供应商变更、法规变化]。延续的结论：[X]。修订的结论：[Y，因为Z]。"
 
-**从上游继承严重程度作为底线**，遵循 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## 共享护栏` 中的跨技能严重程度底线规则。被分诊评为高风险的活动，不能在 PIA 中静默变为低风险，除非说明理由和变化了什么。
+**从上游继承严重程度作为底线**，遵循 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` → `## 共享护栏` 中的跨技能严重程度底线规则。被分诊评为高风险的活动，不能在 PIA 中静默变为低风险，除非说明理由和变化了什么。
 
 如果未找到先前的输出，明确说明——"输出文件夹中无关于本活动的先前分诊或 PIA；此为冷启动"——以便审核律师知道检查已经执行过且未发现需要衔接的内容。
 
 ## 加载内部规范
 
-读取 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → `## PIA 内部规范`。其中包含：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` → `## PIA 内部规范`。其中包含：
 - 本团队什么触发 PIA（可能与法定评估触发条件不同——有些团队对所有处理活动做 PIA，有些仅对高风险活动）
 - 从种子 PIA 提取的结构模板
 - 典型深度
 - 审批人
 
-如果配置 CLAUDE.md 中有种子 PIA 结构，**使用它**。核心在于本 PIA 看起来像该团队产出的其他 PIA，而非像通用模板。
+如果配置 PRACTICE.md 中有种子 PIA 结构，**使用它**。核心在于本 PIA 看起来像该团队产出的其他 PIA，而非像通用模板。
 
 ## 第0步：是否需要 PIA？
 
-检查 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` 中的触发标准。这是团队的内部回答。
+检查 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` 中的触发标准。这是团队的内部回答。
 
 此外，**检索监管覆盖范围中每个适用制度的当前有效法定评估触发条件**（个保法第55条四类情形、数据出境安全评估、算法安全评估等）。引用现行有效的法律、行政法规、部门规章或指引，附精准引用。验证时效——评估门槛和定义因新法出台和执法指引而变化。不确定时标示，而非猜测。
 
@@ -135,7 +134,7 @@ PIA 是与产品团队的对话，被记录下来。它问：什么数据，为�
 
 ## 撰写 PIA
 
-**使用配置 CLAUDE.md 中的种子 PIA 结构。** 如果未捕获，使用以下默认结构。冠以 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` `## 输出` 中的工作成果抬头（因用户角色不同而异——见 `## 谁在使用`）。
+**使用配置 PRACTICE.md 中的种子 PIA 结构。** 如果未捕获，使用以下默认结构。冠以 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` `## 输出` 中的工作成果抬头（因用户角色不同而异——见 `## 谁在使用`）。
 
 ```markdown
 [工作成果抬头 — 按插件配置 ## 输出]
@@ -187,7 +186,7 @@ PIA 是与产品团队的对话，被记录下来。它问：什么数据，为�
 
 | 处理规则承诺 | 一致？ | 备注 |
 |---|---|---|
-| [来自配置 CLAUDE.md 处理规则部分的承诺] | 🟢 / 🟡 | |
+| [来自配置 PRACTICE.md 处理规则部分的承诺] | 🟢 / 🟡 | |
 
 [如有任何 🟡：上线前需更新处理规则，或需变更处理活动]
 
@@ -241,7 +240,7 @@ PIA 中的风险应**具体且与设计关联**，而非泛泛。差的风险陈
 
 ## 个人信息处理规则差异对比
 
-每份 PIA 都应交叉检查 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` 中的个人信息处理规则承诺。常见漂移：
+每份 PIA 都应交叉检查 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` 中的个人信息处理规则承诺。常见漂移：
 
 - 处理规则说"我们收集 X、Y、Z"——新功能收集 W。需更新处理规则，或停止收集 W。
 - 处理规则说"我们不会向第三方提供数据"——新功能与广告合作伙伴共享。可能构成个保法第23条下的对外提供。
@@ -253,13 +252,13 @@ PIA 中的风险应**具体且与设计关联**，而非泛泛。差的风险陈
 
 - **至产品团队：** 带负责人和截止日期的条件清单。不是"改进安全"——而是"为后台面板的位置查询添加审计日志，负责人：[工程负责人]，截止：上线前。"
 - **至 reg-gap-analysis 技能：** 如果 PIA 发现了处理规则不一致，该技能追踪处理规则更新。
-- **至审批流程：** 按 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` → 谁批准 PIA。
+- **至审批流程：** 按 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` → 谁批准 PIA。
 
 ## 关口：向监管机构提交评估
 
 制作内部 PIA 是研究和记录。*将 PIA 提交给监管部门*——或应行政调查请求自愿披露——是具有法律后果的行为。
 
-**在将任何影响评估提交给网信办或其他履行个人信息保护职责的部门之前：** 读取 `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md` 中的 `## 谁在使用`。如果角色为非律师：
+**在将任何影响评估提交给网信办或其他履行个人信息保护职责的部门之前：** 读取 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md` 中的 `## 谁在使用`。如果角色为非律师：
 
 > 向监管部门提交文件具有法律后果——文件成为行政监管记录的一部分，任何实质遗漏或错误均构成执法风险敞口。你是否已请律师审查过？如已审查，继续。如未审查，以下是你带给律师的简要材料：
 >
@@ -271,7 +270,7 @@ PIA 中的风险应**具体且与设计关联**，而非泛泛。差的风险陈
 
 ## 以下一步决策树结束
 
-以符合 CLAUDE.md `## 输出` 的下一步决策树结束。根据本技能刚刚产出的内容定制选项——五个默认分支（起草X、升级、获取更多事实、观察和等待、其他）是起点，而非锁定。决策树即输出；律师选择。
+以符合 PRACTICE.md `## 输出` 的下一步决策树结束。根据本技能刚刚产出的内容定制选项——五个默认分支（起草X、升级、获取更多事实、观察和等待、其他）是起点，而非锁定。决策树即输出；律师选择。
 
 ## 本技能不做的事
 

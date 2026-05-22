@@ -7,33 +7,32 @@ description: >
 argument-hint: "<new | list | switch | close | none> [简称]"
 ---
 
-# /matter-workspace
-
+# matter-workspace
 执业者跨多个客户和事项工作。事项工作区将一个客户或委托的上下文与其他客户隔离。本技能管理这些工作区。
 
 ## 子命令
 
-- `/corporate-legal:matter-workspace new <简称>` — 创建新事项工作区，运行简短的信息采集，写入 `matter.md`
-- `/corporate-legal:matter-workspace list` — 列出事项及其状态和活跃标识
-- `/corporate-legal:matter-workspace switch <简称>` — 设置活跃事项
-- `/corporate-legal:matter-workspace close <简称>` — 归档事项（移至 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/_archived/`，绝不删除）
-- `/corporate-legal:matter-workspace none` — 脱离任何活跃事项，仅以实务级工作
+- `corporate-legal:matter-workspace new <简称>` — 创建新事项工作区，运行简短的信息采集，写入 `matter.md`
+- `corporate-legal:matter-workspace list` — 列出事项及其状态和活跃标识
+- `corporate-legal:matter-workspace switch <简称>` — 设置活跃事项
+- `corporate-legal:matter-workspace close <简称>` — 归档事项（移至 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/_archived/`，绝不删除）
+- `corporate-legal:matter-workspace none` — 脱离任何活跃事项，仅以实务级工作
 
 ## 指令
 
-1. 读取 `~/.claude/plugins/config/claude-for-legal/corporate-legal/CLAUDE.md` ——确认 `## 事项工作区` 部分已填充。如果 `Enabled` 为 `✗`，告知用户："事项工作区已关闭——你的配置为企业法务，仅服务一家公司，因此插件自动在实务级上下文下工作。如果你实际为多家客户工作，重新运行 `/corporate-legal:cold-start-interview --redo` 并选择私人执业设置。否则，你完全不需要 `/matter-workspace`。"不要报错——对于企业法务用户，关闭状态是预期状态。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` ——确认 `## 事项工作区` 部分已填充。如果 `Enabled` 为 `✗`，告知用户："事项工作区已关闭——你的配置为企业法务，仅服务一家公司，因此插件自动在实务级上下文下工作。如果你实际为多家客户工作，重新运行 `corporate-legal:cold-start-interview --redo` 并选择私人执业设置。否则，你完全不需要 `corporate-legal:matter-workspace`。"不要报错——对于企业法务用户，关闭状态是预期状态。
 2. 使用以下工作流。
 3. 按 `$ARGUMENTS` 的第一个 token 分发：
-   - `new` → 运行信息采集访谈，写入 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/<简称>/matter.md`，初始化 `history.md` 和 `notes.md`。
-   - `list` → 枚举 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/*/matter.md`，打印表格，标记活跃事项。
-   - `switch` → 更新实务级 CLAUDE.md 中的 `活跃事项：` 行。
-   - `close` → 将 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/<简称>/` 移至 `~/.claude/plugins/config/claude-for-legal/corporate-legal/matters/_archived/<简称>/`，在 `history.md` 中记录关闭日期。
+   - `new` → 运行信息采集访谈，写入 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/<简称>/matter.md`，初始化 `history.md` 和 `notes.md`。
+   - `list` → 枚举 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/*/matter.md`，打印表格，标记活跃事项。
+   - `switch` → 更新实务级 PRACTICE.md 中的 `活跃事项：` 行。
+   - `close` → 将 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/<简称>/` 移至 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/matters/_archived/<简称>/`，在 `history.md` 中记录关闭日期。
    - `none` → 将 `活跃事项：` 设置为 `无 — 仅实务级上下文`。
 4. 展示变更内容并在写入前与用户确认。
 
 ## 注意事项
 
-- 除非实务级 CLAUDE.md 中 `跨事项上下文` 为 `开`，技能绝不跨事项读取。
+- 除非实务级 PRACTICE.md 中 `跨事项上下文` 为 `开`，技能绝不跨事项读取。
 - 归档不是删除——已关闭事项保留可读，用于保留/利益冲突目的。
 - 简称为小写字母加连字符。如简称跨已归档和活跃事项重复使用，已归档版本保留在 `_archived/<简称>/` 下。
 
@@ -41,15 +40,15 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 
 多客户执业者（私人执业——个人执业、小型律所、大型律所）跨大量事项工作。一个事项的上下文不得泄露到另一个。本技能是使这一隔离成立的薄文件管理层。
 
-**默认状态是关闭。** 企业法务用户从不看到此项——他们仅以实务级运行。事项工作区在冷启动时为私人执业用户开启，或通过编辑实务级 CLAUDE.md 中的 `## 事项工作区` 开启。如果 `Enabled` 为 `✗`，本技能不运行；`/corporate-legal:matter-workspace` 解释关闭状态并建议对实际需要事项隔离的用户运行 `/corporate-legal:cold-start-interview --redo`。
+**默认状态是关闭。** 企业法务用户从不看到此项——他们仅以实务级运行。事项工作区在冷启动时为私人执业用户开启，或通过编辑实务级 PRACTICE.md 中的 `## 事项工作区` 开启。如果 `Enabled` 为 `✗`，本技能不运行；`corporate-legal:matter-workspace` 解释关闭状态并建议对实际需要事项隔离的用户运行 `corporate-legal:cold-start-interview --redo`。
 
 ## 存储布局
 
 所有事项数据位于：
 
 ```
-~/.claude/plugins/config/claude-for-legal/corporate-legal/
-├── CLAUDE.md                       # 实务级实务画像
+~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/
+├── PRACTICE.md                       # 实务级实务画像
 └── matters/
     ├── <简称>/
     │   ├── matter.md               # 客户、对方当事人、事项类型、关键事实、覆盖规则
@@ -62,9 +61,9 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 
 简称为小写字母加连字符。示例：`acme-msa-2026`、`zenith-renewal`、`vendor-xyz-nda`。
 
-## 活跃事项在实务 CLAUDE.md 中
+## 活跃事项在实务 PRACTICE.md 中
 
-实务级 CLAUDE.md 中 `## 事项工作区` 下的 `活跃事项：` 行是单一真实来源。切换事项编辑该行。无独立的状态文件。
+实务级 PRACTICE.md 中 `## 事项工作区` 下的 `活跃事项：` 行是单一真实来源。切换事项编辑该行。无独立的状态文件。
 
 ## 子命令逻辑
 
@@ -82,7 +81,7 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 3. 使用以下模板写入 `matters/<简称>/matter.md`。
 4. 在 `matters/<简称>/history.md` 中初始化一条"已创建"条目。
 5. 创建一个空的 `matters/<简称>/notes.md`。
-6. **不**自动切换到新事项。询问："要现在切换到 `<简称>` 吗？（`/corporate-legal:matter-workspace switch <简称>`）"
+6. **不**自动切换到新事项。询问："要现在切换到 `<简称>` 吗？（`corporate-legal:matter-workspace switch <简称>`）"
 
 ### `list`
 
@@ -95,8 +94,8 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 
 ### `switch <简称>`
 
-1. 确认 `matters/<简称>/matter.md` 存在。如不存在，提供 `/corporate-legal:matter-workspace new <简称>`。
-2. 编辑实务级 CLAUDE.md 中的 `活跃事项：` 行为 `活跃事项：<简称>`。
+1. 确认 `matters/<简称>/matter.md` 存在。如不存在，提供 `corporate-legal:matter-workspace new <简称>`。
+2. 编辑实务级 PRACTICE.md 中的 `活跃事项：` 行为 `活跃事项：<简称>`。
 3. 向用户展示 matter.md 摘要以便确认在正确的事项上。
 
 ### `close <简称>`
@@ -108,12 +107,12 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 
 ### `none`
 
-将实务级 CLAUDE.md 中的 `活跃事项：` 设置为 `无 — 仅实务级上下文`。与用户确认。
+将实务级 PRACTICE.md 中的 `活跃事项：` 设置为 `无 — 仅实务级上下文`。与用户确认。
 
 ## `matter.md` 模板
 
 ```markdown
-[工作成果页眉 — 按插件配置 ## 输出规范 — 因角色而异；参见实务级 CLAUDE.md 中的 `## 使用者`]
+[工作成果页眉 — 按插件配置 ## 输出规范 — 因角色而异；参见实务级 PRACTICE.md 中的 `## 使用者`]
 
 # 事项：[客户] — [简述]
 
@@ -171,7 +170,7 @@ argument-hint: "<new | list | switch | close | none> [简称]"
 
 ## 跨事项上下文
 
-实务级 CLAUDE.md 有一个 `跨事项上下文：` 标志。当其为 `关`（默认值）时，在事项 A 中工作的技能**绝不**读取任何其他 B 的 `matters/B/` 中的文件。句号。这是该设置存在所保障的保密性。
+实务级 PRACTICE.md 有一个 `跨事项上下文：` 标志。当其为 `关`（默认值）时，在事项 A 中工作的技能**绝不**读取任何其他 B 的 `matters/B/` 中的文件。句号。这是该设置存在所保障的保密性。
 
 当其为 `开` 时，技能仅在用户明确要求时才可跨事项文件夹读取文件（例如"比较我们过去五个供应商事项在责任上限上的立场"）。即使为 `开`，默认也仅加载活跃事项，除非用户要求跨事项视角。
 

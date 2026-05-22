@@ -13,27 +13,27 @@
 这是关于你个人的设置，非组织设置。你的课程、你的法考报考地、你的学习风格——追问训练型（drill-me）还是讲解引导型（explain-to-me）。请准备以下材料：既往大纲、有批改反馈的论文、历年考题（尤其是同一授课教师的）、法考真题集、课程大纲、论文。目标是10-20份材料；低于此数，实践画像将被标记为 `LIMITED DATA`（数据有限），下游技能在补充更多材料前将产出较薄的内容。
 
 ```
-/law-student:cold-start-interview
+law-student:cold-start-interview
 ```
 
 ## 技能列表
 
-每个技能通过 `/law-student:<skill-name>` 调用。
+每个技能通过 `law-student:<skill-name>` 调用。
 
 | 技能 | 功能 |
 |---|---|
-| `/law-student:cold-start-interview` | 个人访谈 + 材料录入 — 课程、法考、学习风格、材料 |
-| `/law-student:socratic-drill [subject]` | 互动式问答训练 — 它提问，你回答，它追问。不给答案。 |
-| `/law-student:case-brief [case]` | 按你偏好的格式生成案例摘要 |
-| `/law-student:outline-builder [subject]` | 从课程材料搭建或扩展知识体系大纲 |
-| `/law-student:bar-prep-questions [subject]` | 法考备考题目，客观题或主观题 — 区分全国统一命题与报考地规则 |
-| `/law-student:flashcards [subject]` | 生成或训练记忆卡片；Leitner 分层记忆法；按科目 markdown 存储；`--session <n>` 模式 |
-| `/law-student:study-plan` | 制定或更新长期学习计划 — 分阶段、按薄弱科目、从训练历史自适应每日安排 |
-| `/law-student:session <subject> <n>` | 某一科目的定向 N 题训练；用结果更新学习计划 |
-| `/law-student:irac-practice` | 评估你的 IRAC 论文 — 结构、争议点、规则、分析。跨训练追踪模式。绝不代写。 |
-| `/law-student:cold-call-prep [case]` | 课堂提问准备 — 预测教师可能提出的问题并进行训练 |
-| `/law-student:legal-writing [path-or-paste]` | 对任何草稿的结构性反馈 — 绝不代写，从未如此 |
-| `/law-student:exam-forecast [class]` | 分析同一位教师历年考题；预测即将到来的考试 |
+| `law-student:cold-start-interview` | 个人访谈 + 材料录入 — 课程、法考、学习风格、材料 |
+| `law-student:socratic-drill [subject]` | 互动式问答训练 — 它提问，你回答，它追问。不给答案。 |
+| `law-student:case-brief [case]` | 按你偏好的格式生成案例摘要 |
+| `law-student:outline-builder [subject]` | 从课程材料搭建或扩展知识体系大纲 |
+| `law-student:bar-prep-questions [subject]` | 法考备考题目，客观题或主观题 — 区分全国统一命题与报考地规则 |
+| `law-student:flashcards [subject]` | 生成或训练记忆卡片；Leitner 分层记忆法；按科目 markdown 存储；`--session <n>` 模式 |
+| `law-student:study-plan` | 制定或更新长期学习计划 — 分阶段、按薄弱科目、从训练历史自适应每日安排 |
+| `law-student:session <subject> <n>` | 某一科目的定向 N 题训练；用结果更新学习计划 |
+| `law-student:irac-practice` | 评估你的 IRAC 论文 — 结构、争议点、规则、分析。跨训练追踪模式。绝不代写。 |
+| `law-student:cold-call-prep [case]` | 课堂提问准备 — 预测教师可能提出的问题并进行训练 |
+| `law-student:legal-writing [path-or-paste]` | 对任何草稿的结构性反馈 — 绝不代写，从未如此 |
+| `law-student:exam-forecast [class]` | 分析同一位教师历年考题；预测即将到来的考试 |
 
 ## "学习模式"意味着什么
 
@@ -71,7 +71,7 @@
 
 ## 存储
 
-你的实践画像存储在 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md`，插件更新时不受影响。其余内容位于你的工作目录：
+你的实践画像存储在 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md`，插件更新时不受影响。其余内容位于你的工作目录：
 
 ```
 law-student/
@@ -95,11 +95,11 @@ law-student/
 
 ## 它是如何学习的
 
-你在 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md` 中的学习画像不是静态的——它随着你使用插件而改善。技能会在输出使用了默认设置时提示你应该调整的地方。你可以重新运行设置、直接编辑文件，或者告诉某个技能记录新的偏好。
+你在 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` 中的学习画像不是静态的——它随着你使用插件而改善。技能会在输出使用了默认设置时提示你应该调整的地方。你可以重新运行设置、直接编辑文件，或者告诉某个技能记录新的偏好。
 
 ## 注意事项
 
 - drill-me 与 explain-to-me 在 cold-start 时设定；可按训练随时切换。
 - 案例摘要和大纲使用**你的**格式。如果你有现成的大纲，在 cold-start 时指向它们。
-- 法考备考以 `~/.claude/plugins/config/claude-for-legal/law-student/CLAUDE.md` 中的薄弱科目为目标。它会反复回到这些科目。
+- 法考备考以 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` 中的薄弱科目为目标。它会反复回到这些科目。
 - 每个内容生成技能在不确信时均会标记。相信标记甚于没有标记——没有标记的规则是我有把握的；考试前仍请核实来源。

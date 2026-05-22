@@ -4,9 +4,8 @@ description: 检查法规动态源，报告自上次检查以来的新事项，�
 argument-hint: "[可选: --since DATE]"
 ---
 
-# /reg-feed-watcher
-
-1. 读取 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md` → 监测清单、重要度阈值、动态源配置。
+# reg-feed-watcher
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` → 监测清单、重要度阈值、动态源配置。
 2. 使用以下工作流。
 3. 拉取每个动态源。按重要度过滤。
 4. 输出：新事项，按重要度层级分类。
@@ -19,7 +18,7 @@ argument-hint: "[可选: --since DATE]"
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md` → 监测清单、重要度阈值、动态源配置、摘要输出路径（如已设置）。
+`~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` → 监测清单、重要度阈值、动态源配置、摘要输出路径（如已设置）。
 
 ## 工作流
 
@@ -32,9 +31,9 @@ argument-hint: "[可选: --since DATE]"
 
 如果存在明显缺口——例如用户监测清单包含"金融监管"类别但动态源中仅有"中国人民银行"，缺少"国家金融监督管理总局""中国证监会"——在摘要顶部提示一次：
 
-> **覆盖缺口提示：** 你的监测清单包含[类别]，但仅配置了[N]个动态源。建议添加[机构名称]的动态源。是否需要建议补充？运行 `/regulatory-legal:cold-start-interview --redo` 更新，或直接编辑 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md`。
+> **覆盖缺口提示：** 你的监测清单包含[类别]，但仅配置了[N]个动态源。建议添加[机构名称]的动态源。是否需要建议补充？运行 `regulatory-legal:cold-start-interview --redo` 更新，或直接编辑 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md`。
 
-不要反复提示同一缺口——如果用户已明确说"暂时不关注某监管机构"，尊重该决定并在 CLAUDE.md 中记录，以便持续有效。
+不要反复提示同一缺口——如果用户已明确说"暂时不关注某监管机构"，尊重该决定并在 PRACTICE.md 中记录，以便持续有效。
 
 ### 第1步：拉取
 
@@ -87,13 +86,13 @@ argument-hint: "[可选: --since DATE]"
 
 ### 第2步：分类
 
-每个事项根据 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md` 分配重要度层级：
+每个事项根据 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` 分配重要度层级：
 
 | 事项类型 | 与阈值匹配 |
 |----------|-----------|
 | 正式发布的行政法规/部门规章 | 通常为"始终重要" |
 | 征求意见稿 | 通常为"值得审阅"——并始终记录征求意见截止日期 |
-| 预征求意见/调研通知 | 值得审阅——用于**策略**而非合规——尚未施加具体要求，但标志着方向，具有实在的反馈截止日期。记录截止日期。仅作为预案分析传送至 `/regulatory-legal:policy-diff`，不作为差距消除的差异分析 |
+| 预征求意见/调研通知 | 值得审阅——用于**策略**而非合规——尚未施加具体要求，但标志着方向，具有实在的反馈截止日期。记录截止日期。仅作为预案分析传送至 `regulatory-legal:policy-diff`，不作为差距消除的差异分析 |
 | 监管执法行动/行政处罚 | 行业匹配→重要；相关实践匹配→值得审阅；两者均不匹配→仅供参考或跳过 |
 | 监管指引/指导意见 | 值得审阅 |
 | 领导讲话/政策吹风 | 仅供参考或根据阈值跳过 |
@@ -112,7 +111,7 @@ argument-hint: "[可选: --since DATE]"
 
 ## 输出
 
-摘要默认在对话中输出。**当输出包含一个或多个高于"仅供参考"的事项时，同时也写入可共享文件**，除非用户的 CLAUDE.md 明确设置了 `摘要输出 → 仅对话`。
+摘要默认在对话中输出。**当输出包含一个或多个高于"仅供参考"的事项时，同时也写入可共享文件**，除非用户的 PRACTICE.md 明确设置了 `摘要输出 → 仅对话`。
 
 ```markdown
 [工作成果头 — 按照插件配置 ## 输出 — 根据角色有所不同；见 `## 谁在使用此工具`]
@@ -153,7 +152,7 @@ argument-hint: "[可选: --since DATE]"
 ---
 
 **上次检查更新至：** [时间戳]
-**意见征集中：** [N] 个征求意见稿有待决定——运行 /regulatory-legal:comments 审阅
+**意见征集中：** [N] 个征求意见稿有待决定——运行 regulatory-legal:comments 审阅
 
 ---
 
@@ -162,7 +161,7 @@ argument-hint: "[可选: --since DATE]"
 
 ## 配置相关的降级方案
 
-- **监测清单为空：** 停止并说明"你的配置中的监测清单为空。在不知道要监测哪些监管机构的情况下，我无法拉取动态源。运行 `/regulatory-legal:cold-start-interview --redo` 或编辑 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md` 并添加至少一个监管机构。"
+- **监测清单为空：** 停止并说明"你的配置中的监测清单为空。在不知道要监测哪些监管机构的情况下，我无法拉取动态源。运行 `regulatory-legal:cold-start-interview --redo` 或编辑 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` 并添加至少一个监管机构。"
 - **重要度阈值为空：** 回退到默认层级并附加说明。
 - **动态源配置为空：** 仅运行中国政府网公告检查并附加说明。
 
@@ -176,12 +175,12 @@ argument-hint: "[可选: --since DATE]"
 
 ## 收尾
 
-以 CLAUDE.md `## 输出` 规定的下一步决策树收尾。
+以 PRACTICE.md `## 输出` 规定的下一步决策树收尾。
 
 ---
 
 ## 本技能不做的事
 
 - 不逐项通读每项。它进行分类和充实；深度阅读是针对通过过滤器筛选后的事项。
-- 不更改重要度阈值。如果过滤器不对，编辑 CLAUDE.md。
+- 不更改重要度阈值。如果过滤器不对，编辑 PRACTICE.md。
 - 不要求付费订阅。免费动态源是基线；付费动态源增加深度。

@@ -7,16 +7,15 @@ description: >
 argument-hint: "[描述拟议商标、商品/服务及法域——或仅提供商标，我会继续询问]"
 ---
 
-# /clearance
-
+# clearance
 **这是一份初步检索，非商标清除法律意见。** 商标清除法律意见需要完整的专业检索和
 执业商标律师的判断。"未发现明显冲突"的结果意味着本次初检未发现任何东西——不意味
 商标无冲突。有客户因通过排除检索的商标而被起诉。
 
 ## 指令
 
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。如包含
-   `[占位符]`，停止并引导至 `/ip-legal:cold-start-interview`。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。如包含
+   `[占位符]`，停止并引导至 `ip-legal:cold-start-interview`。
 2. 遵循以下工作流。
 3. 运行录入（商标、商品/服务、类别、法域、视觉/风格化）。
 4. 排除性筛查固有障碍——通用名称、描述性、欺骗性、地理名称、姓氏、虚假关联、
@@ -32,11 +31,11 @@ argument-hint: "[描述拟议商标、商品/服务及法域——或仅提供�
 ## 示例
 
 ```
-/ip-legal:clearance "APEXLEAF 户外服装产品线，计划在中美欧上市"
+ip-legal:clearance "APEXLEAF 户外服装产品线，计划在中美欧上市"
 ```
 
 ```
-/ip-legal:clearance
+ip-legal:clearance
 ```
 
 （技能将询问商标、商品、类别和法域。）
@@ -60,13 +59,13 @@ argument-hint: "[描述拟议商标、商品/服务及法域——或仅提供�
 
 ## 事项上下文
 
-**事项上下文。** 检查实践级 CLAUDE.md 中的 `## 事项工作区`。如果 `已启用` 为 `✗`（法务用户的默认值），跳过本段——技能使用实践级上下文，事项机制不可见。如果已启用且无活动事项，询问："这是哪个事项？运行 `/ip-legal:matter-workspace switch <代号>` 或说 `实践级`。"加载活动事项的 `matter.md` 获取事项特定上下文和覆盖项。将输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/ip-legal/matters/<代号>/`。除非 `跨事项上下文` 为 `开启`，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实践级 PRACTICE.md 中的 `## 事项工作区`。如果 `已启用` 为 `✗`（法务用户的默认值），跳过本段——技能使用实践级上下文，事项机制不可见。如果已启用且无活动事项，询问："这是哪个事项？运行 `ip-legal:matter-workspace switch <代号>` 或说 `实践级`。"加载活动事项的 `matter.md` 获取事项特定上下文和覆盖项。将输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/matters/<代号>/`。除非 `跨事项上下文` 为 `开启`，否则绝不读取其他事项的文件。
 
 ---
 
 ## 先加载实践档案
 
-清除检索前，读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。提取：
+清除检索前，读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。提取：
 
 - **角色**来自 `## 谁在使用`（律师 vs. 非律师改变工作成果抬头和下方的非律师关口）。
 - **注册地**和**执法地**来自 `## IP实践档案` 和 `## 执法姿态`（用户未指定时的默认法域）。
@@ -78,7 +77,7 @@ argument-hint: "[描述拟议商标、商品/服务及法域——或仅提供�
 > 我注意到你尚未配置实践档案——我据此定制立场、法域和审批链。
 >
 > **两个选择：**
-> - 运行 `/ip-legal:cold-start-interview`（2分钟）配置档案，然后我将针对你的实践进行定制。
+> - 运行 `ip-legal:cold-start-interview`（2分钟）配置档案，然后我将针对你的实践进行定制。
 > - 说 **"临时模式"** 我将按通用默认值——中国法域、中等风险偏好、律师角色、无操作手册——并标注每个输出为 `[临时模式 — 请配置实践档案以获取定制输出]`。
 
 ### 临时模式
@@ -292,7 +291,7 @@ argument-hint: "[描述拟议商标、商品/服务及法域——或仅提供�
 
 ## 以下一步决策树结束
 
-以符合 CLAUDE.md `## 输出` 的下一步决策树结束。根据本技能刚刚产出的内容定制选项。
+以符合 PRACTICE.md `## 输出` 的下一步决策树结束。根据本技能刚刚产出的内容定制选项。
 
 ## 本技能不做的事
 

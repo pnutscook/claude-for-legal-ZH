@@ -29,13 +29,13 @@ Year makes the slug stable even if a similar matter arises later. The folder nam
 
 | File | Written by | Edit directly? |
 |---|---|---|
-| `_log.yaml` | `/matter-intake`, `/matter-update`, `/matter-close` | Yes, but reflect the change in the matter's `history.md` |
-| `matter.md` | `/matter-intake` at intake; appended by `/matter-close` | Yes, for evolving theory / posture notes |
-| `history.md` | `/matter-intake` seeds; `/matter-update` and `/matter-close` append | Append-only in practice — treat past entries as record |
+| `_log.yaml` | `litigation-legal:matter-intake`, `litigation-legal:matter-update`, `litigation-legal:matter-close` | Yes, but reflect the change in the matter's `history.md` |
+| `matter.md` | `litigation-legal:matter-intake` at intake; appended by `litigation-legal:matter-close` | Yes, for evolving theory / posture notes |
+| `history.md` | `litigation-legal:matter-intake` seeds; `litigation-legal:matter-update` and `litigation-legal:matter-close` append | Append-only in practice — treat past entries as record |
 
 ## Closed matters
 
-Stay here. Don't delete. `/portfolio-status` filters them from active rollups by default; `/portfolio-status --all` includes them. Closed matters are the training set for portfolio judgment.
+Stay here. Don't delete. `litigation-legal:portfolio-status` filters them from active rollups by default; `litigation-legal:portfolio-status --all` includes them. Closed matters are the training set for portfolio judgment.
 
 ## Corrections
 

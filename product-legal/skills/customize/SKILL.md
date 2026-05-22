@@ -7,20 +7,19 @@ description: >
 argument-hint: "[节名称，或描述需要修改的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户输入 `/product-legal:customize`。希望修改产品法务实务画像中的某项设置——风险校准阈值、上报联系人、框架某一节——无需重新运行完整冷启动访谈，也无需手工编辑 YAML。
+用户输入 `product-legal:customize`。希望修改产品法务实务画像中的某项设置——风险校准阈值、上报联系人、框架某一节——无需重新运行完整冷启动访谈，也无需手工编辑 YAML。
 
 ## 需要做什么
 
 1. **读取配置。** 读取
-   `~/.claude/plugins/config/claude-for-legal/product-legal/CLAUDE.md`
-   （以及上级目录的 `~/.claude/plugins/config/claude-for-legal/company-profile.md`）。
+   `~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md`
+   （以及上级目录的 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`）。
    如果插件配置不存在或仍包含 `[PLACEHOLDER]` 值，说：
 
-   > 您尚未运行设置。请先运行 `/product-legal:cold-start-interview`——customize 用于调整已有的画像。
+   > 您尚未运行设置。请先运行 `product-legal:cold-start-interview`——customize 用于调整已有的画像。
 
 2. **展示可定制内容概览。** 列出画像中的内容，按组归类，附当前值的一句话摘要：
 
@@ -40,18 +39,18 @@ argument-hint: "[节名称，或描述需要修改的内容]"
 4. **执行修改。** 展示当前值，询问新值，说明下游影响，确认后写入配置。
 
    示例：
-   - *将"无问题"的风险校准收紧为"需要认真审查"：* "`/triage` 和 `/launch-review` 将开始标记此模式。已有审查记录保持原样；如需适用新立场请重新运行。"
-   - *新增上线审查类别：* "`/launch-review` 将增加该类别一节。`/is-this-a-problem` 将在分流中匹配该模式。"
+   - *将"无问题"的风险校准收紧为"需要认真审查"：* "`/triage` 和 `product-legal:launch-review` 将开始标记此模式。已有审查记录保持原样；如需适用新立场请重新运行。"
+   - *新增上线审查类别：* "`product-legal:launch-review` 将增加该类别一节。`product-legal:is-this-a-problem` 将在分流中匹配该模式。"
    - *收紧营销宣传立场：* "`/check-claims` 将更多用语标记为需要证实或改写。"
 
 5. **对于共享画像的修改**（公司名称、行业、法域、执业场景、阶段）：写入
-   `~/.claude/plugins/config/claude-for-legal/company-profile.md` 并注明：
+   `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` 并注明：
 
    > 此修改影响全部12个插件——任何读取您法域范围的插件现在都看到 [新值]。
 
 6. **收尾。**
 
-   > 完成。您的下次输出将反映修改。还有其他需要吗？您可随时运行 `/product-legal:customize`。
+   > 完成。您的下次输出将反映修改。还有其他需要吗？您可随时运行 `product-legal:customize`。
 
 ## 安全护栏
 

@@ -25,29 +25,29 @@ Cold-start 访谈编写*事务所/法务部*级别的实践画像——跨所有
 每一步提供合理默认值（如 3x3 严重性-可能性矩阵），所有内容保持自由文本可编辑。
 
 ```
-/litigation-legal:cold-start-interview
+litigation-legal:cold-start-interview
 ```
 
-你的配置存储于 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md`，不受插件更新影响。
+你的配置存储于 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md`，不受插件更新影响。
 
 ## 命令
 
 | 命令 | 功能 |
 |---|---|
-| `/litigation-legal:cold-start-interview` | Cold-start → 编写实践画像 |
-| `/litigation-legal:matter-intake` | 统一案件登记 → 写入 `matters/[slug]/` + 追加至 `_log.yaml` |
-| `/litigation-legal:portfolio-status` | 案件组合概览——风险分布、即将到期的期限、停滞案件 |
-| `/litigation-legal:matter-briefing [slug]` | 单一案件深度简报——与法务负责人或外部律师沟通前的完整阅读 |
-| `/litigation-legal:matter-update [slug]` | 追加带日期的事件至案件历史；刷新日志的 `last_updated` |
-| `/litigation-legal:matter-close [slug]` | 将案件从活跃组合归档（保留，不删除） |
-| `/litigation-legal:demand-intake [title]` | 律师函发送前的背景信息收集 |
-| `/litigation-legal:demand-draft [slug]` | 基于收集信息起草律师函——经保密性审查，输出 `.docx`，附发送后核查清单 |
-| `/litigation-legal:demand-received [path]` | 收悉对方律师函——方案分析、案件组合交叉检索、转交至案件登记 |
-| `/litigation-legal:subpoena-triage [path]` | 法院调查令/协查通知分类——范围/负担/保密性分析、异议框架、合规方案 |
-| `/litigation-legal:legal-hold [slug] [--issue/--refresh/--release/--status]` | 证据保全通知的签发、更新、解除或状态报告 |
-| `/litigation-legal:chronology [slug]` | 从已声明文件来源+上传材料构建或更新大事记/时间线——按案件理论标注重要性 |
-| `/litigation-legal:oc-status` | 起草周期性的外部律师案件进度询问函 |
-| `/litigation-legal:claim-chart` | 构建或审查要件分析表——对任一请求权基础或抗辩事由进行构成要件逐项分析，附法条编号，检测证据缺口 |
+| `litigation-legal:cold-start-interview` | Cold-start → 编写实践画像 |
+| `litigation-legal:matter-intake` | 统一案件登记 → 写入 `matters/[slug]/` + 追加至 `_log.yaml` |
+| `litigation-legal:portfolio-status` | 案件组合概览——风险分布、即将到期的期限、停滞案件 |
+| `litigation-legal:matter-briefing [slug]` | 单一案件深度简报——与法务负责人或外部律师沟通前的完整阅读 |
+| `litigation-legal:matter-update [slug]` | 追加带日期的事件至案件历史；刷新日志的 `last_updated` |
+| `litigation-legal:matter-close [slug]` | 将案件从活跃组合归档（保留，不删除） |
+| `litigation-legal:demand-intake [title]` | 律师函发送前的背景信息收集 |
+| `litigation-legal:demand-draft [slug]` | 基于收集信息起草律师函——经保密性审查，输出 `.docx`，附发送后核查清单 |
+| `litigation-legal:demand-received [path]` | 收悉对方律师函——方案分析、案件组合交叉检索、转交至案件登记 |
+| `litigation-legal:subpoena-triage [path]` | 法院调查令/协查通知分类——范围/负担/保密性分析、异议框架、合规方案 |
+| `litigation-legal:legal-hold [slug] [--issue/--refresh/--release/--status]` | 证据保全通知的签发、更新、解除或状态报告 |
+| `litigation-legal:chronology [slug]` | 从已声明文件来源+上传材料构建或更新大事记/时间线——按案件理论标注重要性 |
+| `litigation-legal:oc-status` | 起草周期性的外部律师案件进度询问函 |
+| `litigation-legal:claim-chart` | 构建或审查要件分析表——对任一请求权基础或抗辩事由进行构成要件逐项分析，附法条编号，检测证据缺口 |
 
 ## 技能
 
@@ -80,7 +80,7 @@ Cold-start 访谈编写*事务所/法务部*级别的实践画像——跨所有
 
 ```
 litigation-legal/
-├── CLAUDE.md                          # 实践画像——风险、画像、风格
+├── PRACTICE.md                          # 实践画像——风险、画像、风格
 ├── matters/
 │   ├── _log.yaml                      # 案件组合账本（每条记录一个案件）
 │   └── [matter-slug]/
@@ -120,8 +120,8 @@ litigation-legal/
 
 ## 注意事项
 
-- 每个技能首先从 `~/.claude/plugins/config/claude-for-legal/litigation-legal/CLAUDE.md` 读取配置。如果你的风险偏好变化或增加了新的外部律师，更新该文件——不要在个案中覆盖。
+- 每个技能首先从 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` 读取配置。如果你的风险偏好变化或增加了新的外部律师，更新该文件——不要在个案中覆盖。
 - `_log.yaml` 是案件组合状态的唯一事实来源。保持整洁。
 - 案件历史仅追加。如果之前记录有误，以新条目记录更正——不修改既往记录。
-- 已结案案件保留在 `_log.yaml` 中（可搜索历史）。`/portfolio-status` 默认过滤已结案案件。
+- 已结案案件保留在 `_log.yaml` 中（可搜索历史）。`litigation-legal:portfolio-status` 默认过滤已结案案件。
 - 所有输出中的法条引用均附来源溯源标签（`[法条原文]`/`[裁判文书]`/`[yuandian检索]`/`[模型知识 — 需验证]`等），律师应在信赖前核实。

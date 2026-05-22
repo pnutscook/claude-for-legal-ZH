@@ -10,20 +10,19 @@ description: >
 argument-hint: "[章节名称，或描述你要修改的内容]"
 ---
 
-# /customize
-
+# customize
 ## 何时运行
 
-用户输入了 `/employment-legal:customize`。他们想要修改其实践画像中的某项内容——管辖地、风险姿态、上报联系人、规章制度立场——而不重新运行整个首次配置访谈，也不手动编辑 YAML。
+用户输入了 `employment-legal:customize`。他们想要修改其实践画像中的某项内容——管辖地、风险姿态、上报联系人、规章制度立场——而不重新运行整个首次配置访谈，也不手动编辑 YAML。
 
 ## 做什么
 
 1. **读取配置。** 读取
-   `~/.claude/plugins/config/claude-for-legal/employment-legal/CLAUDE.md`
-   （和上一级的 `~/.claude/plugins/config/claude-for-legal/company-profile.md`）。
+   `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md`
+   （和上一级的 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`）。
    如果插件配置不存在或仍包含 `[PLACEHOLDER]` 值，说：
 
-   > 你尚未运行设置。先运行 `/employment-legal:cold-start-interview`——customize 是用于调整已有画像的。
+   > 你尚未运行设置。先运行 `employment-legal:cold-start-interview`——customize 是用于调整已有画像的。
 
 2. **展示可自定义的映射。** 列举画像中的内容，按组，附当前值的一行摘要：
 
@@ -46,18 +45,18 @@ argument-hint: "[章节名称，或描述你要修改的内容]"
 4. **执行变更。** 显示当前值，询问新值，解释下游变更，确认，写入配置。
 
    示例：
-   - *将四川加入管辖范围：* "`/wage-hour-qa` 和 `/termination-review` 将开始适用四川规则。`/handbook-updates` 将提示四川补充条款。"
-   - *经济补偿框架从法定标准改为 N+3：* "`/termination-review` 将在经济补偿计算中使用新基准。"
+   - *将四川加入管辖范围：* "`employment-legal:wage-hour-qa` 和 `employment-legal:termination-review` 将开始适用四川规则。`employment-legal:handbook-updates` 将提示四川补充条款。"
+   - *经济补偿框架从法定标准改为 N+3：* "`employment-legal:termination-review` 将在经济补偿计算中使用新基准。"
    - *风险姿态从中等改为保守：* "我将标记更多解除供上报，建议更强的保护性协议语言，并在竞业限制上更严格。"
 
 5. **对于共享画像变更**（公司名称、行业、管辖地、执业场景、阶段）：写入
-   `~/.claude/plugins/config/claude-for-legal/company-profile.md` 并注明：
+   `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` 并注明：
 
    > 此变更影响所有法律插件——任何读取管辖范围的插件现在看到[新值]。
 
 6. **收尾。**
 
-   > 完成。你的下一次输出将反映此变更。还有其他吗？你可以随时运行 `/employment-legal:customize`。
+   > 完成。你的下一次输出将反映此变更。还有其他吗？你可以随时运行 `employment-legal:customize`。
 
 ## 护栏
 

@@ -8,16 +8,15 @@ description: >
 argument-hint: "[系统名称或'--full'进行全量审查]"
 ---
 
-# /ai-inventory
-
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md` → 既有AI系统清单（如有）、监管注册表。
+# ai-inventory
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` → 既有AI系统清单（如有）、监管注册表。
 2. 运行以下工作流。
 3. 对每个系统：描述功能 → 判定提供者/使用者角色 → 分配风险等级 → 映射监管义务。
 4. 输出系统级条目 + 汇总表。
 
 ```
-/ai-governance-legal:ai-inventory "智能客服系统 v3"
-/ai-governance-legal:ai-inventory --full
+ai-governance-legal:ai-inventory "智能客服系统 v3"
+ai-governance-legal:ai-inventory --full
 ```
 
 ---
@@ -30,7 +29,7 @@ argument-hint: "[系统名称或'--full'进行全量审查]"
 
 ## 加载当前状态
 
-读取 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/CLAUDE.md`：
+读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md`：
 - `## AI系统清单` — 既有清单（如有）
 - `## 监管注册表` — 适用法规及义务
 - `## 红线` — 禁止的用例类别
@@ -153,7 +152,7 @@ argument-hint: "[系统名称或'--full'进行全量审查]"
 
 ## 输出
 
-保存到 `~/.claude/plugins/config/claude-for-legal/ai-governance-legal/outputs/ai-inventory-[日期].md`。同时更新 `## AI系统清单` 中的条目。
+保存到 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/outputs/ai-inventory-[日期].md`。同时更新 `## AI系统清单` 中的条目。
 
 ```markdown
 [工作成果头 — 按照插件配置 ## 输出]
@@ -165,7 +164,7 @@ argument-hint: "[系统名称或'--full'进行全量审查]"
 
 ## 收尾
 
-以 CLAUDE.md `## 输出` 规定的下一步决策树收尾。定制选项：完成缺失系统的录入、处理不一致标记、填补监管覆盖缺口、升级至法律顾问。
+以 PRACTICE.md `## 输出` 规定的下一步决策树收尾。定制选项：完成缺失系统的录入、处理不一致标记、填补监管覆盖缺口、升级至法律顾问。
 
 ---
 

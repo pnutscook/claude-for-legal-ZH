@@ -7,8 +7,7 @@ description: >
 argument-hint: "[粘贴或描述发明披露 — 或仅提供名称，由我询问]"
 ---
 
-# /invention-intake
-
+# invention-intake
 **这是由非专业人士执行的初步筛查，而非可专利性意见。**
 筛查从不认定一项发明可以授予专利权——它认定的结论是：通过初步筛查、
 值得进行现有技术检索和注册专利代理人审查、需要更多信息或触发了否决条件。现有技术检索是独立步骤；
@@ -16,8 +15,8 @@ argument-hint: "[粘贴或描述发明披露 — 或仅提供名称，由我询�
 
 ## 使用说明
 
-1. 读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。如含
-   `[PLACEHOLDER]`，停止并指引至 `/ip-legal:cold-start-interview`。如实务画像显示仅商标或著作权实务（无专利实务），说明并将用户转至合适渠道——这用错了工具。
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。如含
+   `[PLACEHOLDER]`，停止并指引至 `ip-legal:cold-start-interview`。如实务画像显示仅商标或著作权实务（无专利实务），说明并将用户转至合适渠道——这用错了工具。
 2. 按以下工作流执行。
 3. 执行采集。如用户粘贴或上传了披露，阅读。如未，一次性询问七个采集问题（是什么/解决的问题/区别/发明人/公开披露/状态/技术领域），不要逐一询问。
 4. 执行六项筛查：新颖性信号、创造性标注、可授权主题、
@@ -35,11 +34,11 @@ argument-hint: "[粘贴或描述发明披露 — 或仅提供名称，由我询�
 ## 示例
 
 ```
-/ip-legal:invention-intake "一种使用学习模型而非LRU的新型缓存淘汰算法；今年第一季度构思，尚未公开，内部开发环境中有工程原型"
+ip-legal:invention-intake "一种使用学习模型而非LRU的新型缓存淘汰算法；今年第一季度构思，尚未公开，内部开发环境中有工程原型"
 ```
 
 ```
-/ip-legal:invention-intake
+ip-legal:invention-intake
 ```
 
 （技能将询问发明、解决的问题、区别、发明人、公开状态、使用状态和技术领域。）
@@ -59,7 +58,7 @@ argument-hint: "[粘贴或描述发明披露 — 或仅提供名称，由我询�
 
 ## 事项上下文
 
-**事项上下文。** 检查实务级 CLAUDE.md 中的 `## 事项工作区`。如 `Enabled` 为 `✗`（法务用户的默认状态），跳过本段其余内容——各技能使用实务级上下文，事项机制不可见。如已启用且无活跃事项，询问："此事项属于哪个案件？运行 `/ip-legal:matter-workspace switch <slug>` 或回复 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖设置。将输出写入事项文件夹 `~/.claude/plugins/config/claude-for-legal/ip-legal/matters/<事项slug>/`。除非 `跨事项上下文` 开启，否则绝不读取其他事项的文件。
+**事项上下文。** 检查实务级 PRACTICE.md 中的 `## 事项工作区`。如 `Enabled` 为 `✗`（法务用户的默认状态），跳过本段其余内容——各技能使用实务级上下文，事项机制不可见。如已启用且无活跃事项，询问："此事项属于哪个案件？运行 `ip-legal:matter-workspace switch <slug>` 或回复 `实务级`。"加载活跃事项的 `matter.md` 获取事项特定上下文和覆盖设置。将输出写入事项文件夹 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/matters/<事项slug>/`。除非 `跨事项上下文` 开启，否则绝不读取其他事项的文件。
 
 发明披露特别常见于**洁净团队**或**高度保密**的事项开放。遵守事项 `matter.md` 中的保密标记。发明内容本质上敏感——不得在保密渠道外概括、引用或提及。
 
@@ -67,7 +66,7 @@ argument-hint: "[粘贴或描述发明披露 — 或仅提供名称，由我询�
 
 ## 首先加载实务画像
 
-**阅读披露前，先读取 `~/.claude/plugins/config/claude-for-legal/ip-legal/CLAUDE.md`。** 如缺失或仍含占位符，停止并运行 `/ip-legal:cold-start-interview`。实务画像告诉你：
+**阅读披露前，先读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。** 如缺失或仍含占位符，停止并运行 `ip-legal:cold-start-interview`。实务画像告诉你：
 
 - 公司的**专利申请策略** — 进攻型（构建维权组合）、防御型（保护自由实施）、混合型或许可收入型。这决定战略价值门槛。
 - **关注的技术领域** — 公司在哪里申请、在哪里不申请。落在关注领域之外的发明即使技术筛查通过也常被驳回。

@@ -10,11 +10,10 @@ description: >
 argument-hint: "[section name, or describe what you want to change]"
 ---
 
-# /customize
-
+# customize
 ## When this runs
 
-The user typed `/privacy-legal:customize`. They want to change something in
+The user typed `privacy-legal:customize`. They want to change something in
 their privacy profile — a risk posture, an escalation contact, a DPA
 position, a PIA section, a DSAR timeline — without re-running the whole
 cold-start interview and without hand-editing YAML.
@@ -22,12 +21,12 @@ cold-start interview and without hand-editing YAML.
 ## What to do
 
 1. **Read the config.** Read
-   `~/.claude/plugins/config/claude-for-legal/privacy-legal/CLAUDE.md`
-   (and `~/.claude/plugins/config/claude-for-legal/company-profile.md` one
+   `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md`
+   (and `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` one
    level up). If the plugin config does not exist or still contains
    `[PLACEHOLDER]` values, say:
 
-   > You haven't run setup yet. Run `/privacy-legal:cold-start-interview`
+   > You haven't run setup yet. Run `privacy-legal:cold-start-interview`
    > first — customize is for adjusting a profile you already have.
 
 2. **Show the customizable map.** List what's in the profile, grouped, with a
@@ -44,7 +43,7 @@ cold-start interview and without hand-editing YAML.
      liability, international transfers, SCCs — as processor and as
      controller
    - **Privacy policy commitments** — the commitments your privacy notice
-     has made that `/policy-monitor` watches practice against
+     has made that `privacy-legal:policy-monitor` watches practice against
    - **PIA house style** — section order, risk scoring, stakeholder framing,
      when DPIA triggers apply
    - **DSAR process** — verification, statutory timelines per regime,
@@ -74,7 +73,7 @@ cold-start interview and without hand-editing YAML.
 
 5. **For shared-profile changes** (company name, industry, jurisdictions,
    practice setting, stage): write to
-   `~/.claude/plugins/config/claude-for-legal/company-profile.md` and note:
+   `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` and note:
 
    > This change affects all 12 plugins — any plugin that reads your
    > jurisdiction footprint now sees [new value].
@@ -82,7 +81,7 @@ cold-start interview and without hand-editing YAML.
 6. **Close.**
 
    > Done. Your next output will reflect the change. Anything else? You can
-   > run `/privacy-legal:customize` anytime.
+   > run `privacy-legal:customize` anytime.
 
 ## Guardrails
 

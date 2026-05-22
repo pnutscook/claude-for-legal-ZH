@@ -4,9 +4,8 @@ description: 将特定法规变化与已索引的政策库进行差异分析。�
 argument-hint: "[法规名称，或粘贴法规文本/摘要]"
 ---
 
-# /policy-diff
-
-1. 读取 `~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md` → 政策库索引。
+# policy-diff
+1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` → 政策库索引。
 2. 使用以下工作流。
 3. 从法规中提取要求。与已索引的政策匹配。
 4. 输出：逐要求的差距分析，哪些政策需要更新。
@@ -15,7 +14,7 @@ argument-hint: "[法规名称，或粘贴法规文本/摘要]"
 
 ## 事务上下文
 
-**事务上下文。** 检查实践级 CLAUDE.md 中的 `## 事务工作区`。如果 `已启用` 为 `✗`（法务内部用户的默认值），跳过本段其余部分——技能使用实践级上下文，事务机制不可见。如果已启用且无活跃事务，询问事务归属。加载活跃事务的 `matter.md`。除非 `跨事务上下文` 为 `开`，否则绝不读取其他事务的文件。
+**事务上下文。** 检查实践级 PRACTICE.md 中的 `## 事务工作区`。如果 `已启用` 为 `✗`（法务内部用户的默认值），跳过本段其余部分——技能使用实践级上下文，事务机制不可见。如果已启用且无活跃事务，询问事务归属。加载活跃事务的 `matter.md`。除非 `跨事务上下文` 为 `开`，否则绝不读取其他事务的文件。
 
 ---
 
@@ -25,7 +24,7 @@ argument-hint: "[法规名称，或粘贴法规文本/摘要]"
 
 ## 加载上下文
 
-`~/.claude/plugins/config/claude-for-legal/regulatory-legal/CLAUDE.md` → 政策库索引（政策、位置、负责人）。
+`~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` → 政策库索引（政策、位置、负责人）。
 
 ## 范围完整性
 
@@ -166,7 +165,7 @@ argument-hint: "[法规名称，或粘贴法规文本/摘要]"
 
 ## 收尾
 
-以 CLAUDE.md `## 输出` 规定的下一步决策树收尾。
+以 PRACTICE.md `## 输出` 规定的下一步决策树收尾。
 
 ---
 

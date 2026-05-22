@@ -1,0 +1,40 @@
+{
+  "name": "legal-clinic",
+  "version": "1.0.2",
+  "description": "配置法律诊所、导入学生、运行结构化接待（intake）、以执业风险意识追踪截止日期，并在学期结束时移交案件 — 依据中国法学院法律诊所实践规范与《律师执业管理办法》构建。",
+  "author": {
+    "name": "陈石 律师",
+    "url": "https://github.com/pnutscook/claude-for-legal-ZH"
+  },
+  "homepage": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "repository": "https://github.com/pnutscook/claude-for-legal-ZH",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "legal",
+    "china-law",
+    "ai-lawyer",
+    "legal-clinic"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Legal Clinic CN",
+    "shortDescription": "配置法律诊所、导入学生、运行结构化接待（intake）、以执业风险意识追踪截止日期，并在学期结束时移交案件 — 依据中国法学院法律诊所实践规范与《律师执业管理办法》构建。",
+    "longDescription": "配置法律诊所、导入学生、运行结构化接待（intake）、以执业风险意识追踪截止日期，并在学期结束时移交案件 — 依据中国法学院法律诊所实践规范与《律师执业管理办法》构建。",
+    "developerName": "陈石 律师",
+    "category": "Legal",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pnutscook/claude-for-legal-ZH",
+    "privacyPolicyURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/pnutscook/claude-for-legal-ZH/blob/main/LICENSE",
+    "defaultPrompt": [
+      "为这个法律诊所案件生成接待和研究路线"
+    ],
+    "screenshots": [],
+    "brandColor": "#1F6FEB"
+  }
+}
