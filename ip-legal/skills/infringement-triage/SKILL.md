@@ -15,7 +15,7 @@ argument-hint: "[描述事实和涉及的权利类型——或仅提供事实，
 
 ## 使用说明
 
-1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。如含
+1. 读取内部 `ip-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/ip-legal/PRACTICE.md`。如含
    `[PLACEHOLDER]`，停止并指引至 `ip-legal:cold-start-interview`。
 2. 按以下工作流执行。
 3. 询问涉及哪项权利——商标 / 著作权 / 专利 / 商业秘密

@@ -5,7 +5,7 @@ argument-hint: "[可选: --since DATE]"
 ---
 
 # reg-feed-watcher
-1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` → 监测清单、重要度阈值、动态源配置。
+1. 读取内部 `regulatory-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/regulatory-legal/PRACTICE.md` → 监测清单、重要度阈值、动态源配置。
 2. 使用以下工作流。
 3. 拉取每个动态源。按重要度过滤。
 4. 输出：新事项，按重要度层级分类。

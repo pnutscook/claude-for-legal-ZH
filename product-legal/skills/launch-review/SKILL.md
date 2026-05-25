@@ -8,7 +8,7 @@ argument-hint: "[PRD文件 | 飞书文档链接 | 追踪工单号]"
 ---
 
 # launch-review
-1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md` → 框架 + 校准。如为占位符则停止。
+1. 加载内部 `product-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/product-legal/PRACTICE.md` → 框架 + 校准。如为占位符则停止。
 2. 获取PRD + 相关文档。如追踪器已连接，拉取工单和评论。
 3. 使用下述工作流遍历每个框架类别。
 4. 将每个发现对照校准表进行校准。全新 = 明确标记。

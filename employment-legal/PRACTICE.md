@@ -14,6 +14,7 @@ Rules for every skill, command, and agent in this plugin:
    but not at the config path, copy it forward to the config path before proceeding.
 5. This file (the one you are reading) is the TEMPLATE. It ships with the plugin and shows the
    structure the config should have. It is replaced on every plugin update. Never write user data here.
+6. Before substantive output, apply the internal `employment-legal:quality-gate`; it controls sourcing, factual gaps, escalation and consequential actions.
 
 **共享公司画像。** 公司级别信息（你是谁、你做什么、你在哪运营、你的风险偏好、关键人员）存储在 `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md`——位于本文件上层，由全部插件共享。在读取本插件的实践画像前先读取该文件。如该文件不存在，本插件的设置流程会创建它。
 -->

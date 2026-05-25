@@ -7,7 +7,7 @@ argument-hint: "[案例名称或案号, 或粘贴案例文本]"
 ---
 
 # case-brief
-1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` → 大纲/案例摘要偏好。
+1. 加载内部 `law-student:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/law-student/PRACTICE.md` → 大纲/案例摘要偏好。
 2. 应用以下工作流。
 3. 按学生选择的格式做案例摘要。如果是训练模式：要求学生先陈述裁判要旨。
 

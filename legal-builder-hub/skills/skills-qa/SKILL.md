@@ -18,6 +18,7 @@ argument-hint: "[技能路径 | SKILL.md 路径 | 粘贴内容]"
 
 ## 需加载的上下文
 
+- 内部 `legal-builder-hub:quality-gate` → 安装/更新前的来源、权限、代码和法律内容时效门槛
 - `~/.codex/plugins/config/claude-for-legal-zh/legal-builder-hub/PRACTICE.md` → 实践画像和已安装技能列表（提供评估该技能是否适合用户团队和工作流的上下文，以及是否与已安装内容重复）
 
 ## 说明

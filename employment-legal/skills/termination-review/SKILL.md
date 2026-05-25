@@ -9,7 +9,7 @@ argument-hint: "[描述解除情形，或附解除相关文件]"
 ---
 
 # termination-review
-1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 解除审查触发条件、高风险标记、经济补偿惯例、管辖地规则。
+1. 加载内部 `employment-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/employment-legal/PRACTICE.md` → 解除审查触发条件、高风险标记、经济补偿惯例、管辖地规则。
 2. 使用以下工作流。
 3. 逐项检查清单。检查每个高风险标记。
 4. 按员工管辖地确定最终工资支付时点。经济补偿/赔偿金 + 协商解除协议（如适用）。

@@ -9,7 +9,7 @@ argument-hint: "[描述个人信息处理活动或功能]"
 ---
 
 # use-case-triage
-1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md`。确认隐私实践已配置——如未配置，停止并引导至设置。
+1. 读取内部 `privacy-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/privacy-legal/PRACTICE.md`。确认隐私实践已配置——如未配置，停止并引导至设置。
 2. 执行以下工作流。如活动描述模糊，先澄清。
 3. 内部触发检查 → 法定评估检查（个保法第55条四类情形）→ 个人信息处理规则冲突检查。
 4. 输出：分类（可直接推进 / 需影响评估 / 法定评估强制触发 / 停止）、理由、条件表（如需）、跨插件交接。

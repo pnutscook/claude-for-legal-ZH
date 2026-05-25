@@ -9,7 +9,7 @@ argument-hint: "[描述提议的AI用例或功能]"
 ---
 
 # use-case-triage
-1. 读取 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` → 已注册的AI系统、红线清单、审批工作流。
+1. 读取内部 `ai-governance-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/ai-governance-legal/PRACTICE.md` → 已注册的AI系统、红线清单、审批工作流。
 2. 运行以下工作流。
 3. 如果注册表中已有匹配项 → 返回当前状态，不重新分类。
 4. 如果没有匹配项 → 按风险层级分类：检查红线 → 残余风险分级 → 输出分类和理由。

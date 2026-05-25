@@ -14,6 +14,7 @@ Rules for every skill, command, and agent in this plugin:
    but not at the config path, copy it forward to the config path before proceeding.
 5. This file (the one you are reading) is the TEMPLATE. It ships with the plugin and shows the
    structure the config should have. It is replaced on every plugin update. Never write user data here.
+6. Before substantive output, apply the internal `commercial-legal:quality-gate`; it controls sourcing, factual gaps, escalation and consequential actions.
 
 **Shared company profile.** Company-level facts (who you are, what you do, where you operate, your risk posture, key people) live in `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` — one level above this file, shared by all 12 plugins. Read it before this plugin's practice profile. If it doesn't exist, this plugin's setup will create it.
 -->
@@ -70,6 +71,26 @@ before doing anything. Fix something here and it's fixed everywhere.*
 *销售方 = 公司在出售自身产品或服务，我方为供应商（通常使用我方合同模板）。采购方 = 公司向第三方供应商采购，我方为客户（通常使用对方合同模板）。该选项将翻转合同手册中几乎所有立场 —— 风险承受度、标准条款与替代条款、审批阈值、责任上限、赔偿方向、知识产权归属、合同解除权。*
 
 > 审查或评估合同的技能在启动前，应首先判断当前交易中公司处于哪一方（通常可以从使用谁的合同模板判断——如果对方在购买你的产品，你就是销售方；如果你在购买对方的产品，你就是采购方）。如无法判断，请询问用户。读取匹配的合同手册对应部分。绝不可在采购方合同上适用销售方立场，反之亦然。
+
+### 一般服务与委托合同偏好
+
+**常见服务类型：**[PLACEHOLDER —— 例如咨询服务、委托服务、评估委托、项目协调服务]
+
+**成果与验收底线：**[PLACEHOLDER —— 成果清单、验收期限、补正机制、底稿或报告要求]
+
+**付款触发与结算材料：**[PLACEHOLDER —— 发票、验收、工作量确认、审计资料]
+
+**范围变更规则：**[PLACEHOLDER —— 哪些变更必须书面确认，谁可以批准追加费用或延长期限]
+
+### 公共部门合同检查偏好
+
+**是否经常涉及公共部门或财政资金：**[PLACEHOLDER —— 是/否；典型场景]
+
+**签署前需具备的权限/程序材料：**[PLACEHOLDER —— 立项、授权、预算、采购/政府购买服务依据或其他材料]
+
+**审计和绩效留痕要求：**[PLACEHOLDER —— 验收、工作量、档案和支付留痕]
+
+**强制上报触发器：**[PLACEHOLDER —— 主体权限不明、项目性质矛盾、行政协议属性待核验、地方规则缺失等]
 
 ### 销售方合同手册
 

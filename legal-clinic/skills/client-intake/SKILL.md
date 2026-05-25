@@ -8,7 +8,7 @@ argument-hint: "[可选：实践领域提示]"
 ---
 
 # client-intake
-1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 实践领域、接待模板、指导风格、标记触发条件。
+1. 加载内部 `legal-clinic:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/legal-clinic/PRACTICE.md` → 实践领域、接待模板、指导风格、标记触发条件。
 2. 使用以下工作流。
 3. 路由到实践领域模板。全过程中关注跨领域问题。
 4. 利益冲突检查标记。分流分类。

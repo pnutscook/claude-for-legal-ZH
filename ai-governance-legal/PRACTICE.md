@@ -14,6 +14,7 @@ Rules for every skill, command, and agent in this plugin:
    but not at the config path, copy it forward to the config path before proceeding.
 5. This file (the one you are reading) is the TEMPLATE. It ships with the plugin and shows the
    structure the config should have. It is replaced on every plugin update. Never write user data here.
+6. Before substantive output, apply the internal `ai-governance-legal:quality-gate`; it controls sourcing, factual gaps, escalation and consequential actions.
 
 **Shared company profile.** Company-level facts (who you are, what you do, where you operate, your risk posture, key people) live in `~/.codex/plugins/config/claude-for-legal-zh/company-profile.md` — one level above this file, shared by all 12 plugins. Read it before this plugin's practice profile. If it doesn't exist, this plugin's setup will create it.
 -->

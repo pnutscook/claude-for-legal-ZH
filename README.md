@@ -112,6 +112,7 @@ corporate-legal:cold-start-interview
 | `enforcement-core.md` | litigation-legal | 282 | 执行依据与管辖、财产调查、执行措施体系（查封/冻结/拍卖/变卖）、执行异议与异议之诉、执行和解、失信被执行人/限制消费、执行转破产、迟延履行利息、拒不执行判决裁定罪 |
 | `company-law-2024-core.md` | corporate-legal | 501 | 限期认缴制（第47条）、出资加速到期（第54条）、股东失权（第51-52条）、治理结构、审计委员会、董监高义务（第180-192条）、公司担保（第15条）、股权转让（第84/88条）、人格否认（第23条）、简易注销（第240条） |
 | `contract-law-core.md` | commercial-legal | 496 | 合同成立与效力（第471-489条）、格式条款（第496-498条）、履行抗辩权、合同变更与转让、合同解除（第563-566条）、违约责任体系（继续履行/损害赔偿/违约金/定金）、情势变更（第533条）与不可抗力（第590条）、保证担保（第686条） |
+| `public-sector-contract-core.md` | commercial-legal | 通用索引 | 行政机关/财政资金背景合同的权限、政府购买服务、绩效审计与行政协议属性首轮核查；仅收录全国性公开来源，不替代地方规则核验 |
 | `ip-core-rules.md` | ip-legal | 374 | 商标法（注册条件/侵权/撤三/损害赔偿）、专利法（三性/职务发明/等同侵权/抗辩）、著作权法（作品类型/合理使用/避风港）、反不正当竞争法（商业秘密/混淆/虚假宣传） |
 | `pipil-core-provisions.md` | privacy-legal | 396 | 个保法核心（定义/合法性基础/告知同意/敏感个人信息/主体权利/自动化决策/PIA/数据出境/5%营业额罚款）、数据安全法（分类分级/重要数据）、网络安全法（等保/CIIO）、三法关系与合规核查清单 |
 | `admin-law-core.md` | regulatory-legal | 523 | 行政处罚法（种类/设定/程序/时效/首违不罚）、行政复议法（2023修订）、行政诉讼法（受案范围/管辖/举证责任/判决类型）、行政许可法、行政强制法、政府信息公开、行政协议、国家赔偿 |
@@ -123,7 +124,7 @@ corporate-legal:cold-start-interview
 
 ## 盒子里有什么
 
-- **12 个业务领域插件**——覆盖律所、法务和学术法律工作，每个插件围绕冷启动面试构建，生成实践画像（`PRACTICE.md`），所有技能从中读取配置。
+- **12 个业务领域插件**——覆盖律所、法务和学术法律工作，每个插件围绕冷启动面试构建，生成实践画像（`PRACTICE.md`），并通过内部 `quality-gate` 统一执行来源、事实缺口、复核和不可逆动作门槛。
 - **Codex automation/recipe 参考**——用于定时、持续监控型工作流的落地参考（续签监控、案件进度监控、法规动态监控、尽调网格、产品上线雷达）；不会被 Codex 自动当作后台任务运行。
 - **MCP 连接器**——覆盖通用生产力工具（飞书、Google Drive）和法律专属系统（元典 yuandian、北大法宝、威科先行、e签宝、聚法案例等）。
 - **命名 workflow/recipe**——端到端工作流提示词（供应商合同审查、个人信息主体权利响应、劳动合同解除审查、要件分析表构建……），作为可迁移的 automation 参考，不在 Codex 中自动后台运行。
@@ -138,7 +139,7 @@ corporate-legal:cold-start-interview
 
 | Agent | 功能 | 插件 | 命令 |
 |---|---|---|---|
-| **供应商合同审查** | 依据审查指引审查供应商主协议，生成修订备忘录 | `commercial-legal` | `commercial-legal:review` |
+| **通用合同审查** | 自动分类一般服务、委托、评估、公共部门背景及供应商合同，生成修订备忘录 | `commercial-legal` | `commercial-legal:review` |
 | **保密协议分流** | 对 incoming 保密协议进行绿/黄/红三色分流，仅复杂协议进入律师审查 | `commercial-legal` | `commercial-legal:review` |
 | **合同修订追踪** | 追踪合同从原始版本到历次修订的完整变更 | `commercial-legal` | `commercial-legal:amendment-history` |
 | **合同续签监控** | 扫描合同台账中的解约和续签截止日期 | `commercial-legal` | scheduled agent |
@@ -245,7 +246,7 @@ Codex automation / recipe 参考——`agent.yaml`、leaf-worker 子 Agent、ste
 ## 仓库布局
 
 ```
-commercial-legal/         # 商事合同——供应商/保密协议/SaaS审查、续签、问题升级
+commercial-legal/         # 商事合同——服务/委托/公共部门叠加、供应商/保密/SaaS审查、续签、问题升级
 corporate-legal/          # 公司并购——尽调、交割清单、董事会决议、主体合规
 employment-legal/         # 劳动用工——录用/解除审查、劳动关系认定、假期、内部调查
 privacy-legal/            # 隐私数据——个人信息处理协议、主体权利响应、影响评估、政策监控
@@ -310,7 +311,7 @@ scripts/                  # validate-codex.py · validate.py · orchestrate.py �
 
 | 插件 | 功能 |
 |------|------|
-| **[commercial-legal](./commercial-legal)** | 基于审查指引的供应商协议、保密协议和 SaaS 订阅合同审查。合同修订追踪。含解约预警的续签台账。问题升级路由。业务人员可读摘要。 |
+| **[commercial-legal](./commercial-legal)** | 基于审查指引的一般服务、委托、评估和公共部门背景合同审查，并支持供应商协议、保密协议和 SaaS 订阅合同。合同修订追踪、续签台账、问题升级路由及业务摘要。 |
 | **[corporate-legal](./corporate-legal)** | 并购尽调——表格式审查、逐格引用。披露清单、交割清单、董事会/股东会决议、会议纪要。企业合规追踪。交割后整合。 |
 | **[privacy-legal](./privacy-legal)** | 个保场景分流（个保法第55条评估/直接推进），个人信息保护影响评估生成，个人信息处理协议审查（控制者/处理者视角），主体权利响应。政策与实践偏差监控。 |
 | **[product-legal](./product-legal)** | 基于风险校准的产品上线审查。营销宣传合规检查（广告法/反不正当竞争法）。快速判断分流。功能风险评估。 |
@@ -451,7 +452,7 @@ scripts/                  # validate-codex.py · validate.py · orchestrate.py �
 | 命令 | 技能 | 功能 |
 |------|------|------|
 | `commercial-legal:cold-start-interview` | cold-start-interview | 冷启动——了解你的商事合同实践 |
-| `commercial-legal:review` | vendor-agreement-review · nda-review · saas-msa-review | 审查供应商协议、保密协议或 SaaS 订阅合同 |
+| `commercial-legal:review` | service-engagement-review · public-sector-contract-overlay · vendor-agreement-review · nda-review · saas-msa-review | 分类并审查一般服务、委托、评估、公共部门背景、供应商、保密或 SaaS 合同 |
 | `commercial-legal:amendment-history` | amendment-history | 追踪合同从原始版本到历次修订的变更 |
 | `commercial-legal:renewal-tracker` | renewal-tracker | 显示 90 天内解约截止日期的合同 |
 | `commercial-legal:escalation-flagger` | escalation-flagger | 路由合同问题并起草请示 |

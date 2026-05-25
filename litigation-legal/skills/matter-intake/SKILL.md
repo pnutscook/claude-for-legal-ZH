@@ -9,7 +9,7 @@ argument-hint: "[可选案件名称]"
 ---
 
 # matter-intake
-1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 风险校准（用于分流）、执业背景（用于上下文、冲突检索方法）、相关方（用于抄送人员）。
+1. 加载内部 `litigation-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/litigation-legal/PRACTICE.md` → 风险校准（用于分流）、执业背景（用于上下文、冲突检索方法）、相关方（用于抄送人员）。
 2. 按以下工作流操作。
 3. 运行统一登记：标识信息、利益冲突检索、来源、风险分流、重要性、外聘律师、内部负责人、证据保全、关键日期、初始姿态。
 4. 从案件名称生成代号（小写、连字符、年份）。

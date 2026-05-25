@@ -26,12 +26,14 @@
 
 5. 连接法律检索工具。没有连接检索工具时，引用的法规和案例将被标注为“未验证”。本插件已预配置 yuandian（元典）MCP 连接器用于案例检索和法规检索；也可以手动配置其他中国法律检索工具。
 
+每个插件在生成法律判断、对外草稿或具有法律后果的下一步建议前都会加载内部质量门槛：核对实践画像、区分事实与待核事项、标注实际来源，并把发送、签署、提交等动作留给有权人员确认。
+
 ## 我应该安装哪个插件？
 
 | 你的角色 | 安装 | 首次命令 |
 |---|---|---|
 | 数据合规/隐私律师/DPO | `privacy-legal` | `privacy-legal:use-case-triage` |
-| 商事/合同律师/法务 | `commercial-legal` | `commercial-legal:review` |
+| 商事/合同律师/法务（含服务、委托、评估或公共部门背景合同） | `commercial-legal` | `commercial-legal:review` |
 | 公司/并购律师 | `corporate-legal` | `corporate-legal:diligence-issue-extraction` |
 | 劳动法律师/HR 法务 | `employment-legal` | `employment-legal:wage-hour-qa` |
 | 产品/业务法务 | `product-legal` | `product-legal:is-this-a-problem` |

@@ -9,7 +9,7 @@ description: >
 ---
 
 # tabular-review
-1. 加载 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → 尽调结构、阈值、内部格式。
+1. 加载内部 `corporate-legal:quality-gate` 以及 `~/.codex/plugins/config/claude-for-legal-zh/corporate-legal/PRACTICE.md` → 尽调结构、阈值、内部格式。
 2. 确认：什么文件、什么列、输出到哪里。
 3. 构建类型化模式。写入 `.review-schema.yaml`。与用户确认。
 4. 样本运行（3-5份文件）。调整模式。确认。

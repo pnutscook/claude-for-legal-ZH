@@ -28,6 +28,20 @@ PLUGINS = [
     "legal-builder-hub",
     "ip-legal",
 ]
+PRIMARY_QUALITY_ENTRYPOINTS = {
+    "commercial-legal": "review",
+    "corporate-legal": "tabular-review",
+    "employment-legal": "termination-review",
+    "privacy-legal": "use-case-triage",
+    "product-legal": "launch-review",
+    "regulatory-legal": "reg-feed-watcher",
+    "ai-governance-legal": "use-case-triage",
+    "litigation-legal": "matter-intake",
+    "law-student": "case-brief",
+    "legal-clinic": "client-intake",
+    "legal-builder-hub": "skills-qa",
+    "ip-legal": "infringement-triage",
+}
 
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
 PLUGIN_SLASH_COMMAND = re.compile(r"(?<![A-Za-z0-9])/[A-Za-z0-9_-]+:")
@@ -137,6 +151,37 @@ def validate_skill_frontmatter(plugin: str, errors: list[str]) -> None:
                 errors.append(f"{rel(path)}: missing legacy Claude migration guidance")
 
 
+def validate_quality_gate(plugin: str, errors: list[str]) -> None:
+    gate_path = ROOT / plugin / "skills" / "quality-gate" / "SKILL.md"
+    if not gate_path.exists():
+        errors.append(f"{plugin}: missing internal quality-gate skill")
+        return
+    gate = gate_path.read_text(encoding="utf-8")
+    for marker in ("user-invocable: false", "PRACTICE.md", "来源"):
+        if marker not in gate:
+            errors.append(f"{rel(gate_path)}: quality gate missing {marker}")
+    practice = (ROOT / plugin / "PRACTICE.md").read_text(encoding="utf-8")
+    if f"{plugin}:quality-gate" not in practice:
+        errors.append(f"{plugin}/PRACTICE.md: missing internal quality-gate rule")
+    entrypoint = PRIMARY_QUALITY_ENTRYPOINTS[plugin]
+    entrypoint_path = ROOT / plugin / "skills" / entrypoint / "SKILL.md"
+    if not entrypoint_path.exists():
+        errors.append(f"{plugin}: missing representative entrypoint {entrypoint}")
+    elif f"{plugin}:quality-gate" not in entrypoint_path.read_text(encoding="utf-8"):
+        errors.append(f"{rel(entrypoint_path)}: does not load internal quality-gate")
+
+
+def validate_commercial_layers(errors: list[str]) -> None:
+    required_paths = (
+        ROOT / "commercial-legal" / "skills" / "service-engagement-review" / "SKILL.md",
+        ROOT / "commercial-legal" / "skills" / "public-sector-contract-overlay" / "SKILL.md",
+        ROOT / "commercial-legal" / "references" / "public-sector-contract-core.md",
+    )
+    for path in required_paths:
+        if not path.exists():
+            errors.append(f"{rel(path)}: missing commercial general/public-sector review layer")
+
+
 def validate_json_files(errors: list[str]) -> None:
     for path in ROOT.rglob("*.json"):
         if ".git" in path.parts:
@@ -209,6 +254,8 @@ def main() -> int:
     for plugin in PLUGINS:
         validate_plugin_manifest(plugin, errors)
         validate_skill_frontmatter(plugin, errors)
+        validate_quality_gate(plugin, errors)
+    validate_commercial_layers(errors)
     validate_json_files(errors)
     validate_semantic_references(errors)
     validate_residual_text(errors)
